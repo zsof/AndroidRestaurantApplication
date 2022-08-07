@@ -2,4 +2,17 @@
     <string name="app_name">RestaurantAppAndroid</string>
     <string name="welcome_text">Welcome in RestaurApp</string>
     <string name="email_address_or_username">Email address or Username</string>
+    <string name="password_text">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="or_use">Or use</string>
+    <string name="sign_in_with_facebook">Sign in with Facebook</string>
+    <string name="no_account">Don\'t have an account? <u>Register</u></string>
+    <string name="email_address_register">Email address</string>
+    <string name="user_name">User name</string>
+    <string name="register">Register</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
+    <string name="favs">Favs</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
 </resources>
