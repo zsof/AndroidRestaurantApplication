@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RestaurantAppAndroid</string>
+    <string name="welcome_text">Welcome in RestaurApp</string>
+    <string name="email_address_or_username">Email address or Username</string>
+</resources>
