@@ -15,7 +15,7 @@ import hu.zsof.restaurantapp.databinding.LoginFragmentBinding
 class LoginFragment : Fragment() {
     private lateinit var binding: LoginFragmentBinding
 
-   // val viewModel : LoginViewModel by viewModels()
+    // val viewModel : LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,12 +29,14 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBindings()
-
     }
 
     private fun setupBindings() {
-        binding.registerText.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFr_to_RegisterFr)
+        binding.apply {
+            registerText.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFr_to_registerFr)
+            }
+            logInBtn.setOnClickListener { findNavController().navigate(R.id.action_loginFr_to_listFr) }
         }
     }
 }

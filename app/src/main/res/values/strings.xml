@@ -15,4 +15,6 @@
     <string name="favs">Favs</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
+    <string name="add_button">Add button</string>
+    <string name="search">Search</string>
 </resources>
