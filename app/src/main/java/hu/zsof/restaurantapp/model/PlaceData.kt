@@ -1,6 +1,6 @@
 package hu.zsof.restaurantapp.model
 
-data class RestaurantData(
+data class PlaceData(
     val id: Long,
     val name: String,
     val address: String,

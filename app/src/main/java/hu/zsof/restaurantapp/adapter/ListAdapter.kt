@@ -5,26 +5,25 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
-import hu.zsof.restaurantapp.model.RestaurantData
+import hu.zsof.restaurantapp.model.PlaceData
 import javax.inject.Inject
 
 class ListAdapter @Inject constructor() :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>(), Filterable {
 
-    var restaurantList: List<RestaurantData>
+    var restaurantList: List<PlaceData>
         get() = differ.currentList.sortedBy { it.name.lowercase() }
         set(value) {
             differ.submitList(value)
         }
 
-    var fixList: MutableList<RestaurantData>? = null
-    var filterList: MutableList<RestaurantData> = mutableListOf()
+    var fixList: MutableList<PlaceData>? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -49,12 +48,12 @@ class ListAdapter @Inject constructor() :
 
     override fun getItemCount() = restaurantList.size
 
-    private val diffCallback = object : DiffUtil.ItemCallback<RestaurantData>() {
-        override fun areItemsTheSame(oldItem: RestaurantData, newItem: RestaurantData): Boolean {
+    private val diffCallback = object : DiffUtil.ItemCallback<PlaceData>() {
+        override fun areItemsTheSame(oldItem: PlaceData, newItem: PlaceData): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: RestaurantData, newItem: RestaurantData): Boolean {
+        override fun areContentsTheSame(oldItem: PlaceData, newItem: PlaceData): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     }
@@ -63,7 +62,7 @@ class ListAdapter @Inject constructor() :
 
     inner class ListViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(restaurant: RestaurantData) {
+        fun bind(restaurant: PlaceData) {
             binding.nameListText.text = restaurant.name
             binding.addressListText.text = restaurant.address
             binding.rateListText.text = restaurant.rate.toString()
@@ -80,6 +79,7 @@ class ListAdapter @Inject constructor() :
     }
 
     override fun getFilter(): Filter {
+        var filterList: MutableList<PlaceData>
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
                 val searchString = charSequence.toString()
@@ -91,7 +91,7 @@ class ListAdapter @Inject constructor() :
                 if (searchString.isEmpty()) {
                     filterList = fixList!!
                 } else {
-                    val tempList: MutableList<RestaurantData> = mutableListOf()
+                    val tempList: MutableList<PlaceData> = mutableListOf()
 
                     restaurantList
                         .filter {
@@ -109,7 +109,7 @@ class ListAdapter @Inject constructor() :
                 charSequence: CharSequence?,
                 filterResults: FilterResults?
             ) {
-                filterList = filterResults?.values as MutableList<RestaurantData>
+                filterList = filterResults?.values as MutableList<PlaceData>
                 differ.submitList(filterList)
             }
         }

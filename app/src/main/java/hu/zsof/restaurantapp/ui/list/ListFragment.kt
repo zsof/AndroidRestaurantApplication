@@ -1,12 +1,13 @@
 package hu.zsof.restaurantapp.ui.list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
@@ -19,23 +20,24 @@ class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var listAdapter: ListAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: ListViewModel
+    private val viewModel: ListViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
 
         recyclerView = binding.recyclerRestaurantList
         listAdapter = ListAdapter()
-        binding.recyclerRestaurantList.adapter = listAdapter
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        subscribeToObservers()
         setupBindings()
     }
 
@@ -53,6 +55,14 @@ class ListFragment : Fragment() {
                     }
                 }
             )
+        }
+    }
+
+    private fun subscribeToObservers() {
+        viewModel.requestPlaceData()
+        viewModel.places.observe(viewLifecycleOwner) {
+            listAdapter.restaurantList = it
+            binding.recyclerRestaurantList.adapter = listAdapter
         }
     }
 }
