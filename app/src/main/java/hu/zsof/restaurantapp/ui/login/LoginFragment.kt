@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.LoginFragmentBinding
+import hu.zsof.restaurantapp.network.model.LoginData
+import hu.zsof.restaurantapp.util.extensions.safeNavigate
+import hu.zsof.restaurantapp.util.extensions.showToast
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -31,14 +36,29 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBindings()
+        setupLogin()
     }
 
     private fun setupBindings() {
         binding.apply {
             registerText.setOnClickListener {
-                findNavController().navigate(R.id.action_loginFr_to_registerFr)
+                safeNavigate(LoginFragmentDirections.actionLoginFrToRegisterFr())
             }
-            logInBtn.setOnClickListener { findNavController().navigate(R.id.action_loginFr_to_listFr) }
+        }
+    }
+
+    private fun setupLogin() {
+        val email = binding.emailEditText.toString()
+        val password = binding.passwordEditText.toString()
+        binding.logInBtn.setOnClickListener {
+            lifecycleScope.launch {
+                val response = viewModel.login(LoginData(email, password))
+                if (response.success) {
+                    safeNavigate(LoginFragmentDirections.actionLoginFrToListFr())
+                } else {
+                    showToast(response.errorMessage, Toast.LENGTH_LONG)
+                }
+            }
         }
     }
 }
