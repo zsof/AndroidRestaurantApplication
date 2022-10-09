@@ -10,10 +10,12 @@
         android:name="hu.zsof.restaurantapp.ui.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/login_fragment">
-        <action android:id="@+id/action_loginFr_to_registerFr"
-            app:destination="@id/registerFragment"/>
-        <action android:id="@+id/action_loginFr_to_listFr"
-            app:destination="@id/listFragment"/>
+        <action
+            android:id="@+id/action_loginFr_to_registerFr"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFr_to_listFr"
+            app:destination="@id/listFragment" />
 
     </fragment>
 
@@ -22,13 +24,16 @@
         android:name="hu.zsof.restaurantapp.ui.register.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/register_fragment">
+        <action
+            android:id="@+id/action_registerFr_to_listFr"
+            app:destination="@id/listFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/listFragment"
         android:name="hu.zsof.restaurantapp.ui.list.ListFragment"
-        tools:layout="@layout/list_fragment"
-        android:label="ListFragment">
+        android:label="ListFragment"
+        tools:layout="@layout/list_fragment">
 
     </fragment>
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
-import hu.zsof.restaurantapp.model.PlaceData
+import hu.zsof.restaurantapp.database.model.PlaceData
 import javax.inject.Inject
 
 class ListAdapter @Inject constructor() :
