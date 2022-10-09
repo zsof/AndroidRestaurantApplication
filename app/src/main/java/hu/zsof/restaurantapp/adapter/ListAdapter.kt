@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
-import hu.zsof.restaurantapp.database.model.PlaceData
+import hu.zsof.restaurantapp.network.model.PlaceData
 import javax.inject.Inject
 
 class ListAdapter @Inject constructor() :
@@ -23,7 +23,6 @@ class ListAdapter @Inject constructor() :
         }
 
     var fixList: MutableList<PlaceData>? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -67,8 +66,8 @@ class ListAdapter @Inject constructor() :
             binding.addressListText.text = restaurant.address
             binding.rateListText.text = restaurant.rate.toString()
 
-           /* itemView.setOnClickListener {
-                *//*val action =
+            /* itemView.setOnClickListener {
+                 *//*val action =
                     AddressListFragmentDirections.actionAddressListToTaskList(
                         address.convertToAddress(),
                         agent

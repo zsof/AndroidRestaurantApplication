@@ -1,11 +1,11 @@
 package hu.zsof.restaurantapp.repository
 
-import hu.zsof.restaurantapp.database.model.PlaceData
 import hu.zsof.restaurantapp.network.ApiService
+import hu.zsof.restaurantapp.network.model.PlaceData
 
 class PlaceRepository(private val apiService: ApiService) {
 
-    suspend fun getAllPlace(): List<PlaceData> {
+  /*  suspend fun getAllPlace(): List<PlaceData> {
         return try {
             apiService.getAllPlace()
         } catch (e: Exception) {
@@ -15,10 +15,10 @@ class PlaceRepository(private val apiService: ApiService) {
     }
     suspend fun getPlaces(): List<PlaceData> {
         try {
-            return placeRepository.getAllPlace()
+            return getAllPlace()
         } catch (e: Exception) {
             e.printStackTrace()
         }
         return mutableListOf()
-    }
+    }*/
 }

@@ -17,4 +17,31 @@
     <string name="logout">Logout</string>
     <string name="add_button">Add button</string>
     <string name="search">Search</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="profile_settings_text">Profile Settings</string>
+    <string name="dark_theme_text">Dark Theme</string>
+    <string name="save_btn_settings">Save</string>
+    <string name="app_name_fragment">RestaurantApp</string>
+    <string name="place_name_text">Name</string>
+    <string name="address_text">Address</string>
+    <string name="type_text">Type</string>
+    <string name="price_text">Price</string>
+    <string name="category_text">Category</string>
+    <string name="gluten_free">Gluten free</string>
+    <string name="lactose_free">Lactose free</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="vegan">Vegan</string>
+    <string name="fast_food">Fast Food</string>
+    <string name="place_text">Place</string>
+    <string name="parking_available">Parking Available</string>
+    <string name="family_place">Family Place</string>
+    <string name="dog_fancier">Dog-fancier</string>
+    <string name="delivery">Delivery</string>
+    <string name="credit_card">Credit Card</string>
+
+    <string-array name="category_items">
+        <item>Restaurant</item>
+        <item>Cafe's</item>
+        <item>Bakery</item>
+    </string-array>
 </resources>
