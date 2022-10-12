@@ -12,7 +12,7 @@ class AuthRepository(private val apiService: ApiService) {
             apiService.registerUser(loginData)
         } catch (e: Exception) {
             e.printStackTrace()
-            return NetworkResponse(false, e.localizedMessage ?: "Network error")
+            NetworkResponse(false, e.localizedMessage ?: "Network error")
         }
     }
 
@@ -21,7 +21,7 @@ class AuthRepository(private val apiService: ApiService) {
             apiService.loginUser(loginData)
         } catch (e: Exception) {
             e.printStackTrace()
-            return NetworkResponse(false, e.localizedMessage ?: "Network error")
+            NetworkResponse(false, e.localizedMessage ?: "Network error")
         }
     }
 }

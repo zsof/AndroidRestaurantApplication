@@ -3,7 +3,7 @@ package hu.zsof.restaurantapp.network
 import androidx.databinding.library.BuildConfig
 import hu.zsof.restaurantapp.network.model.LoginData
 import hu.zsof.restaurantapp.network.model.NetworkResponse
-import hu.zsof.restaurantapp.network.model.PlaceData
+import hu.zsof.restaurantapp.network.model.PlaceDataRequest
 import hu.zsof.restaurantapp.util.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,13 +17,16 @@ import java.util.concurrent.TimeUnit
 interface ApiService {
 
     @GET("places/")
-    suspend fun getAllPlace(): List<PlaceData>
+    suspend fun getAllPlace(): List<PlaceDataRequest>
 
     @POST("auth/register")
     suspend fun registerUser(@Body loginData: LoginData): NetworkResponse
 
     @POST("auth/login")
     suspend fun loginUser(@Body loginData: LoginData): NetworkResponse
+
+    @POST("user/newplace")
+    suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): NetworkResponse
 
     companion object {
         operator fun invoke(): ApiService {
