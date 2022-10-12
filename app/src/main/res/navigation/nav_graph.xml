@@ -35,6 +35,13 @@
         android:label="ListFragment"
         tools:layout="@layout/list_fragment">
 
+        <action android:id="@+id/action_listFr_to_newPlaceDialogFr"
+            app:destination="@id/NewPlaceDialogFragment"/>
     </fragment>
 
+    <dialog android:id="@+id/NewPlaceDialogFragment"
+        android:label="NewPlaceDialogFragment"
+        android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment">
+
+    </dialog>
 </navigation>

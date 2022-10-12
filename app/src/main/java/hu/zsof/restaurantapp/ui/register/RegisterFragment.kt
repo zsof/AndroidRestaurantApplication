@@ -46,10 +46,10 @@ class RegisterFragment : Fragment() {
 
         binding.logInBtn.setOnClickListener {
             lifecycleScope.launch {
-                val response = viewModel.register(LoginData(email, password))
-                if (response.success) {
+               /* val response = viewModel.register(LoginData(email, password))
+                if (response.success) {*/
                     safeNavigate(RegisterFragmentDirections.actionRegisterFrToListFr())
-                } else showToast(response.errorMessage, Toast.LENGTH_LONG)
+                /*} else showToast(response.errorMessage, Toast.LENGTH_LONG)*/
             }
         }
     }

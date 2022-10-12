@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class LoginFragment : Fragment() {
     private lateinit var binding: LoginFragmentBinding
 
-    val viewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,14 +51,14 @@ class LoginFragment : Fragment() {
         val email = binding.emailEditText.toString()
         val password = binding.passwordEditText.toString()
         binding.logInBtn.setOnClickListener {
-            lifecycleScope.launch {
+           /* lifecycleScope.launch {
                 val response = viewModel.login(LoginData(email, password))
-                if (response.success) {
+                if (response.success) {*/
                     safeNavigate(LoginFragmentDirections.actionLoginFrToListFr())
-                } else {
+              /*  } else {
                     showToast(response.errorMessage, Toast.LENGTH_LONG)
                 }
-            }
+            }*/
         }
     }
 }

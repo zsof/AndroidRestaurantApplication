@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.adapter.ListAdapter
 import hu.zsof.restaurantapp.databinding.ListFragmentBinding
+import hu.zsof.restaurantapp.util.extensions.safeNavigate
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -55,6 +56,9 @@ class ListFragment : Fragment() {
                     }
                 }
             )
+            addNewPlaceBtn.setOnClickListener {
+                safeNavigate(ListFragmentDirections.actionListFrToNewPlaceDialogFr())
+            }
         }
     }
 
