@@ -38,10 +38,15 @@
     <string name="dog_fancier">Dog-fancier</string>
     <string name="delivery">Delivery</string>
     <string name="credit_card">Credit Card</string>
+    <string name="add_new_place_title">Add new place</string>
+    <string name="save_btn">Save</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="require_error">Required</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>
         <item>Cafe's</item>
         <item>Bakery</item>
+        <item>Patisserie</item>
     </string-array>
 </resources>
