@@ -24,12 +24,12 @@
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/placeNameEditText"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/placeNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textMultiLine" />
@@ -44,12 +44,12 @@
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addressEditText"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addressEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textMultiLine" />
@@ -99,6 +99,7 @@
                     android:layout_weight="1" />
 
                 <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/priceSlider"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
