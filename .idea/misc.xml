@@ -3,16 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/drawable-anydpi/ic_camera.xml" value="0.1" />
+        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/drawable-anydpi/ic_star.xml" value="0.1" />
+        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/drawable-xxxhdpi/search_view.xml" value="0.1" />
         <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/drawable/add_new_place_dialogfragment.xml" value="0.1365" />
         <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/drawable/button_shape.xml" value="0.165" />
         <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/drawable/chip_background_color.xml" value="0.1365" />
         <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/activity_main.xml" value="0.16875" />
-        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/list_fragment.xml" value="0.22" />
+        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/list_fragment.xml" value="0.17857142857142858" />
         <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/list_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/login_fragment.xml" value="0.22" />
-        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/new_place_dialogfragment.xml" value="0.18333333333333332" />
+        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/new_place_dialogfragment.xml" value="0.1" />
         <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/register_fragment.xml" value="0.16875" />
-        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/settings_fragment.xml" value="0.22" />
+        <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/layout/settings_fragment.xml" value="0.1" />
         <entry key="..\:/Adat/BME_MSC/RestaurantAPP/Android_NEM_Jetpack/app/src/main/res/menu/bottom_navbar.xml" value="0.16875" />
       </map>
     </option>
