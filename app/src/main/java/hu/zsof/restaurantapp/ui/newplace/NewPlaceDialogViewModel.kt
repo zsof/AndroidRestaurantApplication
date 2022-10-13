@@ -2,7 +2,7 @@ package hu.zsof.restaurantapp.ui.newplace
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import hu.zsof.restaurantapp.network.model.PlaceDataRequest
+import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.repository.PlaceRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject

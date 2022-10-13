@@ -4,18 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.LoginFragmentBinding
-import hu.zsof.restaurantapp.network.model.LoginData
 import hu.zsof.restaurantapp.util.extensions.safeNavigate
-import hu.zsof.restaurantapp.util.extensions.showToast
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -52,7 +47,7 @@ class LoginFragment : Fragment() {
         val password = binding.passwordEditText.toString()
         binding.logInBtn.setOnClickListener {
            /* lifecycleScope.launch {
-                val response = viewModel.login(LoginData(email, password))
+                val response = viewModel.login(LoginDataRequest(email, password))
                 if (response.success) {*/
                     safeNavigate(LoginFragmentDirections.actionLoginFrToListFr())
               /*  } else {

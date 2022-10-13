@@ -1,7 +1,8 @@
-package hu.zsof.restaurantapp.network.model
+package hu.zsof.restaurantapp.network.request
 
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.enums.Type
+import hu.zsof.restaurantapp.network.model.Filter
 
 data class PlaceDataRequest(
     val name: String = "",

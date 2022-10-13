@@ -45,7 +45,7 @@
 
     <string-array name="category_items">
         <item>Restaurant</item>
-        <item>Cafe's</item>
+        <item>Cafe\'s</item>
         <item>Bakery</item>
         <item>Patisserie</item>
     </string-array>

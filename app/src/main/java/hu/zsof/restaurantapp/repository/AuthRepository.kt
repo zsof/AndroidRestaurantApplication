@@ -1,24 +1,24 @@
 package hu.zsof.restaurantapp.repository
 
 import hu.zsof.restaurantapp.network.ApiService
-import hu.zsof.restaurantapp.network.model.LoginData
-import hu.zsof.restaurantapp.network.model.NetworkResponse
-import kotlin.math.log
+import hu.zsof.restaurantapp.network.request.LoginDataRequest
+import hu.zsof.restaurantapp.network.response.NetworkResponse
+import javax.inject.Inject
 
-class AuthRepository(private val apiService: ApiService) {
+class AuthRepository @Inject constructor(private val apiService: ApiService) {
 
-    suspend fun registerUser(loginData: LoginData): NetworkResponse {
+    suspend fun registerUser(loginDataRequest: LoginDataRequest): NetworkResponse {
         return try {
-            apiService.registerUser(loginData)
+            apiService.registerUser(loginDataRequest)
         } catch (e: Exception) {
             e.printStackTrace()
             NetworkResponse(false, e.localizedMessage ?: "Network error")
         }
     }
 
-    suspend fun loginUser(loginData: LoginData): NetworkResponse {
+    suspend fun loginUser(loginDataRequest: LoginDataRequest): NetworkResponse {
         return try {
-            apiService.loginUser(loginData)
+            apiService.loginUser(loginDataRequest)
         } catch (e: Exception) {
             e.printStackTrace()
             NetworkResponse(false, e.localizedMessage ?: "Network error")

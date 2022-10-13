@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
-import hu.zsof.restaurantapp.network.model.PlaceDataRequest
+import hu.zsof.restaurantapp.network.model.Place
 import javax.inject.Inject
 
 class ListAdapter @Inject constructor() :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>(), Filterable {
 
-    var restaurantList: List<PlaceDataRequest>
+    var restaurantList: List<Place>
         get() = differ.currentList.sortedBy { it.name.lowercase() }
         set(value) {
             differ.submitList(value)
         }
 
-    var fixList: MutableList<PlaceDataRequest>? = null
+    var fixList: MutableList<Place>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -47,12 +47,12 @@ class ListAdapter @Inject constructor() :
 
     override fun getItemCount() = restaurantList.size
 
-    private val diffCallback = object : DiffUtil.ItemCallback<PlaceDataRequest>() {
-        override fun areItemsTheSame(oldItem: PlaceDataRequest, newItem: PlaceDataRequest): Boolean {
+    private val diffCallback = object : DiffUtil.ItemCallback<Place>() {
+        override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: PlaceDataRequest, newItem: PlaceDataRequest): Boolean {
+        override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     }
@@ -61,10 +61,10 @@ class ListAdapter @Inject constructor() :
 
     inner class ListViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(restaurant: PlaceDataRequest) {
+        fun bind(restaurant: Place) {
             binding.nameListText.text = restaurant.name
             binding.addressListText.text = restaurant.address
-            binding.rateListText.text = restaurant.rate.toString()
+            // binding.rateListText.text = restaurant.rate.toString()
 
             /* itemView.setOnClickListener {
                  *//*val action =
@@ -78,7 +78,7 @@ class ListAdapter @Inject constructor() :
     }
 
     override fun getFilter(): Filter {
-        var filterList: MutableList<PlaceDataRequest>
+        var filterList: MutableList<Place>
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
                 val searchString = charSequence.toString()
@@ -90,7 +90,7 @@ class ListAdapter @Inject constructor() :
                 if (searchString.isEmpty()) {
                     filterList = fixList!!
                 } else {
-                    val tempList: MutableList<PlaceDataRequest> = mutableListOf()
+                    val tempList: MutableList<Place> = mutableListOf()
 
                     restaurantList
                         .filter {
@@ -108,7 +108,7 @@ class ListAdapter @Inject constructor() :
                 charSequence: CharSequence?,
                 filterResults: FilterResults?
             ) {
-                filterList = filterResults?.values as MutableList<PlaceDataRequest>
+                filterList = filterResults?.values as MutableList<Place>
                 differ.submitList(filterList)
             }
         }

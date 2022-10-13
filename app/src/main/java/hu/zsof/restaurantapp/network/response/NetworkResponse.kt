@@ -1,4 +1,4 @@
-package hu.zsof.restaurantapp.network.model
+package hu.zsof.restaurantapp.network.response
 
 class NetworkResponse(
     val success: Boolean = true,

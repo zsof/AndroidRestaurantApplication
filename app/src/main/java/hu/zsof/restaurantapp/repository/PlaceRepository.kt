@@ -1,8 +1,8 @@
 package hu.zsof.restaurantapp.repository
 
 import hu.zsof.restaurantapp.network.ApiService
-import hu.zsof.restaurantapp.network.model.NetworkResponse
-import hu.zsof.restaurantapp.network.model.PlaceDataRequest
+import hu.zsof.restaurantapp.network.response.NetworkResponse
+import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 
 class PlaceRepository(private val apiService: ApiService) {
 
