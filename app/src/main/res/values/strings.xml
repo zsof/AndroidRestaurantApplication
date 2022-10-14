@@ -42,6 +42,8 @@
     <string name="save_btn">Save</string>
     <string name="cancel_btn">Cancel</string>
     <string name="require_error">Required</string>
+    <string name="password_not_strong_error">The password is not strong enough. It must contain at least sic characters, including at least 1 uppercase letter, 1 number and 1 symbol character</string>
+    <string name="email_not_valid_error">The email is not valid</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>

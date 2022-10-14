@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,7 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.RegisterFragmentBinding
-import hu.zsof.restaurantapp.util.extensions.safeNavigate
+import hu.zsof.restaurantapp.network.request.LoginDataRequest
+import hu.zsof.restaurantapp.util.extensions.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -37,16 +39,27 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setupRegister() {
-        val email = binding.emailEditText.toString()
-        val password = binding.passwordEditText.toString()
+        val email = binding.emailEditText.text.toString()
+        val password = binding.passwordEditText.text.toString()
 
         binding.logInBtn.setOnClickListener {
-            lifecycleScope.launch {
-               /* val response = viewModel.register(LoginDataRequest(email, password))
-                if (response.success) {*/
-                    safeNavigate(RegisterFragmentDirections.actionRegisterFrToListFr())
-                /*} else showToast(response.errorMessage, Toast.LENGTH_LONG)*/
+            if (validateRegister()) {
+                lifecycleScope.launch {
+                    val response = viewModel.register(LoginDataRequest(email, password))
+                    if (response.success) {
+                        safeNavigate(RegisterFragmentDirections.actionRegisterFrToListFr())
+                    } else showToast(response.errorMessage, Toast.LENGTH_LONG)
+                }
             }
+        }
+    }
+
+    private fun validateRegister(): Boolean {
+        binding.apply {
+            return emailEditText.validateNonEmptyField() &&
+                emailEditText.isEmailValid() &&
+                passwordEditText.validateNonEmptyField() &&
+                passwordEditText.isPasswordValid()
         }
     }
 }

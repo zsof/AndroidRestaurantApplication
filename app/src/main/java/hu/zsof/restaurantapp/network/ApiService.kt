@@ -6,8 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
-import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
+import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.util.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,7 +21,7 @@ import javax.inject.Singleton
 
 interface ApiService {
 
-    @GET("places/")
+    @GET("places")
     suspend fun getAllPlace(): List<PlaceDataRequest>
 
     @POST("auth/register")
@@ -44,7 +44,7 @@ interface ApiService {
             if (BuildConfig.DEBUG) {
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
             } else {
-                interceptor.level = HttpLoggingInterceptor.Level.BASIC
+                interceptor.level = HttpLoggingInterceptor.Level.BODY
             }
 
             val okHttpClient =
