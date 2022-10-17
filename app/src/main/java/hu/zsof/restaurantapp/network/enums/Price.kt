@@ -7,10 +7,10 @@ enum class Price {
 
     companion object {
 
-        fun getByOrdinal(ordinal: Int): Price {
+        fun getByOrdinal(ordinal: Float): Price {
             var price: Price = LOW
             for (p in values()) {
-                if (p.ordinal == ordinal) {
+                if (p.ordinal.toFloat() == ordinal) {
                     price = p
                     break
                 }

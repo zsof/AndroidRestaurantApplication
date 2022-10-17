@@ -1,19 +1,20 @@
 package hu.zsof.restaurantapp.repository
 
 import hu.zsof.restaurantapp.network.ApiService
-import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
+import hu.zsof.restaurantapp.network.response.NetworkResponse
+import javax.inject.Inject
 
-class PlaceRepository(private val apiService: ApiService) {
+class PlaceRepository @Inject constructor(private val apiService: ApiService) {
 
-   /* suspend fun getAllPlace(): List<PlaceDataRequest> {
-        return try {
-            apiService.getAllPlace()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            mutableListOf()
-        }
-    }*/
+    /* suspend fun getAllPlace(): List<PlaceDataRequest> {
+         return try {
+             apiService.getAllPlace()
+         } catch (e: Exception) {
+             e.printStackTrace()
+             mutableListOf()
+         }
+     }*/
 
     suspend fun addNewPlace(placeDataRequest: PlaceDataRequest): NetworkResponse {
         return try {

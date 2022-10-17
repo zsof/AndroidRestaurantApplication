@@ -7,9 +7,15 @@ import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.NewPlaceDialogfragmentBinding
+import hu.zsof.restaurantapp.network.enums.Price
+import hu.zsof.restaurantapp.network.enums.Type
+import hu.zsof.restaurantapp.network.model.Filter
+import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 
+@AndroidEntryPoint
 class NewPlaceDialogFragment : DialogFragment() {
 
     private lateinit var binding: NewPlaceDialogfragmentBinding
@@ -35,15 +41,15 @@ class NewPlaceDialogFragment : DialogFragment() {
     private fun savePlace() {
         var priceValue = 0F
         binding.apply {
-            /*priceSlider.addOnChangeListener { _, value, _ ->
+            priceSlider.addOnChangeListener { _, value, _ ->
                 priceValue = value
-            }*/
-            /*viewModel.addNewPlace(
+            }
+            viewModel.addNewPlace(
                 PlaceDataRequest(
                     name = placeNameEditText.text.toString(),
                     address = addressEditText.text.toString(),
                     type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
-                    price = Price.valueOf(priceValue.toString()),
+                    price = Price.getByOrdinal(priceValue),
                     image = "",
                     filter = Filter(
                         freeParking = parkingAdd.isChecked,
@@ -52,7 +58,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                         vegetarian = vegetarianAdd.isChecked
                     )
                 )
-            )*/
+            )
         }
     }
 }
