@@ -9,14 +9,16 @@ import hu.zsof.restaurantapp.network.request.LoginDataRequest
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.util.Constants
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
+import java.util.prefs.Preferences
 import javax.inject.Singleton
 
 interface ApiService {
@@ -52,6 +54,8 @@ interface ApiService {
                     .connectTimeout(15, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
                     .addInterceptor(interceptor)
+                    .addInterceptor(ReceivedCookiesInterceptor())
+                    .addInterceptor(AddCookiesInterceptor())
                     .build()
 
             val retrofit = Retrofit.Builder()
@@ -61,6 +65,35 @@ interface ApiService {
                 .build()
 
             return retrofit.create(ApiService::class.java)
+        }
+
+        class ReceivedCookiesInterceptor : Interceptor {
+
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val originalResponse: Response = chain.proceed(chain.request())
+                if (originalResponse.headers("Set-Cookie").isNotEmpty()) {
+                    val cookies = originalResponse.headers("Set-Cookie")
+                    // Timber.wtf(cookies[0])
+                    Preferences.userRoot().put("cookie", cookies[0])
+                    println(cookies[0])
+                }
+                return originalResponse
+            }
+        }
+
+        class AddCookiesInterceptor : Interceptor {
+
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val builder: Request.Builder = chain.request().newBuilder()
+                val cookie = Preferences.userRoot().get("cookie", "")
+                if (cookie.isNotEmpty()) {
+                    println("Cookie ->$cookie")
+                    builder.addHeader("Cookie", cookie)
+                    // Timber.tag("OkHttp").d("Adding Header: %s", cookie)
+                } else println("ERROR: NO COOKIE ADDED")
+                // This is done so I know which headers are being added; this interceptor is used after the normal logging of OkHttp
+                return chain.proceed(builder.build())
+            }
         }
     }
 }
