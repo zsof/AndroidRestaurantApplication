@@ -61,10 +61,10 @@ class ListAdapter @Inject constructor() :
 
     inner class ListViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(restaurant: Place) {
-            binding.nameListText.text = restaurant.name
-            binding.addressListText.text = restaurant.address
-            // binding.rateListText.text = restaurant.rate.toString()
+        fun bind(place: Place) {
+            binding.nameListText.text = place.name
+            binding.addressListText.text = place.address
+            binding.rateListText.text = place.rate.toString()
 
             /* itemView.setOnClickListener {
                  *//*val action =

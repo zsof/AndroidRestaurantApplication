@@ -63,10 +63,10 @@ class ListFragment : Fragment() {
     }
 
     private fun subscribeToObservers() {
-        /*viewModel.requestPlaceData()
+        viewModel.requestPlaceData()
         viewModel.places.observe(viewLifecycleOwner) {
             listAdapter.restaurantList = it
             binding.recyclerRestaurantList.adapter = listAdapter
-        }*/
+        }
     }
 }

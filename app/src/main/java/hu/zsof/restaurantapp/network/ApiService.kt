@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.network.response.NetworkResponse
@@ -24,7 +25,7 @@ import javax.inject.Singleton
 interface ApiService {
 
     @GET("places")
-    suspend fun getAllPlace(): List<PlaceDataRequest>
+    suspend fun getAllPlace(): List<Place>
 
     @POST("auth/register")
     suspend fun registerUser(@Body loginDataRequest: LoginDataRequest): NetworkResponse
