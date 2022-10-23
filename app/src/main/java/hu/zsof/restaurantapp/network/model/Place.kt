@@ -10,6 +10,6 @@ data class Place(
     val type: Type = Type.RESTAURANT,
     val rate: Float = 2.0f,
     val price: Price = Price.LOW,
-    val image: String = "",
+    val image: String? = "",
     val filter: Filter = Filter()
 )

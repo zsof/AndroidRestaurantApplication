@@ -35,13 +35,23 @@
         android:label="ListFragment"
         tools:layout="@layout/list_fragment">
 
-        <action android:id="@+id/action_listFr_to_newPlaceDialogFr"
-            app:destination="@id/NewPlaceDialogFragment"/>
+        <action
+            android:id="@+id/action_listFr_to_newPlaceDialogFr"
+            app:destination="@id/NewPlaceDialogFragment" />
     </fragment>
 
-    <dialog android:id="@+id/NewPlaceDialogFragment"
-        android:label="NewPlaceDialogFragment"
-        android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment">
+    <dialog
+        android:id="@+id/NewPlaceDialogFragment"
+        android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment"
+        android:label="NewPlaceDialogFragment">
 
     </dialog>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="hu.zsof.restaurantapp.ui.map.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map">
+
+    </fragment>
 </navigation>
