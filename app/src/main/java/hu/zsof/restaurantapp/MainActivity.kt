@@ -1,8 +1,10 @@
 package hu.zsof.restaurantapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,5 +27,17 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
         setupWithNavController(binding.bottomNavigationView, navController)
+
+        navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
+            // the IDs of fragments as defined in the `navigation_graph`
+            if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment
+            ) {
+                binding.bottomNavigationView.visibility = View.GONE
+            } else {
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
     }
+
+
 }

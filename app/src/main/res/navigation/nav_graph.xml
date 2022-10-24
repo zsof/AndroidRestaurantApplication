@@ -40,6 +40,14 @@
             app:destination="@id/NewPlaceDialogFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="hu.zsof.restaurantapp.ui.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/settings_fragment">
+
+    </fragment>
+
     <dialog
         android:id="@+id/NewPlaceDialogFragment"
         android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment"
