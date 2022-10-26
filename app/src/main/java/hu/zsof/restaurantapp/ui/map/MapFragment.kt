@@ -1,21 +1,22 @@
 package hu.zsof.restaurantapp.ui.map
 
-import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import hu.zsof.restaurantapp.R
+import hu.zsof.restaurantapp.databinding.MapFragmentBinding
 
 class MapFragment : Fragment() {
+
+    private lateinit var binding: MapFragmentBinding
+    private lateinit var map: GoogleMap
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -27,9 +28,14 @@ class MapFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        map = googleMap
+        val budapest = LatLng(47.497913, 19.040236)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(budapest))
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(11F))
+
+        googleMap.uiSettings.setAllGesturesEnabled(true)
+        googleMap.uiSettings.isCompassEnabled = true
+        googleMap.uiSettings.isZoomControlsEnabled = true
     }
 
     override fun onCreateView(
@@ -37,11 +43,12 @@ class MapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        return inflater.inflate(R.layout.map_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = MapFragmentBinding.bind(view)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }

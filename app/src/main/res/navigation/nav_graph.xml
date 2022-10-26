@@ -59,7 +59,7 @@
         android:id="@+id/mapFragment"
         android:name="hu.zsof.restaurantapp.ui.map.MapFragment"
         android:label="MapFragment"
-        tools:layout="@layout/fragment_map">
+        tools:layout="@layout/map_fragment">
 
     </fragment>
 </navigation>

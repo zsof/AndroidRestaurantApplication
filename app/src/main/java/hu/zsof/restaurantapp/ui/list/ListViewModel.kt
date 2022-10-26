@@ -10,7 +10,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(private val placeRepository: PlaceRepository) : ViewModel() {
+class ListViewModel @Inject constructor(private val placeRepository: PlaceRepository) :
+    ViewModel() {
 
     var places = MutableLiveData<List<Place>>()
     fun requestPlaceData() {
