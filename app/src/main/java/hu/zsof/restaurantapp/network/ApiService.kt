@@ -6,8 +6,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
+import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
 import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.util.Constants
 import okhttp3.Interceptor
@@ -35,6 +37,12 @@ interface ApiService {
 
     @POST("user/newplace")
     suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): NetworkResponse
+
+    @GET("loggeduser/get-profile")
+    suspend fun getUserProfile(): User
+
+    @POST("loggeduser/update-profile")
+    suspend fun updateUserProfile(@Body userUpdateProfileRequest: UserUpdateProfileRequest): User
 
     @Module
     @InstallIn(SingletonComponent::class)
