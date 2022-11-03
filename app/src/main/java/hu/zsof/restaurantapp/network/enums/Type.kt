@@ -1,7 +1,7 @@
 package hu.zsof.restaurantapp.network.enums
 
 enum class Type {
-    RESTAURANT, CAFE, PATISSERIE, BAKERY;
+    RESTAURANT, CAFE, PATISSERIE, BAKERY, BAR, FAST_FOOD;
 
     companion object {
 

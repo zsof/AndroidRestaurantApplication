@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+class SettingsViewModel @Inject constructor(private val userRepository: UserRepository) :
+    ViewModel() {
 
     val userProfile = MutableLiveData<User>()
     fun getUserProfile() {
@@ -20,7 +21,9 @@ class SettingsViewModel @Inject constructor(private val userRepository: UserRepo
         }
     }
 
-    suspend fun updateUserProfile(userUpdateProfileRequest: UserUpdateProfileRequest): User {
-        return userRepository.updateUserProfile(userUpdateProfileRequest)
+    fun updateUserProfile(userUpdateProfileRequest: UserUpdateProfileRequest) {
+        viewModelScope.launch {
+            userRepository.updateUserProfile(userUpdateProfileRequest)
+        }
     }
 }

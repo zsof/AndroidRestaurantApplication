@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.RegisterFragmentBinding
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
+import hu.zsof.restaurantapp.ui.login.LoginFragmentDirections
 import hu.zsof.restaurantapp.util.extensions.*
 import kotlinx.coroutines.launch
 
@@ -36,10 +37,18 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRegister()
+        setupBindings()
     }
 
+    private fun setupBindings() {
+        binding.apply {
+            loginText.setOnClickListener {
+                safeNavigate(RegisterFragmentDirections.actionLoginFrToRegisterFr())
+            }
+        }
+    }
     private fun setupRegister() {
-        binding.logInBtn.setOnClickListener {
+        binding.registerBtn.setOnClickListener {
             if (validateRegister()) {
                 lifecycleScope.launch {
                     val email = binding.emailEditText.text.toString()
@@ -58,7 +67,8 @@ class RegisterFragment : Fragment() {
             return emailEditText.validateNonEmptyField() &&
                 emailEditText.isEmailValid() &&
                 passwordEditText.validateNonEmptyField() &&
-                passwordEditText.isPasswordValid()
+                passwordEditText.isPasswordValid() &&
+                userNameEditText.validateNonEmptyField()
         }
     }
 }

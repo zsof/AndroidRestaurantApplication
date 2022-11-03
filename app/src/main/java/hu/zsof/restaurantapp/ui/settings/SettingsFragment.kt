@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.SettingsFragmentBinding
+import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -33,7 +35,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeToObservers()
-        //setupBindings()
+        setupBindings()
     }
 
     private fun subscribeToObservers() {
@@ -47,20 +49,22 @@ class SettingsFragment : Fragment() {
         }
     }
 
-   /* private fun setupBindings() {
+    private fun setupBindings() {
         binding.apply {
-            settingsNameText.setOnClickListener {
-                showNameChangeDialog(
-                    title = "Név",
-                    inputTextHint = "Név",
+            settingsNickNameText.setOnClickListener {
+                showDataChangeDialog(
+                    title = "NickName",
+                    changedTextView = settingsNickNameText,
+                    inputTextHint = "Type your nickname",
                     inputTextType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
                 )
             }
         }
     }
 
-    private fun showNameChangeDialog(
+    private fun showDataChangeDialog(
         title: String?,
+        changedTextView: TextView,
         onNegativeButton: () -> Unit = this::onDestroy,
         inputTextHint: String?,
         inputTextType: Int
@@ -74,12 +78,18 @@ class SettingsFragment : Fragment() {
             .setPositiveButton(getString(R.string.save_btn)) { dialog, _ ->
                 dialog.cancel()
                 if (!inputText.text.isNullOrEmpty()) {
-                    binding.settingsNameText.text = inputText.text.toString()
+                    changedTextView.text = inputText.text.toString()
+                    viewModel.updateUserProfile(
+                        UserUpdateProfileRequest(
+                            name = binding.settingsNameText.text.toString(),
+                            nickName = binding.settingsNickNameText.text.toString()
+                        )
+                    )
                 }
             }
             .setNegativeButton(getString(R.string.cancel_btn)) { _, _ -> onNegativeButton() }
             .setView(inputText)
             .create()
         alertDialog.show()
-    }*/
+    }
 }

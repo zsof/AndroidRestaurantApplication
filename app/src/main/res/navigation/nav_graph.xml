@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_registerFr_to_listFr"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_loginFr_to_registerFr"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
@@ -34,12 +37,25 @@
         android:name="hu.zsof.restaurantapp.ui.list.ListFragment"
         android:label="ListFragment"
         tools:layout="@layout/list_fragment">
-
         <action
             android:id="@+id/action_listFr_to_newPlaceDialogFr"
             app:destination="@id/NewPlaceDialogFragment" />
+        <action
+            android:id="@+id/action_listFr_to_detailsFr"
+            app:destination="@id/detailsFragment"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="hu.zsof.restaurantapp.ui.details.DetailsViewPagerFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/details_viewpager_fragment">
+
+
+        <argument
+            android:name="placeId"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="hu.zsof.restaurantapp.ui.settings.SettingsFragment"

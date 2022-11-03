@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.ui.list.ListFragmentDirections
 import javax.inject.Inject
 
 class ListAdapter @Inject constructor() :
@@ -66,14 +68,11 @@ class ListAdapter @Inject constructor() :
             binding.addressListText.text = place.address
             binding.rateListText.text = place.rate.toString()
 
-            /* itemView.setOnClickListener {
-                 *//*val action =
-                    AddressListFragmentDirections.actionAddressListToTaskList(
-                        address.convertToAddress(),
-                        agent
-                    )*//*
+            itemView.setOnClickListener {
+                val action =
+                    ListFragmentDirections.actionListFrToDetailsFr(place.id)
                 itemView.findNavController().navigate(action)
-            }*/
+            }
         }
     }
 

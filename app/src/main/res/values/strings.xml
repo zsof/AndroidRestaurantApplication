@@ -44,11 +44,16 @@
     <string name="require_error">Required</string>
     <string name="password_not_strong_error">The password is not strong enough. It must contain at least sic characters, including at least 1 uppercase letter, 1 number and 1 symbol character</string>
     <string name="email_not_valid_error">The email is not valid</string>
+    <string name="nickname">Nickname</string>
+    <string name="have_account">You have already an account? <u>Login</u></string>
+    <string name="details_tab_text">Details</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>
         <item>Cafe\'s</item>
         <item>Bakery</item>
         <item>Patisserie</item>
+        <item>Bar</item>
+        <item>Fast food</item>
     </string-array>
 </resources>
