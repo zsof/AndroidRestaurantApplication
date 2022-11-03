@@ -39,12 +39,11 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setupRegister() {
-        val email = binding.emailEditText.text.toString()
-        val password = binding.passwordEditText.text.toString()
-
         binding.logInBtn.setOnClickListener {
             if (validateRegister()) {
                 lifecycleScope.launch {
+                    val email = binding.emailEditText.text.toString()
+                    val password = binding.passwordEditText.text.toString()
                     val response = viewModel.register(LoginDataRequest(email, password))
                     if (response.success) {
                         safeNavigate(RegisterFragmentDirections.actionRegisterFrToListFr())

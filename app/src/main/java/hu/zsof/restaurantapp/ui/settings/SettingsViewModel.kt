@@ -1,8 +1,26 @@
 package hu.zsof.restaurantapp.ui.settings
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import hu.zsof.restaurantapp.repository.AuthRepository
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import hu.zsof.restaurantapp.network.model.User
+import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
+import hu.zsof.restaurantapp.repository.UserRepository
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SettingsViewModel @Inject constructor(private val authRepository: AuthRepository) :
-    ViewModel()
+@HiltViewModel
+class SettingsViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+
+    val userProfile = MutableLiveData<User>()
+    fun getUserProfile() {
+        viewModelScope.launch {
+            userProfile.postValue(userRepository.getUserProfile())
+        }
+    }
+
+    suspend fun updateUserProfile(userUpdateProfileRequest: UserUpdateProfileRequest): User {
+        return userRepository.updateUserProfile(userUpdateProfileRequest)
+    }
+}

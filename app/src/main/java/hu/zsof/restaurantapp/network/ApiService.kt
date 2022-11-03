@@ -35,13 +35,13 @@ interface ApiService {
     @POST("auth/login")
     suspend fun loginUser(@Body loginDataRequest: LoginDataRequest): NetworkResponse
 
-    @POST("user/newplace")
+    @POST("loggeduser/new-place")
     suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): NetworkResponse
 
     @GET("loggeduser/get-profile")
     suspend fun getUserProfile(): User
 
-    @POST("loggeduser/update-profile")
+    @PUT("loggeduser/update-profile")
     suspend fun updateUserProfile(@Body userUpdateProfileRequest: UserUpdateProfileRequest): User
 
     @Module
