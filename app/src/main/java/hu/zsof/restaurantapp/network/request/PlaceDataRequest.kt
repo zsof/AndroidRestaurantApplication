@@ -10,5 +10,6 @@ data class PlaceDataRequest(
     val type: Type = Type.RESTAURANT,
     val price: Price = Price.LOW,
     val image: String = "",
-    val filter: Filter = Filter()
+    val filter: Filter = Filter(),
+    val phoneNumber: String = ""
 )
