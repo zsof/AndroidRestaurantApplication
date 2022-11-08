@@ -17,7 +17,7 @@ fun EditText.validateNonEmptyField(): Boolean {
 fun EditText.isPasswordValid(): Boolean {
     val pattern = Pattern.compile(PASSWORD_PATTERN)
 
-    if (pattern.matcher(text).matches()) {
+    if (!pattern.matcher(text).matches()) {
         error = context.getString(R.string.password_not_strong_error)
         return false
     }
@@ -25,9 +25,9 @@ fun EditText.isPasswordValid(): Boolean {
 }
 
 fun EditText.isEmailValid(): Boolean {
-    val pattern = Pattern.compile(EMAIL_PATTERN)
+    val pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE)
 
-    if (pattern.matcher(text).matches()) {
+    if (!pattern.matcher(text).matches()) {
         error = context.getString(R.string.email_not_valid_error)
         return false
     }
