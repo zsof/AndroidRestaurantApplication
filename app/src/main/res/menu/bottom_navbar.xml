@@ -16,12 +16,12 @@
         android:icon="@drawable/ic_favs"
         android:title="@string/favs"/>
     <item
-        android:id="@+id/settingsFragment"
+        android:id="@+id/userProfileFragment"
         android:enabled="true"
         android:icon="@drawable/ic_person_outlined"
         android:title="@string/profile"/>
      <item
-         android:id="@+id/loginFragment"
+         android:id="@+id/registerFragment"
          android:enabled="true"
          android:icon="@drawable/ic_logout"
          android:title="@string/logout"/>

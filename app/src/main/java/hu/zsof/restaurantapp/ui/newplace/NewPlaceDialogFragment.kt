@@ -38,12 +38,14 @@ class NewPlaceDialogFragment : DialogFragment() {
         return dialog
     }
 
+    // todo layout - elkülöníteni a dolgokat + "filters" legyen catgeroy és place helyett
     private fun savePlace() {
         var priceValue = 0F
         binding.apply {
             priceSlider.addOnChangeListener { _, value, _ ->
                 priceValue = value
             }
+            // todo befejezni
             viewModel.addNewPlace(
                 PlaceDataRequest(
                     name = placeNameEditText.text.toString(),
@@ -61,4 +63,6 @@ class NewPlaceDialogFragment : DialogFragment() {
             )
         }
     }
+
+    // todo kép
 }

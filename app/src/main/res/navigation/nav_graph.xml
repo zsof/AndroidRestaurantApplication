@@ -57,10 +57,10 @@
             app:argType="long" />
     </fragment>
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="hu.zsof.restaurantapp.ui.settings.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/settings_fragment">
+        android:id="@+id/userProfileFragment"
+        android:name="hu.zsof.restaurantapp.ui.userprofile.UserProfileFragment"
+        android:label="UserProfileFragment"
+        tools:layout="@layout/user_profile_fragment">
 
     </fragment>
 

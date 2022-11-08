@@ -47,6 +47,8 @@ class RegisterFragment : Fragment() {
             }
         }
     }
+
+    //todo jelszó mégegyszer - ellenőrini h ugyanaz-e -> backend
     private fun setupRegister() {
         binding.registerBtn.setOnClickListener {
             if (validateRegister()) {

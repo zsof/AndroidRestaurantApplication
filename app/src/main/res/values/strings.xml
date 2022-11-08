@@ -47,6 +47,7 @@
     <string name="nickname">Nickname</string>
     <string name="have_account">You have already an account? <u>Login</u></string>
     <string name="details_tab_text">Details</string>
+    <string name="not_set_text">Not set</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>

@@ -36,7 +36,7 @@ interface ApiService {
     suspend fun loginUser(@Body loginDataRequest: LoginDataRequest): NetworkResponse
 
     @POST("loggeduser/new-place")
-    suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): NetworkResponse
+    suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): Place
 
     @GET("loggeduser/get-profile")
     suspend fun getUserProfile(): User
@@ -44,6 +44,7 @@ interface ApiService {
     @PUT("loggeduser/update-profile")
     suspend fun updateUserProfile(@Body userUpdateProfileRequest: UserUpdateProfileRequest): User
 
+    // todo cookie megmaradjon vmennyi ideig - ne kelljen újra bejelentkezni. De ha lejárt, akkor kérjen új bejelentkezést
     @Module
     @InstallIn(SingletonComponent::class)
     object ApiModule {
