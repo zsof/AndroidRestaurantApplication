@@ -42,7 +42,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/settingsNickNameText"
+                        android:id="@+id/userProfileNickNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -50,7 +50,7 @@
                         tools:text="Bécu" />
 
                     <TextView
-                        android:id="@+id/settingsNameText"
+                        android:id="@+id/userProfileNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -58,7 +58,7 @@
                         tools:text="Kis Béla" />
 
                     <TextView
-                        android:id="@+id/settingsEmailText"
+                        android:id="@+id/userProfileEmailText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -66,7 +66,7 @@
                         tools:text="kis.bela@teszt.hu" />
 
                     <TextView
-                        android:id="@+id/settingPasswordText"
+                        android:id="@+id/userProfilePasswordText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -82,7 +82,7 @@
                     android:layout_weight="1" />
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/settingsProfileImage"
+                    android:id="@+id/userProfileImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

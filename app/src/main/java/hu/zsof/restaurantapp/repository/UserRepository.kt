@@ -7,21 +7,21 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val apiService: ApiService) {
 
-    suspend fun getUserProfile(): User {
+    suspend fun getUserProfile(): User? {
         return try {
             apiService.getUserProfile()
         } catch (e: Exception) {
             e.printStackTrace()
-            User()
+            null
         }
     }
 
-    suspend fun updateUserProfile(userUpdateProfileRequest: UserUpdateProfileRequest): User { // User vay NetworkResponse??
+    suspend fun updateUserProfile(userUpdateProfileRequest: UserUpdateProfileRequest): User? {
         return try {
             apiService.updateUserProfile(userUpdateProfileRequest)
         } catch (e: Exception) {
             e.printStackTrace()
-            User()
+            null
         }
     }
 }

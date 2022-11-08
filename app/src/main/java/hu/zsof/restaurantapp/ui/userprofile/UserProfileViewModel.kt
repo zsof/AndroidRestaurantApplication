@@ -1,4 +1,4 @@
-package hu.zsof.restaurantapp.ui.settings
+package hu.zsof.restaurantapp.ui.userprofile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(private val userRepository: UserRepository) :
+class UserProfileViewModel @Inject constructor(private val userRepository: UserRepository) :
     ViewModel() {
 
     val userProfile = MutableLiveData<User>()
@@ -24,6 +24,7 @@ class SettingsViewModel @Inject constructor(private val userRepository: UserRepo
     fun updateUserProfile(userUpdateProfileRequest: UserUpdateProfileRequest) {
         viewModelScope.launch {
             userRepository.updateUserProfile(userUpdateProfileRequest)
+            // todo check if userProfile refreshes after update
         }
     }
 }
