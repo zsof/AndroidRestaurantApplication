@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.RegisterFragmentBinding
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
-import hu.zsof.restaurantapp.ui.login.LoginFragmentDirections
 import hu.zsof.restaurantapp.util.extensions.*
 import kotlinx.coroutines.launch
 
@@ -48,17 +47,21 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    //todo jelszó mégegyszer - ellenőrini h ugyanaz-e -> backend
+    // todo jelszó mégegyszer - ellenőrini h ugyanaz-e -> backend
     private fun setupRegister() {
         binding.registerBtn.setOnClickListener {
             if (validateRegister()) {
                 lifecycleScope.launch {
                     val email = binding.emailEditText.text.toString()
                     val password = binding.passwordEditText.text.toString()
-                    val response = viewModel.register(LoginDataRequest(email, password))
-                    if (response.success) {
+                    val name = binding.userNameEditText.text.toString()
+                    val nickname = binding.userNickNameEditText.text.toString()
+                    val response =
+                        viewModel.register(LoginDataRequest(email, password, name, nickname))
+                    if (response.isSuccess) {
+                        showToast(response.success, Toast.LENGTH_LONG)
                         safeNavigate(RegisterFragmentDirections.actionRegisterFrToListFr())
-                    } else showToast(response.errorMessage, Toast.LENGTH_LONG)
+                    } else showToast(response.error, Toast.LENGTH_LONG)
                 }
             }
         }

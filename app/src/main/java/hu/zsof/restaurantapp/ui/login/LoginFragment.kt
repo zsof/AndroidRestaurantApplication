@@ -54,10 +54,11 @@ class LoginFragment : Fragment() {
                     val password = binding.passwordEditText.text.toString()
                     val response =
                         viewModel.login(LoginDataRequest(email = email, password = password))
-                    if (response.success) {
+                    if (response.isSuccess) {
+                        showToast(response.success, Toast.LENGTH_LONG)
                         safeNavigate(LoginFragmentDirections.actionLoginFrToListFr())
                     } else {
-                        showToast(response.errorMessage, Toast.LENGTH_LONG)
+                        showToast(response.error, Toast.LENGTH_LONG)
                     }
                 }
             }
