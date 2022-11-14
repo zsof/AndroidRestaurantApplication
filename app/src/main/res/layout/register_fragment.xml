@@ -122,27 +122,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/passwordLayout" />
 
-        <RelativeLayout
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="#605E5E"
+            app:layout_constraintEnd_toStartOf="@id/orUseText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/registerBtn" />
+
+        <TextView
+            android:id="@+id/orUseText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:layout_constraintTop_toBottomOf="@id/registerBtn">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:padding="6dp"
+            android:text="@string/or_use"
+            app:layout_constraintTop_toBottomOf="@id/registerBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="12dp"
-                android:background="#605E5E" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:background="@android:color/white"
-                android:padding="2dp"
-                android:text="@string/or_use" />
-        </RelativeLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="#605E5E"
+            app:layout_constraintStart_toEndOf="@id/orUseText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/registerBtn" />
 
         <Button
             android:id="@+id/facebookBtn"
@@ -157,7 +169,7 @@
             android:textColor="@color/secondary_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider" />
+            app:layout_constraintTop_toBottomOf="@id/orUseText" />
 
         <Button
             android:id="@+id/googleBtn"
