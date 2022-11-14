@@ -48,6 +48,12 @@
     <string name="have_account">You have already an account? <u>Login</u></string>
     <string name="details_tab_text">Details</string>
     <string name="not_set_text">Not set</string>
+    <string name="password">********</string>
+    <string name="permission_granted">Permission granted.</string>
+    <string name="permission_denied">Permission denied.</string>
+    <string name="permission_explanation_location">The device needs permission to display your location data</string>
+    <string name="permission_request">Permission request</string>
+    <string name="ok_btn">Ok</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>

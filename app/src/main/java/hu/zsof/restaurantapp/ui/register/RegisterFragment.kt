@@ -59,7 +59,7 @@ class RegisterFragment : Fragment() {
                     val response =
                         viewModel.register(LoginDataRequest(email, password, name, nickname))
                     if (response.isSuccess) {
-                        showToast(response.success, Toast.LENGTH_LONG)
+                        showToast(response.successMessage, Toast.LENGTH_LONG)
                         safeNavigate(RegisterFragmentDirections.actionRegisterFrToListFr())
                     } else showToast(response.error, Toast.LENGTH_LONG)
                 }

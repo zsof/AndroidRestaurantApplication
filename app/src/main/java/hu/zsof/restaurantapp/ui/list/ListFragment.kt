@@ -8,7 +8,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
@@ -32,7 +31,7 @@ class ListFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
 
         recyclerView = binding.recyclerRestaurantList
-       // recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        // recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         listAdapter = ListAdapter()
 
         return binding.root
@@ -59,7 +58,7 @@ class ListFragment : Fragment() {
                 }
             )
             addNewPlaceBtn.setOnClickListener {
-                safeNavigate(ListFragmentDirections.actionListFrToNewPlaceDialogFr())
+                safeNavigate(ListFragmentDirections.actionListFrToNewPlaceDialogFr(null))
             }
         }
     }

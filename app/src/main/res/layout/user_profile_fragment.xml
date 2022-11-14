@@ -46,8 +46,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
+                        android:textStyle="italic"
                         android:textAppearance="?attr/textAppearanceHeadline5"
-                        tools:text="Bécu" />
+                        android:text="@string/not_set_text" />
 
                     <TextView
                         android:id="@+id/userProfileNameText"
@@ -71,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:textSize="20sp"
-                        tools:text="********" />
+                        android:text="@string/password" />
 
 
                 </LinearLayout>

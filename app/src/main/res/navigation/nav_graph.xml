@@ -50,8 +50,6 @@
         android:name="hu.zsof.restaurantapp.ui.details.DetailsViewPagerFragment"
         android:label="DetailsFragment"
         tools:layout="@layout/details_viewpager_fragment">
-
-
         <argument
             android:name="placeId"
             app:argType="long" />
@@ -68,7 +66,10 @@
         android:id="@+id/NewPlaceDialogFragment"
         android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment"
         android:label="NewPlaceDialogFragment">
-
+        <argument
+            android:name="latLong"
+            app:nullable="true"
+            app:argType="com.google.android.gms.maps.model.LatLng" />
     </dialog>
 
     <fragment
@@ -76,6 +77,8 @@
         android:name="hu.zsof.restaurantapp.ui.map.MapFragment"
         android:label="MapFragment"
         tools:layout="@layout/map_fragment">
+        <action android:id="@+id/action_mapFr_to_addPlaceDialogFr"
+            app:destination="@id/NewPlaceDialogFragment"/>
 
     </fragment>
 </navigation>

@@ -44,9 +44,10 @@ class UserProfileFragment : Fragment() {
         viewModel.getUserProfile()
         viewModel.userProfile.observe(viewLifecycleOwner) { user ->
             binding.apply {
-                userProfileNameText.text = user.name ?: getString(R.string.not_set_text)
+                userProfileNameText.text = user.name
                 userProfileEmailText.text = user.email
-                userProfileNickNameText.text = user.nickName ?: getString(R.string.not_set_text)
+                userProfileNickNameText.text = user.nickName
+                println("username ${user.nickName}")
             }
         }
     }
@@ -126,6 +127,6 @@ class UserProfileFragment : Fragment() {
 
     // todo toggle-hez külön mentés gomb
     // todo bekötni a toggle-ket -> backend is
-    //todo image
-    //todo dark theme
+    // todo image
+    // todo dark theme
 }
