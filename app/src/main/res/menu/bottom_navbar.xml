@@ -4,25 +4,25 @@
         android:id="@+id/listFragment"
         android:enabled="true"
         android:icon="@drawable/ic_home"
-        android:title="@string/home"/>
+        android:title="@string/home" />
     <item
         android:id="@+id/mapFragment"
         android:enabled="true"
         android:icon="@drawable/ic_map"
-        android:title="@string/map"/>
+        android:title="@string/map" />
     <item
         android:id="@+id/favs"
         android:enabled="true"
         android:icon="@drawable/ic_favs"
-        android:title="@string/favs"/>
+        android:title="@string/favs" />
     <item
         android:id="@+id/userProfileFragment"
         android:enabled="true"
         android:icon="@drawable/ic_person_outlined"
-        android:title="@string/profile"/>
-     <item
-         android:id="@+id/loginFragment"
-         android:enabled="true"
-         android:icon="@drawable/ic_logout"
-         android:title="@string/logout"/>
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/loginFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/logout" />
 </menu>

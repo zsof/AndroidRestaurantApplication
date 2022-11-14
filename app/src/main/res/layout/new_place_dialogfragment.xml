@@ -36,7 +36,8 @@
                     android:id="@+id/placeNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapSentences|textMultiLine" />
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +85,8 @@
                     android:id="@+id/websiteEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapSentences|textMultiLine" />
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +111,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/optional_text"
-                    android:inputType="textEmailAddress|textMultiLine" />
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,15 +137,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/optional_text"
-                    android:inputType="phone|textMultiLine" />
+                    android:imeOptions="actionDone"
+                    android:inputType="phone" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -162,15 +166,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:dropDownWidth="150dp"
-                    android:gravity="center"
-                    android:entries="@array/category_items" />
+                    android:entries="@array/category_items"
+                    android:gravity="center" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"

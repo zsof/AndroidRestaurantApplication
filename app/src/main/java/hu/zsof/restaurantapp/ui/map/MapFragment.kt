@@ -22,7 +22,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.MapFragmentBinding
-import hu.zsof.restaurantapp.util.extensions.safeNavigate
 import hu.zsof.restaurantapp.util.extensions.showToast
 
 class MapFragment : Fragment() {
