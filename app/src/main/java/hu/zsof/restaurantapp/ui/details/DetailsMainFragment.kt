@@ -9,10 +9,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.DetailsMainFragmentBinding
+import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.util.Constants
+import hu.zsof.restaurantapp.util.Constants.PLACE
 
 class DetailsMainFragment : Fragment() {
     private lateinit var binding: DetailsMainFragmentBinding
     private val viewModel: DetailsViewModel by viewModels()
+    private var place: Place? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            place = it.get(PLACE) as Place
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,5 +39,17 @@ class DetailsMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupBindings()
+    }
+
+    private fun setupBindings() {
+        binding.apply {
+            println("place details $place")
+            nameDetailsText.text = place?.name
+            addressDetailsText.text = place?.address
+            webDetailsText.text = place?.web
+            emailDetailsText.text = place?.email
+            phoneDetailsText.text = place?.phoneNumber
+        }
     }
 }

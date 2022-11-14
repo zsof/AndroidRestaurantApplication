@@ -47,12 +47,12 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="hu.zsof.restaurantapp.ui.details.DetailsViewPagerFragment"
+        android:name="hu.zsof.restaurantapp.ui.details.DetailsMainFragment"
         android:label="DetailsFragment"
-        tools:layout="@layout/details_viewpager_fragment">
+        tools:layout="@layout/details_main_fragment">
         <argument
-            android:name="placeId"
-            app:argType="long" />
+            android:name="place"
+            app:argType="hu.zsof.restaurantapp.network.model.Place" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"

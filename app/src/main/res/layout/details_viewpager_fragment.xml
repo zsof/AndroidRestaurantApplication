@@ -15,11 +15,12 @@
             android:background="@android:color/transparent"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:tabPaddingEnd="80dp"
             app:tabPaddingStart="80dp"
-            app:tabSelectedTextColor="@color/white" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabTextColor="@color/secondary_dark"
+            app:tabSelectedTextColor="@color/black" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"

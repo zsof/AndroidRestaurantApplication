@@ -45,11 +45,13 @@ class NewPlaceDialogFragment : DialogFragment() {
             priceSlider.addOnChangeListener { _, value, _ ->
                 priceValue = value
             }
-            // todo befejezni
             viewModel.addNewPlace(
                 PlaceDataRequest(
                     name = placeNameEditText.text.toString(),
                     address = addressEditText.text.toString(),
+                    web = websiteEditText.text.toString(),
+                    email = emailEditText.text.toString(),
+                    phoneNumber = phoneEditText.text.toString(),
                     type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
                     price = Price.getByOrdinal(priceValue),
                     image = "",
@@ -57,7 +59,14 @@ class NewPlaceDialogFragment : DialogFragment() {
                         freeParking = parkingAdd.isChecked,
                         glutenFree = glutenFreeAdd.isChecked,
                         lactoseFree = lactoseFreeAdd.isChecked,
-                        vegetarian = vegetarianAdd.isChecked
+                        vegetarian = vegetarianAdd.isChecked,
+                        vegan = veganAdd.isChecked,
+                        fastFood = fastFoodAdd.isChecked,
+                        parkingAvailable = parkingAdd.isChecked,
+                        dogFriendly = dogAdd.isChecked,
+                        familyPlace = familyPlaceAdd.isChecked,
+                        delivery = deliveryAdd.isChecked,
+                        creditCard = creditCardAdd.isChecked
                     )
                 )
             )

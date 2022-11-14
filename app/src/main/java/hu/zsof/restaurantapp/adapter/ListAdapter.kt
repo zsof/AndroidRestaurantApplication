@@ -69,8 +69,9 @@ class ListAdapter @Inject constructor() :
             binding.rateListText.text = place.rate.toString()
 
             itemView.setOnClickListener {
+                println("place adapter: $place")
                 val action =
-                    ListFragmentDirections.actionListFrToDetailsFr(place.id)
+                    ListFragmentDirections.actionListFrToDetailsFr(place = place)
                 itemView.findNavController().navigate(action)
             }
         }

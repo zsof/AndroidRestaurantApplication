@@ -11,4 +11,6 @@ object Constants {
     object Settings {
         const val LAYOUT_FORMAT = "layout_format"
     }
+
+    const val PLACE = "place"
 }

@@ -70,10 +70,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailsPlaceAddressLayout">
+            app:layout_constraintTop_toBottomOf="@id/detailsPlaceEmailLayout">
 
             <TextView
-                android:id="@+id/phoneNumberText"
+                android:id="@+id/phoneDetailsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -101,10 +101,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailsPlacePhoneLayout">
+            app:layout_constraintTop_toBottomOf="@id/detailsPlaceAddressLayout">
 
             <TextView
-                android:id="@+id/webText"
+                android:id="@+id/webDetailsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -135,7 +135,7 @@
             app:layout_constraintTop_toBottomOf="@id/detailsPlaceWebLayout">
 
             <TextView
-                android:id="@+id/emailText"
+                android:id="@+id/emailDetailsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
