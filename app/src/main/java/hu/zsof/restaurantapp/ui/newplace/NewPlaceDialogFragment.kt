@@ -1,12 +1,14 @@
 package hu.zsof.restaurantapp.ui.newplace
 
 import android.app.Dialog
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.NewPlaceDialogfragmentBinding
@@ -14,17 +16,31 @@ import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.enums.Type
 import hu.zsof.restaurantapp.network.model.Filter
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
+import hu.zsof.restaurantapp.util.Constants.LATLNG
+import java.util.*
 
 @AndroidEntryPoint
 class NewPlaceDialogFragment : DialogFragment() {
 
     private lateinit var binding: NewPlaceDialogfragmentBinding
     private val viewModel: NewPlaceDialogViewModel by viewModels()
+    private var latLng: LatLng? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            latLng = it.get(LATLNG) as LatLng?
+        }
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
         binding = NewPlaceDialogfragmentBinding.inflate(LayoutInflater.from(requireContext()))
 
+       /* if (latLng != null) {
+            binding.addressEditText.setText(getAddress(latLng!!))
+        } else binding.addressEditText.setText("")*/
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.add_new_place_title))
             .setView(binding.root)
@@ -71,6 +87,14 @@ class NewPlaceDialogFragment : DialogFragment() {
                 )
             )
         }
+    }
+
+    // todo nem rakja bele a címet, null-t kap latlng-ként
+    private fun getAddress(latLng: LatLng): String {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+        println("efs ${addresses[0].getAddressLine(0)}")
+        return addresses[0].getAddressLine(0)
     }
 
     // todo kép

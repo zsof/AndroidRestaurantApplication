@@ -13,4 +13,5 @@ object Constants {
     }
 
     const val PLACE = "place"
+    const val LATLNG = "latlng"
 }

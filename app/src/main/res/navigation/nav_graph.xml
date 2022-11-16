@@ -67,7 +67,7 @@
         android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment"
         android:label="NewPlaceDialogFragment">
         <argument
-            android:name="latLong"
+            android:name="latLng"
             app:nullable="true"
             app:argType="com.google.android.gms.maps.model.LatLng" />
     </dialog>

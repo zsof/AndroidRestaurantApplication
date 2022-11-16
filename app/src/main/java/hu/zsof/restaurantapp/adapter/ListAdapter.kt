@@ -68,6 +68,7 @@ class ListAdapter @Inject constructor() :
             binding.addressListText.text = place.address
             binding.rateListText.text = place.rate.toString()
 
+            // todo most nem a viewpager-re visz
             itemView.setOnClickListener {
                 println("place adapter: $place")
                 val action =
