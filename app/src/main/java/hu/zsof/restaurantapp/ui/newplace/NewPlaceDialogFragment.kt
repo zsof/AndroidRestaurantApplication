@@ -1,11 +1,21 @@
 package hu.zsof.restaurantapp.ui.newplace
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
+import android.graphics.Bitmap
 import android.location.Geocoder
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.WindowManager
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.model.LatLng
@@ -17,6 +27,9 @@ import hu.zsof.restaurantapp.network.enums.Type
 import hu.zsof.restaurantapp.network.model.Filter
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.util.Constants.LATLNG
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -24,6 +37,11 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     private lateinit var binding: NewPlaceDialogfragmentBinding
     private val viewModel: NewPlaceDialogViewModel by viewModels()
+
+    private lateinit var startForPhotoResult: ActivityResultLauncher<Intent>
+    private lateinit var writeExternalPermission: ActivityResultLauncher<String>
+    private var currentPhotoPath: String? = ""
+
     private var latLng: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,15 +50,77 @@ class NewPlaceDialogFragment : DialogFragment() {
         arguments?.let {
             latLng = it.get(LATLNG) as LatLng?
         }
+
+        startForPhotoResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    var bitmap: Bitmap? = null
+                    if (currentPhotoPath != null) {
+                        val uri = Uri.fromFile(File(currentPhotoPath!!))
+                        bitmap =
+                            MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+                    }
+
+                    if (bitmap == null) {
+                        return@registerForActivityResult
+                    }
+
+                    MediaStore.Images.Media.insertImage(
+                        requireContext().contentResolver,
+                        currentPhotoPath,
+                        "RestaurantApp_${System.currentTimeMillis()}",
+                        "RestaurantApp-images"
+                    )
+
+                    binding.addPhotoBtn.setImageBitmap(
+                        Bitmap.createScaledBitmap(
+                            bitmap,
+                            binding.addPhotoBtn.width,
+                            binding.addPhotoBtn.height,
+                            false
+                        )
+                    )
+                }
+            }
+
+        writeExternalPermission =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isPermissionAccepted ->
+                if (isPermissionAccepted) {
+                    val imageCaptureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+                    var photoFile: File? = null
+                    try {
+                        photoFile = createImageFile()
+                    } catch (ex: IOException) {
+                        ex.printStackTrace()
+                    }
+                    if (photoFile != null) {
+                        val photoURI: Uri = FileProvider.getUriForFile(
+                            requireContext(),
+                            "hu.zsof.restaurantapp.fileProvider",
+                            photoFile
+                        )
+
+                        currentPhotoPath = photoURI.path
+                        imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                        startForPhotoResult.launch(Intent(imageCaptureIntent))
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Permission is declined", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
         binding = NewPlaceDialogfragmentBinding.inflate(LayoutInflater.from(requireContext()))
 
-       /* if (latLng != null) {
-            binding.addressEditText.setText(getAddress(latLng!!))
-        } else binding.addressEditText.setText("")*/
+        setupBindings()
+
+        /* if (latLng != null) {
+             binding.addressEditText.setText(getAddress(latLng!!))
+         } else binding.addressEditText.setText("")*/
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.add_new_place_title))
             .setView(binding.root)
@@ -61,6 +141,11 @@ class NewPlaceDialogFragment : DialogFragment() {
             priceSlider.addOnChangeListener { _, value, _ ->
                 priceValue = value
             }
+
+            var photoUrl = ""
+            if (currentPhotoPath != null && currentPhotoPath != "") {
+                photoUrl = currentPhotoPath ?: ""
+            }
             viewModel.addNewPlace(
                 PlaceDataRequest(
                     name = placeNameEditText.text.toString(),
@@ -70,7 +155,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     phoneNumber = phoneEditText.text.toString(),
                     type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
                     price = Price.getByOrdinal(priceValue),
-                    image = "",
+                    image = photoUrl,
                     filter = Filter(
                         freeParking = parkingAdd.isChecked,
                         glutenFree = glutenFreeAdd.isChecked,
@@ -89,6 +174,12 @@ class NewPlaceDialogFragment : DialogFragment() {
         }
     }
 
+    private fun setupBindings() {
+        binding.addPhotoBtn.setOnClickListener {
+            writeExternalPermission.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+    }
+
     // todo nem rakja bele a címet, null-t kap latlng-ként
     private fun getAddress(latLng: LatLng): String {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
@@ -97,5 +188,30 @@ class NewPlaceDialogFragment : DialogFragment() {
         return addresses[0].getAddressLine(0)
     }
 
-    // todo kép
+    private fun createImageFile(): File {
+        val timeStamp: String =
+            SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir: File? =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        var idsDir: File? = null
+        storageDir?.let {
+            idsDir = File(storageDir.absolutePath + "/RestaurantApp")
+
+            if (!idsDir!!.exists()) {
+                val success = idsDir!!.mkdir()
+                if (success) {
+                    idsDir = File(storageDir.absolutePath + "/RestaurantApp")
+                }
+            }
+        }
+
+        val image = File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            idsDir /* directory */
+        )
+        val path = image.absolutePath
+        println("abs path: $path")
+        return image
+    }
 }

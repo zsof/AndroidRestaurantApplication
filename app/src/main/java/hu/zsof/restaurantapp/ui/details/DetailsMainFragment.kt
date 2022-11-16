@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.DetailsMainFragmentBinding
 import hu.zsof.restaurantapp.network.model.Place
-import hu.zsof.restaurantapp.util.Constants
 import hu.zsof.restaurantapp.util.Constants.PLACE
 
 class DetailsMainFragment : Fragment() {
@@ -50,6 +50,12 @@ class DetailsMainFragment : Fragment() {
             webDetailsText.text = place?.web
             emailDetailsText.text = place?.email
             phoneDetailsText.text = place?.phoneNumber
+            Glide.with(requireContext())
+                .load(place?.image)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(
+                    imageDetails
+                )
         }
     }
 }
