@@ -28,6 +28,7 @@ import hu.zsof.restaurantapp.network.enums.Type
 import hu.zsof.restaurantapp.network.model.Filter
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.util.Constants.LATLNG
+import hu.zsof.restaurantapp.util.extensions.isEmailValid
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -156,7 +157,73 @@ class NewPlaceDialogFragment : DialogFragment() {
         return dialog
     }
 
-    // todo layout - elkülöníteni a dolgokat + "filters" legyen catgeroy és place helyett
+    private fun checkAllRequiredFieldDone() {
+        binding.apply {
+            val name = placeNameEditText.text.toString()
+            val address = addressEditText.text.toString()
+
+            if (name == "" || name == " " || address == "" || address == " ") {
+                showDialog(
+                    title = getString(R.string.required_field),
+                    setView = view,
+                    message = (getString(R.string.warning_fill_required_fields)),
+                    textPositiveBtn = getString(R.string.ok_btn),
+                    onPositiveButton = {}
+                )
+            } else {
+                checkValidFields()
+            }
+        }
+    }
+
+    private fun checkValidFields() {
+        binding.apply {
+            val email = emailEditText.text.toString()
+            val phoneNumber = phoneEditText.text.toString()
+
+            if (email != "" || phoneNumber != "") {
+                if (!emailEditText.isEmailValid()) {
+                    showDialog(
+                        title = getString(R.string.invalid_fields),
+                        setView = view,
+                        message = getString(R.string.warning_invalid_email_or_phone),
+                        textPositiveBtn = getString(R.string.ok_btn),
+                        onPositiveButton = {}
+                    )
+                } else {
+                    checkFieldsDone()
+                }
+            } else {
+                checkFieldsDone()
+            }
+        }
+    }
+
+    private fun checkFieldsDone() {
+        binding.apply {
+            val web = websiteEditText.text.toString()
+            val email = emailEditText.text.toString()
+            val phoneNumber = phoneEditText.text.toString()
+
+            if (web == "" || phoneNumber == "" || email == "") {
+                showDialog(
+                    title = getString(R.string.empty_field_title),
+                    setView = view,
+                    message = getString(R.string.warning_missing_fields),
+                    textPositiveBtn = getString(R.string.save_btn),
+                    textNegativeBtn = getString(R.string.contuine_btn),
+                    onPositiveButton = {
+                        savePlace()
+                        dismiss()
+                    }
+                )
+            } else {
+                savePlace()
+                dismiss()
+            }
+        }
+    }
+
     private fun savePlace() {
         var photoUrl = ""
         if (currentPhotoPath != null && currentPhotoPath != "") {
@@ -192,57 +259,13 @@ class NewPlaceDialogFragment : DialogFragment() {
         }
     }
 
-    private fun checkAllRequiredFieldDone() {
-        binding.apply {
-            val name = placeNameEditText.text.toString()
-            val address = addressEditText.text.toString()
-
-            if (name == "" || name == " " || address == "" || address == " ") {
-                showDialog(
-                    title = getString(R.string.required_field),
-                    setView = view,
-                    message = (getString(R.string.warning_fill_required_fields)),
-                    textPositiveBtn = getString(R.string.ok_btn),
-                    onPositiveButton = {}
-                )
-            } else {
-                checkFieldsDone()
-            }
-        }
-    }
-
-    private fun checkFieldsDone() {
-        binding.apply {
-            val web = websiteEditText.text.toString()
-            val email = emailEditText.text.toString()
-            val phoneNumber = phoneEditText.text.toString()
-
-            if (web == "" || email == "" || phoneNumber == "") {
-                showDialog(
-                    title = getString(R.string.empty_field_title),
-                    setView = view,
-                    message = getString(R.string.warning_missing_fields),
-                    textPositiveBtn = getString(R.string.save_btn),
-                    textNegativeBtn = getString(R.string.contuine_btn),
-                    onPositiveButton = {
-                        savePlace()
-                        dismiss()
-                    }
-                )
-            } else {
-                savePlace()
-                dismiss()
-            }
-        }
-    }
-
     private fun showDialog(
         title: String?,
         setView: View?,
         message: String,
         textPositiveBtn: String,
         textNegativeBtn: String? = null,
-        onPositiveButton: () -> Unit,
+        onPositiveButton: () -> Unit
     ) {
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(title)

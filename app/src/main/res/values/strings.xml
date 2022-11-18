@@ -65,6 +65,8 @@
     <string name="empty_field_title">Empty fields</string>
     <string name="contuine_btn">Continue</string>
     <string name="warning_missing_fields">Some fields are not filled in. Save like this or continue filling?</string>
+    <string name="invalid_fields">Invalid Fields</string>
+    <string name="warning_invalid_email_or_phone">Invalid Email address or Phone number</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>
