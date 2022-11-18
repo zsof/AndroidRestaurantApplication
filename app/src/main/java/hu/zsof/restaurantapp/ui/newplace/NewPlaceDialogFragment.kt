@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -121,15 +122,15 @@ class NewPlaceDialogFragment : DialogFragment() {
         setupBindings()
 
         binding.priceSlider.addOnChangeListener { _, value, _ ->
-            when (value) {
+            priceValue = when (value) {
                 0f -> {
-                    priceValue = Price.LOW
+                    Price.LOW
                 }
                 50f -> {
-                    priceValue = Price.MIDDLE
+                    Price.MIDDLE
                 }
                 else -> {
-                    priceValue = Price.HIGH
+                    Price.HIGH
                 }
             }
         }
@@ -140,11 +141,16 @@ class NewPlaceDialogFragment : DialogFragment() {
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.add_new_place_title))
             .setView(binding.root)
-            .setPositiveButton(R.string.save_btn) { _, _ ->
-                savePlace()
-            }
+            .setPositiveButton(R.string.save_btn, null)
             .setNegativeButton(R.string.cancel_btn, null)
             .create()
+
+        dialog.setOnShowListener {
+            val okButton = dialog.getButton(Dialog.BUTTON_POSITIVE)
+            okButton.setOnClickListener {
+                checkAllRequiredFieldDone()
+            }
+        }
 
         dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MODE_CHANGED)
         return dialog
@@ -152,12 +158,12 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     // todo layout - elkülöníteni a dolgokat + "filters" legyen catgeroy és place helyett
     private fun savePlace() {
-        binding.apply {
-            var photoUrl = ""
-            if (currentPhotoPath != null && currentPhotoPath != "") {
-                photoUrl = currentPhotoPath ?: ""
-            }
+        var photoUrl = ""
+        if (currentPhotoPath != null && currentPhotoPath != "") {
+            photoUrl = currentPhotoPath ?: ""
+        }
 
+        binding.apply {
             viewModel.addNewPlace(
                 PlaceDataRequest(
                     name = placeNameEditText.text.toString(),
@@ -184,6 +190,74 @@ class NewPlaceDialogFragment : DialogFragment() {
                 )
             )
         }
+    }
+
+    private fun checkAllRequiredFieldDone() {
+        binding.apply {
+            val name = placeNameEditText.text.toString()
+            val address = addressEditText.text.toString()
+
+            if (name == "" || name == " " || address == "" || address == " ") {
+                showDialog(
+                    title = getString(R.string.required_field),
+                    setView = view,
+                    message = (getString(R.string.warning_fill_required_fields)),
+                    textPositiveBtn = getString(R.string.ok_btn),
+                    onPositiveButton = {}
+                )
+            } else {
+                checkFieldsDone()
+            }
+        }
+    }
+
+    private fun checkFieldsDone() {
+        binding.apply {
+            val web = websiteEditText.text.toString()
+            val email = emailEditText.text.toString()
+            val phoneNumber = phoneEditText.text.toString()
+
+            if (web == "" || email == "" || phoneNumber == "") {
+                showDialog(
+                    title = getString(R.string.empty_field_title),
+                    setView = view,
+                    message = getString(R.string.warning_missing_fields),
+                    textPositiveBtn = getString(R.string.save_btn),
+                    textNegativeBtn = getString(R.string.contuine_btn),
+                    onPositiveButton = {
+                        savePlace()
+                        dismiss()
+                    }
+                )
+            } else {
+                savePlace()
+                dismiss()
+            }
+        }
+    }
+
+    private fun showDialog(
+        title: String?,
+        setView: View?,
+        message: String,
+        textPositiveBtn: String,
+        textNegativeBtn: String? = null,
+        onPositiveButton: () -> Unit,
+    ) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setView(setView)
+            .setMessage(message)
+            .setPositiveButton(textPositiveBtn) { _, _ ->
+                onPositiveButton()
+            }
+            .setNegativeButton(textNegativeBtn) { dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MODE_CHANGED)
+        dialog.show()
     }
 
     private fun setupBindings() {

@@ -1,5 +1,6 @@
 package hu.zsof.restaurantapp.network
 
+import android.content.SharedPreferences
 import androidx.databinding.library.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -83,7 +84,7 @@ interface ApiService {
                 val originalResponse: Response = chain.proceed(chain.request())
                 if (originalResponse.headers("Set-Cookie").isNotEmpty()) {
                     val cookies = originalResponse.headers("Set-Cookie")
-                    // Timber.wtf(cookies[0])
+
                     Preferences.userRoot().put("cookie", cookies[0])
                     println(cookies[0])
                 }

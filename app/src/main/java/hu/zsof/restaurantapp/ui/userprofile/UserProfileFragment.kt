@@ -94,7 +94,7 @@ class UserProfileFragment : Fragment() {
         inputTextHint: String?,
         inputTextType: Int
     ) {
-        val inputText = EditText(context)
+        val inputText = EditText(requireContext())
         inputText.hint = inputTextHint
         inputText.inputType = inputTextType
 
