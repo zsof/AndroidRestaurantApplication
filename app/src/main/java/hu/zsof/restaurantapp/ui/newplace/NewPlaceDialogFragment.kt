@@ -40,7 +40,9 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     private lateinit var startForPhotoResult: ActivityResultLauncher<Intent>
     private lateinit var writeExternalPermission: ActivityResultLauncher<String>
+
     private var currentPhotoPath: String? = ""
+    private var priceValue = Price.LOW
 
     private var latLng: LatLng? = null
 
@@ -118,6 +120,20 @@ class NewPlaceDialogFragment : DialogFragment() {
 
         setupBindings()
 
+        binding.priceSlider.addOnChangeListener { _, value, _ ->
+            when (value) {
+                0f -> {
+                    priceValue = Price.LOW
+                }
+                50f -> {
+                    priceValue = Price.MIDDLE
+                }
+                else -> {
+                    priceValue = Price.HIGH
+                }
+            }
+        }
+
         /* if (latLng != null) {
              binding.addressEditText.setText(getAddress(latLng!!))
          } else binding.addressEditText.setText("")*/
@@ -136,16 +152,12 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     // todo layout - elkülöníteni a dolgokat + "filters" legyen catgeroy és place helyett
     private fun savePlace() {
-        var priceValue = 0F
         binding.apply {
-            priceSlider.addOnChangeListener { _, value, _ ->
-                priceValue = value
-            }
-
             var photoUrl = ""
             if (currentPhotoPath != null && currentPhotoPath != "") {
                 photoUrl = currentPhotoPath ?: ""
             }
+
             viewModel.addNewPlace(
                 PlaceDataRequest(
                     name = placeNameEditText.text.toString(),
@@ -154,7 +166,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     email = emailEditText.text.toString(),
                     phoneNumber = phoneEditText.text.toString(),
                     type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
-                    price = Price.getByOrdinal(priceValue),
+                    price = priceValue,
                     image = photoUrl,
                     filter = Filter(
                         freeParking = parkingAdd.isChecked,

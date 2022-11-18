@@ -9,8 +9,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
+import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.ui.list.ListFragmentDirections
 import javax.inject.Inject
@@ -67,6 +69,23 @@ class ListAdapter @Inject constructor() :
             binding.nameListText.text = place.name
             binding.addressListText.text = place.address
             binding.rateListText.text = place.rate.toString()
+
+            binding.priceListText.text = when (place.price) {
+                Price.LOW -> {
+                    "$"
+                }
+                Price.MIDDLE -> {
+                    "$$"
+                }
+                else -> "$$$"
+            }
+
+            Glide.with(binding.imageList)
+                .load(place.image)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(
+                    binding.imageList
+                )
 
             // todo most nem a viewpager-re visz
             itemView.setOnClickListener {
