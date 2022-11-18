@@ -59,6 +59,7 @@
     <string name="email_address_text">Email address</string>
     <string name="phone_number_text">Phone number</string>
     <string name="filters">Filters</string>
+    <string name="please_sign_in_text">! Please sign in.</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>

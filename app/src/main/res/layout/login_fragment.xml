@@ -39,6 +39,7 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:text="test@test.hu" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,8 +84,8 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="18dp"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="12dp"
             android:background="#605E5E"
             app:layout_constraintEnd_toStartOf="@id/orUseText"
@@ -99,19 +100,19 @@
             android:layout_marginTop="2dp"
             android:padding="6dp"
             android:text="@string/or_use"
-            app:layout_constraintTop_toBottomOf="@id/logInBtn"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/logInBtn" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="18dp"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="12dp"
             android:background="#605E5E"
-            app:layout_constraintStart_toEndOf="@id/orUseText"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/orUseText"
             app:layout_constraintTop_toBottomOf="@id/logInBtn" />
 
         <Button
