@@ -2,6 +2,7 @@ package hu.zsof.restaurantapp.ui.newplace
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.location.Geocoder
@@ -28,7 +29,9 @@ import hu.zsof.restaurantapp.network.enums.Type
 import hu.zsof.restaurantapp.network.model.Filter
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.util.Constants.LATLNG
+import hu.zsof.restaurantapp.util.Constants.LISTENER
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
+import hu.zsof.restaurantapp.util.listeners.OnDialogCloseListener
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -39,6 +42,8 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     private lateinit var binding: NewPlaceDialogfragmentBinding
     private val viewModel: NewPlaceDialogViewModel by viewModels()
+
+    //private lateinit var closeListener: OnDialogCloseListener
 
     private lateinit var startForPhotoResult: ActivityResultLauncher<Intent>
     private lateinit var writeExternalPermission: ActivityResultLauncher<String>
@@ -53,6 +58,7 @@ class NewPlaceDialogFragment : DialogFragment() {
 
         arguments?.let {
             latLng = it.get(LATLNG) as LatLng?
+            //closeListener = it.get(LISTENER) as OnDialogCloseListener
         }
 
         startForPhotoResult =
@@ -157,6 +163,16 @@ class NewPlaceDialogFragment : DialogFragment() {
         return dialog
     }
 
+
+
+    /*override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        val activity: Activity? = activity
+        if (activity is DialogInterface.OnDismissListener) {
+            (activity as DialogInterface.OnDismissListener).onDismiss(dialog)
+        }
+    }*/
+
     private fun checkAllRequiredFieldDone() {
         binding.apply {
             val name = placeNameEditText.text.toString()
@@ -215,11 +231,13 @@ class NewPlaceDialogFragment : DialogFragment() {
                     onPositiveButton = {
                         savePlace()
                         dismiss()
+                        //closeListener.onDialogClosed()
                     }
                 )
             } else {
                 savePlace()
                 dismiss()
+                //closeListener.onDialogClosed()
             }
         }
     }

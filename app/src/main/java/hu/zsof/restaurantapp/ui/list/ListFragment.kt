@@ -8,15 +8,18 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.adapter.ListAdapter
 import hu.zsof.restaurantapp.databinding.ListFragmentBinding
+import hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment
 import hu.zsof.restaurantapp.util.extensions.safeNavigate
+import hu.zsof.restaurantapp.util.listeners.OnDialogCloseListener
 
 @AndroidEntryPoint
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), OnDialogCloseListener {
 
     private lateinit var binding: ListFragmentBinding
     private lateinit var listAdapter: ListAdapter
@@ -58,7 +61,7 @@ class ListFragment : Fragment() {
                 }
             )
             addNewPlaceBtn.setOnClickListener {
-                safeNavigate(ListFragmentDirections.actionListFrToNewPlaceDialogFr(null))
+                safeNavigate(ListFragmentDirections.actionListFrToNewPlaceDialogFr( null))
             }
         }
     }
@@ -69,5 +72,9 @@ class ListFragment : Fragment() {
             listAdapter.restaurantList = it
             binding.recyclerRestaurantList.adapter = listAdapter
         }
+    }
+
+    override fun onDialogClosed() {
+        viewModel.requestPlaceData()
     }
 }

@@ -50,11 +50,11 @@ class MapFragment : Fragment() {
         googleMap.uiSettings.isCompassEnabled = true
         googleMap.uiSettings.isZoomControlsEnabled = true
 
-        googleMap.setOnMapLongClickListener {
+        /*googleMap.setOnMapLongClickListener {
             val action =
                 MapFragmentDirections.actionMapFrToAddPlaceDialogFr(latLng = it)
             findNavController().navigate(action)
-        }
+        }*/
     }
 
     override fun onCreateView(
