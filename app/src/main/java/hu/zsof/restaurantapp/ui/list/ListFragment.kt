@@ -13,10 +13,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.adapter.ListAdapter
 import hu.zsof.restaurantapp.databinding.ListFragmentBinding
+import hu.zsof.restaurantapp.util.extensions.safeNavigate
+import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
 import hu.zsof.restaurantapp.util.listeners.OnDialogCloseListener
 
 @AndroidEntryPoint
-class ListFragment : Fragment(), OnDialogCloseListener {
+class ListFragment : Fragment(), OnDialogCloseListener, FavBtnClickListener {
 
     private lateinit var binding: ListFragmentBinding
     private lateinit var listAdapter: ListAdapter
@@ -31,7 +33,10 @@ class ListFragment : Fragment(), OnDialogCloseListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
 
         recyclerView = binding.recyclerRestaurantList
-        listAdapter = ListAdapter()
+        //todo user-t eltárolni legelején, és onnan elkérni a favlistát- ezt betölteni  ++ todo backenden addfav usert adjon vissza, ne place-t
+        val testList = mutableListOf<Long>()
+        testList.add(1)
+        listAdapter = ListAdapter(this, testList )
 
         return binding.root
     }
@@ -56,9 +61,13 @@ class ListFragment : Fragment(), OnDialogCloseListener {
                     }
                 }
             )
-            /* addNewPlaceBtn.setOnClickListener {
-                 safeNavigate(ListFragmentDirections.actionListFrToNewPlaceDialogFr( null))
-             }*/
+
+            filterBtn.setOnClickListener {
+                safeNavigate(ListFragmentDirections.actionListFrToFilterDialogFr())
+            }
+             addNewPlaceBtn.setOnClickListener {
+                 safeNavigate(ListFragmentDirections.actionListFrToMapFr())
+             }
         }
     }
 
@@ -67,16 +76,14 @@ class ListFragment : Fragment(), OnDialogCloseListener {
         viewModel.places.observe(viewLifecycleOwner) {
             listAdapter.restaurantList = it
             binding.recyclerRestaurantList.adapter = listAdapter
-            // listAdapter.favPlaceId = listAdapter.favPlaceId
         }
-
-       /* if (listAdapter.favPlaceId != 0L) {
-            viewModel.addOrRemoveFavPlace(listAdapter.favPlaceId)
-            println("fr ${listAdapter.favPlaceId}")
-        }*/
     }
 
     override fun onDialogClosed() {
         viewModel.requestPlaceData()
+    }
+
+    override fun onFavBtnClicked(placeId: Long) {
+        viewModel.addOrRemoveFavPlace(placeId)
     }
 }

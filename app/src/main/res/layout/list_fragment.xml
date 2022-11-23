@@ -35,13 +35,13 @@
             app:layout_behavior="com.lapism.searchview.SearchBehavior"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filterListBtn"
+            app:layout_constraintTop_toBottomOf="@id/filterBtn"
             app:queryBackground="@drawable/search_view"
             app:queryHint="@string/search"
             app:showAsAction="ifRoom|collapseActionView" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/filterListBtn"
+            android:id="@+id/filterBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -90,7 +90,7 @@
             app:layout_constraintTop_toBottomOf="@id/searchView"
             tools:listitem="@layout/list_item" />
 
-      <!--  <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addNewPlaceBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             android:contentDescription="@string/add_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_plus" />-->
+            app:srcCompat="@drawable/ic_plus" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

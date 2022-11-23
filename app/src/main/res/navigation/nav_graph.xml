@@ -39,10 +39,16 @@
         tools:layout="@layout/list_fragment">
         <action
             android:id="@+id/action_listFr_to_newPlaceDialogFr"
-            app:destination="@id/NewPlaceDialogFragment" />
+            app:destination="@id/newPlaceDialogFragment" />
         <action
             android:id="@+id/action_listFr_to_detailsFr"
-            app:destination="@id/detailsFragment"/>
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_listFr_to_mapFr"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_listFr_to_filterDialogFr"
+            app:destination="@id/filterPlaceDialogFragment" />
     </fragment>
 
     <fragment
@@ -73,22 +79,28 @@
     </fragment>
 
     <dialog
-        android:id="@+id/NewPlaceDialogFragment"
+        android:id="@+id/newPlaceDialogFragment"
         android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment"
         android:label="NewPlaceDialogFragment">
         <argument
             android:name="latLng"
-            app:nullable="true"
-            app:argType="com.google.android.gms.maps.model.LatLng" />
+            app:argType="com.google.android.gms.maps.model.LatLng"
+            app:nullable="true" />
     </dialog>
+
+    <dialog
+        android:id="@+id/filterPlaceDialogFragment"
+        android:name="hu.zsof.restaurantapp.ui.filter.FilterPlaceDialogFragment"
+        android:label="FilterPlaceDialogFragment" />
 
     <fragment
         android:id="@+id/mapFragment"
         android:name="hu.zsof.restaurantapp.ui.map.MapFragment"
         android:label="MapFragment"
         tools:layout="@layout/map_fragment">
-        <action android:id="@+id/action_mapFr_to_addPlaceDialogFr"
-            app:destination="@id/NewPlaceDialogFragment"/>
+        <action
+            android:id="@+id/action_mapFr_to_addPlaceDialogFr"
+            app:destination="@id/newPlaceDialogFragment" />
 
     </fragment>
 </navigation>

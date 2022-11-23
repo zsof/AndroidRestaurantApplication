@@ -15,9 +15,13 @@ import hu.zsof.restaurantapp.databinding.ListItemBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.ui.list.ListFragmentDirections
+import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
 import javax.inject.Inject
 
-class ListAdapter @Inject constructor() :
+class ListAdapter @Inject constructor(
+    private val favBtnListener: FavBtnClickListener,
+    private val favList: List<Long>
+) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>(), Filterable {
 
     var restaurantList: List<Place>
@@ -27,8 +31,6 @@ class ListAdapter @Inject constructor() :
         }
 
     var fixList: MutableList<Place>? = null
-
-    var favPlaceId: Long = 0L
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -82,13 +84,19 @@ class ListAdapter @Inject constructor() :
                 else -> "$$$"
             }
 
+            binding.favIcon.isChecked = favList.contains(place.id)
+            if (binding.favIcon.isChecked) {
+                binding.favIcon.setButtonDrawable(R.drawable.ic_favs)
+            } else {
+                binding.favIcon.setButtonDrawable(R.drawable.ic_fav_outlined)
+            }
+
             binding.favIcon.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    favPlaceId = place.id
-                    println("fav id $favPlaceId")
+                    favBtnListener.onFavBtnClicked(place.id)
                     binding.favIcon.setButtonDrawable(R.drawable.ic_favs)
                 } else {
-                    favPlaceId = place.id
+                    favBtnListener.onFavBtnClicked(place.id)
                     binding.favIcon.setButtonDrawable(R.drawable.ic_fav_outlined)
                 }
             }
