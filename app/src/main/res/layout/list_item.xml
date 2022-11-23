@@ -6,9 +6,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         app:cardElevation="4dp"
-        app:strokeColor="@color/black"
-        android:layout_marginBottom="8dp">
+        app:strokeColor="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -82,7 +82,22 @@
                 android:paddingBottom="16dp"
                 app:layout_constraintStart_toEndOf="@id/mapIcon"
                 app:layout_constraintTop_toBottomOf="@id/priceListText"
-                tools:text="1146 Budapest Stefánia út 50"/>
+                tools:text="1146 Budapest Stefánia út 50" />
+
+            <CheckBox
+                android:id="@+id/favIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:button="@drawable/ic_fav_outlined"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingEnd="8dp"
+                android:buttonTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

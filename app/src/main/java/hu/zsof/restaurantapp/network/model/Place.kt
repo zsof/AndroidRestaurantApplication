@@ -15,5 +15,8 @@ data class Place(
     var rate: Float = 2.0f,
     var price: Price = Price.LOW,
     var image: String? = "",
-    var filter: Filter = Filter()
+    var filter: Filter = Filter(),
+    var latitude: Double = 0.0,
+    var longitude: Double = 0.0,
+    var usersNumber: Int = 0
 ) : Serializable

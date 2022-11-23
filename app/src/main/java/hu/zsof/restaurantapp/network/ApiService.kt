@@ -1,6 +1,5 @@
 package hu.zsof.restaurantapp.network
 
-import android.content.SharedPreferences
 import androidx.databinding.library.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -44,6 +43,12 @@ interface ApiService {
 
     @PUT("loggeduser/update-profile")
     suspend fun updateUserProfile(@Body userUpdateProfileRequest: UserUpdateProfileRequest): User
+
+    @POST("loggeduser/add-favplace/{placeId}")
+    suspend fun addPlaceToFav(@Path("placeId") placeId: Long): Place
+
+    @GET("loggeduser/favplaces")
+    suspend fun getFavPlaces(): List<Place>
 
     // todo cookie megmaradjon vmennyi ideig - ne kelljen újra bejelentkezni. De ha lejárt, akkor kérjen új bejelentkezést
     @Module

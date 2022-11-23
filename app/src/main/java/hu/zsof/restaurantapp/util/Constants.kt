@@ -13,6 +13,6 @@ object Constants {
     }
 
     const val PLACE = "place"
-    const val LATLNG = "latlng"
+    const val LATLNG = "latLng"
     const val LISTENER = "listener"
 }

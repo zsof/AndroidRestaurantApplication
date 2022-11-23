@@ -14,20 +14,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.MapFragmentBinding
 import hu.zsof.restaurantapp.util.extensions.showToast
 
+@AndroidEntryPoint
 class MapFragment : Fragment() {
 
     private lateinit var binding: MapFragmentBinding
     private lateinit var map: GoogleMap
+    private val viewModel: MapViewModel by viewModels()
     private lateinit var locationPermRequest: ActivityResultLauncher<String>
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -42,6 +47,7 @@ class MapFragment : Fragment() {
          */
         map = googleMap
         handleFineLocationPermission()
+
         val budapest = LatLng(47.497913, 19.040236)
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(budapest))
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(11F))
@@ -50,11 +56,11 @@ class MapFragment : Fragment() {
         googleMap.uiSettings.isCompassEnabled = true
         googleMap.uiSettings.isZoomControlsEnabled = true
 
-        /*googleMap.setOnMapLongClickListener {
+        googleMap.setOnMapLongClickListener {
             val action =
                 MapFragmentDirections.actionMapFrToAddPlaceDialogFr(latLng = it)
             findNavController().navigate(action)
-        }*/
+        }
     }
 
     override fun onCreateView(
@@ -70,6 +76,8 @@ class MapFragment : Fragment() {
         binding = MapFragmentBinding.bind(view)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+
+        getPlacesToMarker()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +93,23 @@ class MapFragment : Fragment() {
                     // Log.d(TAG, "Permission denied for location data")
                 }
             }
+    }
+
+    private fun getPlacesToMarker() {
+        viewModel.requestPlaceData()
+        viewModel.places.observe(viewLifecycleOwner) {
+            for (place in it) {
+                map.addMarker(
+                    MarkerOptions().position(
+                        LatLng(
+                            place.latitude,
+                            place.longitude
+                        )
+                    ).title(place.name)
+
+                )
+            }
+        }
     }
 
     @SuppressLint("MissingPermission")

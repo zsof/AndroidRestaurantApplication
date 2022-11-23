@@ -28,6 +28,8 @@ class ListAdapter @Inject constructor() :
 
     var fixList: MutableList<Place>? = null
 
+    var favPlaceId: Long = 0L
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
@@ -78,6 +80,17 @@ class ListAdapter @Inject constructor() :
                     "$$"
                 }
                 else -> "$$$"
+            }
+
+            binding.favIcon.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    favPlaceId = place.id
+                    println("fav id $favPlaceId")
+                    binding.favIcon.setButtonDrawable(R.drawable.ic_favs)
+                } else {
+                    favPlaceId = place.id
+                    binding.favIcon.setButtonDrawable(R.drawable.ic_fav_outlined)
+                }
             }
 
             Glide.with(binding.imageList)

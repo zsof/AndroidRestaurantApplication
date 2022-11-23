@@ -1,7 +1,5 @@
 package hu.zsof.restaurantapp.network.model
 
-import hu.zsof.restaurantapp.network.request.PlaceDataRequest
-
 data class User(
     val id: Long = 0,
     val name: String? = "",
@@ -9,5 +7,5 @@ data class User(
     val email: String = "",
     val image: String? = null,
     val admin: Boolean = false,
-    val favPlaces: MutableList<PlaceDataRequest> = mutableListOf()
+    val favPlaces: MutableList<Place> = mutableListOf()
 )

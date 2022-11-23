@@ -8,14 +8,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.adapter.ListAdapter
 import hu.zsof.restaurantapp.databinding.ListFragmentBinding
-import hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment
-import hu.zsof.restaurantapp.util.extensions.safeNavigate
 import hu.zsof.restaurantapp.util.listeners.OnDialogCloseListener
 
 @AndroidEntryPoint
@@ -34,7 +31,6 @@ class ListFragment : Fragment(), OnDialogCloseListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
 
         recyclerView = binding.recyclerRestaurantList
-        // recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         listAdapter = ListAdapter()
 
         return binding.root
@@ -60,9 +56,9 @@ class ListFragment : Fragment(), OnDialogCloseListener {
                     }
                 }
             )
-            addNewPlaceBtn.setOnClickListener {
-                safeNavigate(ListFragmentDirections.actionListFrToNewPlaceDialogFr( null))
-            }
+            /* addNewPlaceBtn.setOnClickListener {
+                 safeNavigate(ListFragmentDirections.actionListFrToNewPlaceDialogFr( null))
+             }*/
         }
     }
 
@@ -71,7 +67,13 @@ class ListFragment : Fragment(), OnDialogCloseListener {
         viewModel.places.observe(viewLifecycleOwner) {
             listAdapter.restaurantList = it
             binding.recyclerRestaurantList.adapter = listAdapter
+            // listAdapter.favPlaceId = listAdapter.favPlaceId
         }
+
+       /* if (listAdapter.favPlaceId != 0L) {
+            viewModel.addOrRemoveFavPlace(listAdapter.favPlaceId)
+            println("fr ${listAdapter.favPlaceId}")
+        }*/
     }
 
     override fun onDialogClosed() {

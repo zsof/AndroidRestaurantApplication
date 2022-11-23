@@ -1,4 +1,4 @@
-package hu.zsof.restaurantapp.ui.list
+package hu.zsof.restaurantapp.ui.map
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,19 +10,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(private val placeRepository: PlaceRepository) :
+class MapViewModel @Inject constructor(private val placeRepository: PlaceRepository) :
     ViewModel() {
 
     var places = MutableLiveData<List<Place>>()
     fun requestPlaceData() {
         viewModelScope.launch {
             places.postValue(placeRepository.getAllPlace())
-        }
-    }
-
-    fun addOrRemoveFavPlace(placeId: Long) {
-        viewModelScope.launch {
-            placeRepository.addOrRemoveFavPlace(placeId)
         }
     }
 }

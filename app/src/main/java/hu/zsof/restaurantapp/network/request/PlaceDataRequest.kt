@@ -14,5 +14,7 @@ data class PlaceDataRequest(
     val price: Price = Price.LOW,
     val image: String = "",
     val filter: Filter = Filter(),
-    val rate: Float = 2.0f
+    val rate: Float = 2.0f,
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0
 )
