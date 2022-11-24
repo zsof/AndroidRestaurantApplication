@@ -85,6 +85,7 @@ class ListAdapter @Inject constructor(
             }
 
             binding.favIcon.isChecked = favList.contains(place.id)
+            println("favlist adapter $favList")
             if (binding.favIcon.isChecked) {
                 binding.favIcon.setButtonDrawable(R.drawable.ic_favs)
             } else {

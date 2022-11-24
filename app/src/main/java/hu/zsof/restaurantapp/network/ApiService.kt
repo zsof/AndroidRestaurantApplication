@@ -10,6 +10,7 @@ import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
+import hu.zsof.restaurantapp.network.response.LoggedUserResponse
 import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.util.Constants
 import okhttp3.Interceptor
@@ -33,7 +34,7 @@ interface ApiService {
     suspend fun registerUser(@Body loginDataRequest: LoginDataRequest): NetworkResponse
 
     @POST("auth/login")
-    suspend fun loginUser(@Body loginDataRequest: LoginDataRequest): NetworkResponse
+    suspend fun loginUser(@Body loginDataRequest: LoginDataRequest): LoggedUserResponse
 
     @POST("loggeduser/new-place")
     suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): Place

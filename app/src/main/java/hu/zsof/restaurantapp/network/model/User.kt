@@ -7,5 +7,5 @@ data class User(
     val email: String = "",
     val image: String? = null,
     val admin: Boolean = false,
-    val favPlaces: MutableList<Place> = mutableListOf()
+    val favPlaceIds: MutableList<Long> = mutableListOf()
 )

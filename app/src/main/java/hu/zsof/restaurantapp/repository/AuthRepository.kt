@@ -2,6 +2,7 @@ package hu.zsof.restaurantapp.repository
 
 import hu.zsof.restaurantapp.network.ApiService
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
+import hu.zsof.restaurantapp.network.response.LoggedUserResponse
 import hu.zsof.restaurantapp.network.response.NetworkResponse
 import javax.inject.Inject
 
@@ -16,12 +17,12 @@ class AuthRepository @Inject constructor(private val apiService: ApiService) {
         }
     }
 
-    suspend fun loginUser(loginDataRequest: LoginDataRequest): NetworkResponse {
+    suspend fun loginUser(loginDataRequest: LoginDataRequest): LoggedUserResponse {
         return try {
             apiService.loginUser(loginDataRequest)
         } catch (e: Exception) {
             e.printStackTrace()
-            NetworkResponse(false, e.localizedMessage ?: "Network error")
+            LoggedUserResponse(false, e.localizedMessage ?: "Network error")
         }
     }
 }

@@ -15,4 +15,7 @@ object Constants {
     const val PLACE = "place"
     const val LATLNG = "latLng"
     const val LISTENER = "listener"
+
+    const val USER_PREFERENCE = "user_preference"
+    const val USER_DATA = "user_data"
 }

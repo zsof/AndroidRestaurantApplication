@@ -58,7 +58,7 @@ class MapFragment : Fragment() {
 
         googleMap.setOnMapLongClickListener {
             val action =
-                MapFragmentDirections.actionMapFrToAddPlaceDialogFr(latLng = null)
+                MapFragmentDirections.actionMapFrToAddPlaceDialogFr(latLng = it)
             findNavController().navigate(action)
         }
     }

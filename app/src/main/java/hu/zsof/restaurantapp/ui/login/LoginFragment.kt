@@ -1,5 +1,7 @@
 package hu.zsof.restaurantapp.ui.login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +11,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.LoginFragmentBinding
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
+import hu.zsof.restaurantapp.util.Constants.USER_DATA
+import hu.zsof.restaurantapp.util.Constants.USER_PREFERENCE
 import hu.zsof.restaurantapp.util.extensions.*
 import kotlinx.coroutines.launch
 
@@ -21,6 +26,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: LoginFragmentBinding
 
     private val viewModel: LoginViewModel by viewModels()
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +35,7 @@ class LoginFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false)
 
+        sharedPref = requireActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
         return binding.root
     }
 
@@ -60,6 +67,10 @@ class LoginFragment : Fragment() {
                     } else {
                         showToast(response.error, Toast.LENGTH_LONG)
                     }
+
+                    val userJson = Gson().toJson(response.user)
+                    sharedPref.edit().putString(USER_DATA, userJson).apply()
+                    println("sharef login ${sharedPref.getString(USER_DATA, "")}")
                 }
             }
         }

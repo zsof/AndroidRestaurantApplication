@@ -47,7 +47,6 @@ class UserProfileFragment : Fragment() {
                 userProfileNameText.text = user.name
                 userProfileEmailText.text = user.email
                 userProfileNickNameText.text = user.nickName
-                println("username ${user.nickName}")
             }
         }
     }
