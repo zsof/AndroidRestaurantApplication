@@ -2,6 +2,7 @@ package hu.zsof.restaurantapp.repository
 
 import hu.zsof.restaurantapp.network.ApiService
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import javax.inject.Inject
 
@@ -25,7 +26,7 @@ class PlaceRepository @Inject constructor(private val apiService: ApiService) {
         }
     }
 
-    suspend fun addOrRemoveFavPlace(placeId: Long): Place? {
+    suspend fun addOrRemoveFavPlace(placeId: Long): User? {
         return try {
             apiService.addPlaceToFav(placeId)
         } catch (e: Exception) {

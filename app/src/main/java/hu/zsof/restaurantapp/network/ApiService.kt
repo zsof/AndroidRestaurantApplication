@@ -46,7 +46,7 @@ interface ApiService {
     suspend fun updateUserProfile(@Body userUpdateProfileRequest: UserUpdateProfileRequest): User
 
     @POST("loggeduser/add-favplace/{placeId}")
-    suspend fun addPlaceToFav(@Path("placeId") placeId: Long): Place
+    suspend fun addPlaceToFav(@Path("placeId") placeId: Long): User
 
     @GET("loggeduser/favplaces")
     suspend fun getFavPlaces(): List<Place>

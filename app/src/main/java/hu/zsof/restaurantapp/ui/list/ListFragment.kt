@@ -1,7 +1,5 @@
 package hu.zsof.restaurantapp.ui.list
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,10 +17,10 @@ import hu.zsof.restaurantapp.adapter.ListAdapter
 import hu.zsof.restaurantapp.databinding.ListFragmentBinding
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.util.Constants.USER_DATA
-import hu.zsof.restaurantapp.util.Constants.USER_PREFERENCE
 import hu.zsof.restaurantapp.util.extensions.safeNavigate
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
 import hu.zsof.restaurantapp.util.listeners.OnDialogCloseListener
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ListFragment : Fragment(), OnDialogCloseListener, FavBtnClickListener {
@@ -30,7 +29,6 @@ class ListFragment : Fragment(), OnDialogCloseListener, FavBtnClickListener {
     private lateinit var listAdapter: ListAdapter
     private lateinit var recyclerView: RecyclerView
     private val viewModel: ListViewModel by viewModels()
-    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,15 +39,11 @@ class ListFragment : Fragment(), OnDialogCloseListener, FavBtnClickListener {
 
         recyclerView = binding.recyclerRestaurantList
 
-        // Get user's favIdsList to compare the full list -> if both contains fill the fav icon
-        sharedPref = requireActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE)
-        val userJson = sharedPref.getString(USER_DATA, "")
+        // Get user's favIdsList to compare the full list -> if both contains the place, fill the fav icon
+        val userJson = viewModel.getAppPreference<String>(USER_DATA)
         val user = Gson().fromJson(userJson, User::class.java)
 
         val userFavIdsList = user.favPlaceIds
-        println("________LIST: ${userFavIdsList}")
-        // todo kiszervezni sharedpref-et
-        //todo addFav cuccnál a sharedPref adatát is frissíteni
         listAdapter = ListAdapter(this, userFavIdsList)
 
         return binding.root
@@ -98,6 +92,11 @@ class ListFragment : Fragment(), OnDialogCloseListener, FavBtnClickListener {
     }
 
     override fun onFavBtnClicked(placeId: Long) {
-        viewModel.addOrRemoveFavPlace(placeId)
+        lifecycleScope.launch {
+            val user = viewModel.addOrRemoveFavPlace(placeId)
+
+            val userJson = Gson().toJson(user)
+            viewModel.setAppPreference(USER_DATA, userJson)
+        }
     }
 }

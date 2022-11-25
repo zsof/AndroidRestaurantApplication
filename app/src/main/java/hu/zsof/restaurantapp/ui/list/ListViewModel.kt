@@ -5,12 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.repository.PlaceRepository
+import hu.zsof.restaurantapp.util.extensions.SharedPreference
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(private val placeRepository: PlaceRepository) :
+class ListViewModel @Inject constructor(
+    private val placeRepository: PlaceRepository,
+    private val sharedPref: SharedPreference
+) :
     ViewModel() {
 
     var places = MutableLiveData<List<Place>>()
@@ -20,9 +25,15 @@ class ListViewModel @Inject constructor(private val placeRepository: PlaceReposi
         }
     }
 
-    fun addOrRemoveFavPlace(placeId: Long) {
-        viewModelScope.launch {
-            placeRepository.addOrRemoveFavPlace(placeId)
-        }
+    suspend fun addOrRemoveFavPlace(placeId: Long): User? {
+        return placeRepository.addOrRemoveFavPlace(placeId)
+    }
+
+    fun <T> setAppPreference(key: String, value: T) {
+        sharedPref.setPreference(key, value)
+    }
+
+    fun <T> getAppPreference(key: String): T {
+        return sharedPref.getPreference(key)
     }
 }
