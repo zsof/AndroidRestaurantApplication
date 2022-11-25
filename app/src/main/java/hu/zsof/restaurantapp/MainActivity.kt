@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.databinding.ActivityMainBinding
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.bottomNavigationView.visibility = View.VISIBLE
             }
+        }
+
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            NavigationUI.onNavDestinationSelected(item, navController)
+
+            return@setOnItemSelectedListener true
         }
     }
 }

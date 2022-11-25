@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
-import hu.zsof.restaurantapp.adapter.ListAdapter
+import hu.zsof.restaurantapp.adapter.FavListAdapter
 import hu.zsof.restaurantapp.databinding.FavListFragmentBinding
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.util.Constants
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 class FavListFragment : Fragment() {
 
     private lateinit var binding: FavListFragmentBinding
-    private lateinit var listAdapter: ListAdapter
+    private lateinit var listAdapter: FavListAdapter
     private lateinit var recyclerView: RecyclerView
     private val viewModel: FavListViewModel by viewModels()
 
@@ -43,7 +43,7 @@ class FavListFragment : Fragment() {
         val user = Gson().fromJson(userJson, User::class.java)
 
         val userFavIdsList = user.favPlaceIds
-        listAdapter = ListAdapter(
+        listAdapter = FavListAdapter(
             object : FavBtnClickListener {
                 override fun onFavBtnClicked(placeId: Long) {
                     lifecycleScope.launch {

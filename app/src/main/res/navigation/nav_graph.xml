@@ -113,5 +113,9 @@
         <action
             android:id="@+id/action_favListFr_to_filterDialogFr"
             app:destination="@id/filterPlaceDialogFragment" />
+
+        <action
+            android:id="@+id/action_favListFr_to_detailsFr"
+            app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>

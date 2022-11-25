@@ -14,6 +14,7 @@ import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.ui.favs.FavListFragmentDirections
 import hu.zsof.restaurantapp.ui.list.ListFragmentDirections
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
 import javax.inject.Inject
@@ -84,21 +85,20 @@ class FavListAdapter @Inject constructor(
                 else -> "$$$"
             }
 
-            binding.favIcon.isChecked = favList.contains(place.id)
-            println("favlist adapter $favList")
-            if (binding.favIcon.isChecked) {
-                binding.favIcon.setButtonDrawable(R.drawable.ic_favs)
+            binding.favIconCheckBox.isChecked = favList.contains(place.id)
+            if (binding.favIconCheckBox.isChecked) {
+                binding.favIconCheckBox.setButtonDrawable(R.drawable.ic_favs)
             } else {
-                binding.favIcon.setButtonDrawable(R.drawable.ic_fav_outlined)
+                binding.favIconCheckBox.setButtonDrawable(R.drawable.ic_fav_outlined)
             }
 
-            binding.favIcon.setOnCheckedChangeListener { _, isChecked ->
+            binding.favIconCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     favBtnListener.onFavBtnClicked(place.id)
-                    binding.favIcon.setButtonDrawable(R.drawable.ic_favs)
+                    binding.favIconCheckBox.setButtonDrawable(R.drawable.ic_favs)
                 } else {
                     favBtnListener.onFavBtnClicked(place.id)
-                    binding.favIcon.setButtonDrawable(R.drawable.ic_fav_outlined)
+                    binding.favIconCheckBox.setButtonDrawable(R.drawable.ic_fav_outlined)
                 }
             }
 
@@ -111,9 +111,8 @@ class FavListAdapter @Inject constructor(
 
             // todo most nem a viewpager-re visz
             itemView.setOnClickListener {
-                println("place adapter: $place")
                 val action =
-                    ListFragmentDirections.actionListFrToDetailsFr(place = place)
+                    FavListFragmentDirections.actionFavListFrToDetailsFr(place = place)
                 itemView.findNavController().navigate(action)
             }
         }
