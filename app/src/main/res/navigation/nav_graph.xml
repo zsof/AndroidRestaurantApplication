@@ -103,4 +103,15 @@
             app:destination="@id/newPlaceDialogFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/favListFragment"
+        android:name="hu.zsof.restaurantapp.ui.favs.FavListFragment"
+        android:label="FavListFragment"
+        tools:layout="@layout/fav_list_fragment">
+
+        <action
+            android:id="@+id/action_favListFr_to_filterDialogFr"
+            app:destination="@id/filterPlaceDialogFragment" />
+    </fragment>
 </navigation>

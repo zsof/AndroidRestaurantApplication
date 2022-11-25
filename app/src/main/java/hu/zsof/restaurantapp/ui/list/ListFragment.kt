@@ -23,7 +23,7 @@ import hu.zsof.restaurantapp.util.listeners.OnDialogCloseListener
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ListFragment : Fragment(), OnDialogCloseListener, FavBtnClickListener {
+class ListFragment : Fragment(), OnDialogCloseListener {
 
     private lateinit var binding: ListFragmentBinding
     private lateinit var listAdapter: ListAdapter
@@ -44,7 +44,19 @@ class ListFragment : Fragment(), OnDialogCloseListener, FavBtnClickListener {
         val user = Gson().fromJson(userJson, User::class.java)
 
         val userFavIdsList = user.favPlaceIds
-        listAdapter = ListAdapter(this, userFavIdsList)
+        listAdapter = ListAdapter(
+            object : FavBtnClickListener {
+                override fun onFavBtnClicked(placeId: Long) {
+                    lifecycleScope.launch {
+                        val user = viewModel.addOrRemoveFavPlace(placeId)
+
+                        val userJson = Gson().toJson(user)
+                        viewModel.setAppPreference(USER_DATA, userJson)
+                    }
+                }
+            },
+            userFavIdsList
+        )
 
         return binding.root
     }
@@ -89,14 +101,5 @@ class ListFragment : Fragment(), OnDialogCloseListener, FavBtnClickListener {
 
     override fun onDialogClosed() {
         viewModel.requestPlaceData()
-    }
-
-    override fun onFavBtnClicked(placeId: Long) {
-        lifecycleScope.launch {
-            val user = viewModel.addOrRemoveFavPlace(placeId)
-
-            val userJson = Gson().toJson(user)
-            viewModel.setAppPreference(USER_DATA, userJson)
-        }
     }
 }
