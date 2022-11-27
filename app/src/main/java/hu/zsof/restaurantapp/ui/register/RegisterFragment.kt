@@ -50,20 +50,25 @@ class RegisterFragment : Fragment() {
     // todo jelszó mégegyszer - ellenőrini h ugyanaz-e -> backend
     private fun setupRegister() {
         binding.registerBtn.setOnClickListener {
-            if (validateRegister()) {
-                lifecycleScope.launch {
-                    val email = binding.emailEditText.text.toString()
-                    val password = binding.passwordEditText.text.toString()
-                    val name = binding.userNameEditText.text.toString()
-                    val nickname = binding.userNickNameEditText.text.toString()
-                    val response =
-                        viewModel.register(LoginDataRequest(email, password, name, nickname))
-                    if (response.isSuccess) {
-                        showToast(response.successMessage + getString(R.string.please_sign_in_text), Toast.LENGTH_LONG)
-                        safeNavigate(RegisterFragmentDirections.actionLoginFrToRegisterFr())
-                    } else showToast(response.error, Toast.LENGTH_LONG)
+            if (this.checkForInternet(requireContext())) {
+                if (validateRegister()) {
+                    lifecycleScope.launch {
+                        val email = binding.emailEditText.text.toString()
+                        val password = binding.passwordEditText.text.toString()
+                        val name = binding.userNameEditText.text.toString()
+                        val nickname = binding.userNickNameEditText.text.toString()
+                        val response =
+                            viewModel.register(LoginDataRequest(email, password, name, nickname))
+                        if (response.isSuccess) {
+                            showToast(
+                                response.successMessage + getString(R.string.please_sign_in_text),
+                                Toast.LENGTH_LONG
+                            )
+                            safeNavigate(RegisterFragmentDirections.actionLoginFrToRegisterFr())
+                        } else showToast(response.error, Toast.LENGTH_LONG)
+                    }
                 }
-            }
+            } else showToast(getString(R.string.no_internet_connection))
         }
     }
 

@@ -70,6 +70,7 @@
     <string name="rating">Rating</string>
     <string name="filter_places_dialog">Filter places</string>
     <string name="filter_btn">Filter</string>
+    <string name="no_internet_connection">No internet connection</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>

@@ -50,24 +50,26 @@ class LoginFragment : Fragment() {
 
     private fun setupLogin() {
         binding.logInBtn.setOnClickListener {
-            lifecycleScope.launch {
-                if (validateLogin()) {
-                    val email = binding.emailEditText.text.toString()
-                    val password = binding.passwordEditText.text.toString()
-                    val response =
-                        viewModel.login(LoginDataRequest(email = email, password = password))
-                    if (response.isSuccess) {
-                        showToast(response.successMessage, Toast.LENGTH_LONG)
-                        safeNavigate(LoginFragmentDirections.actionLoginFrToListFr())
-                    } else {
-                        showToast(response.error, Toast.LENGTH_LONG)
-                    }
+            if (this.checkForInternet(requireContext())) {
+                lifecycleScope.launch {
+                    if (validateLogin()) {
+                        val email = binding.emailEditText.text.toString()
+                        val password = binding.passwordEditText.text.toString()
+                        val response =
+                            viewModel.login(LoginDataRequest(email = email, password = password))
+                        if (response.isSuccess) {
+                            showToast(response.successMessage, Toast.LENGTH_LONG)
+                            safeNavigate(LoginFragmentDirections.actionLoginFrToListFr())
+                        } else {
+                            showToast(response.error, Toast.LENGTH_LONG)
+                        }
 
-                    val userJson = Gson().toJson(response.user)
-                    viewModel.setAppPreference(USER_DATA, userJson)
-                    println("sharef login ${viewModel.getAppPreference<String>(USER_DATA)}")
+                        val userJson = Gson().toJson(response.user)
+                        viewModel.setAppPreference(USER_DATA, userJson)
+                        println("sharef login ${viewModel.getAppPreference<String>(USER_DATA)}")
+                    }
                 }
-            }
+            } else showToast(getString(R.string.no_internet_connection))
         }
     }
 
