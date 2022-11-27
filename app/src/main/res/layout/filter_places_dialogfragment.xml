@@ -138,7 +138,7 @@
                         android:id="@+id/veganAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
+                        android:checked="false"
                         android:text="@string/vegan" />
 
                     <CheckBox
@@ -172,7 +172,7 @@
                         android:id="@+id/familyPlaceAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
+                        android:checked="false"
                         android:text="@string/family_place" />
 
                     <CheckBox
@@ -186,7 +186,7 @@
                         android:id="@+id/deliveryAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
+                        android:checked="false"
                         android:text="@string/delivery" />
 
                     <CheckBox

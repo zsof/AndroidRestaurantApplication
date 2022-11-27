@@ -13,7 +13,7 @@ data class PlaceDataRequest(
     val type: Type = Type.RESTAURANT,
     val price: Price = Price.LOW,
     val image: String = "",
-    val customFilter: CustomFilter = CustomFilter(),
+    val filter: CustomFilter = CustomFilter(),
     val rate: Float = 2.0f,
     val latitude: Double = 0.0,
     val longitude: Double = 0.0

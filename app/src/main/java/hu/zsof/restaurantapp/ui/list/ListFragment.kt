@@ -117,8 +117,4 @@ class ListFragment : Fragment() {
             binding.recyclerRestaurantList.adapter = listAdapter
         }
     }
-
-    /*override fun onDialogClosed() {
-        viewModel.requestPlaceData()
-    }*/
 }

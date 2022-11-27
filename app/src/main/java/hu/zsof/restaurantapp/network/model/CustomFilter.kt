@@ -1,7 +1,8 @@
 package hu.zsof.restaurantapp.network.model
 
+import java.io.Serializable
+
 data class CustomFilter(
-    var freeParking: Boolean = false,
     var glutenFree: Boolean = false,
     var lactoseFree: Boolean = false,
     var vegetarian: Boolean = false,
@@ -13,12 +14,10 @@ data class CustomFilter(
     var familyPlace: Boolean = false,
     var delivery: Boolean = false,
     var creditCard: Boolean = false,
-    var szepCard: Boolean = false
-) {
+) : Serializable {
     fun convertToList(): CustomFilterList {
         return CustomFilterList(
             mutableListOf(
-                freeParking,
                 glutenFree,
                 lactoseFree,
                 vegetarian,
@@ -28,8 +27,7 @@ data class CustomFilter(
                 dogFriendly,
                 familyPlace,
                 delivery,
-                creditCard,
-                szepCard
+                creditCard
             )
         )
     }

@@ -60,7 +60,6 @@ class FilterPlaceDialogFragment : DialogFragment() {
         var customFilter: CustomFilter
         binding.apply {
             customFilter = CustomFilter(
-                freeParking = parkingAdd.isChecked,
                 glutenFree = glutenFreeAdd.isChecked,
                 lactoseFree = lactoseFreeAdd.isChecked,
                 vegetarian = vegetarianAdd.isChecked,

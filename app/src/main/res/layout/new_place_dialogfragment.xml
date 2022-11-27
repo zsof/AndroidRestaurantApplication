@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -84,8 +85,8 @@
                     android:id="@+id/websiteEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
                     android:hint="@string/optional_text"
+                    android:imeOptions="actionNext"
                     android:inputType="textWebEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -225,35 +226,40 @@
                         android:id="@+id/glutenFreeAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/gluten_free" />
 
                     <CheckBox
                         android:id="@+id/lactoseFreeAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/lactose_free" />
 
                     <CheckBox
                         android:id="@+id/vegetarianAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/vegetarian" />
 
                     <CheckBox
                         android:id="@+id/veganAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/vegan" />
 
                     <CheckBox
                         android:id="@+id/fastFoodAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/fast_food" />
 
                 </LinearLayout>
@@ -273,35 +279,40 @@
                         android:id="@+id/parkingAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/parking_available" />
 
                     <CheckBox
                         android:id="@+id/familyPlaceAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/family_place" />
 
                     <CheckBox
                         android:id="@+id/dogAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/dog_fancier" />
 
                     <CheckBox
                         android:id="@+id/deliveryAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/delivery" />
 
                     <CheckBox
                         android:id="@+id/creditCardAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:text="@string/credit_card" />
                 </LinearLayout>
             </LinearLayout>
