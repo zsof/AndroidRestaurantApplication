@@ -71,6 +71,7 @@
     <string name="filter_places_dialog">Filter places</string>
     <string name="filter_btn">Filter</string>
     <string name="no_internet_connection">No internet connection</string>
+    <string name="clear_filters">Clear filters</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>

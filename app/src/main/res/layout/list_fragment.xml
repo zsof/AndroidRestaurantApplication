@@ -25,9 +25,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center_vertical"
             android:layout_margin="8dp"
             android:background="@drawable/search_view"
+            android:gravity="center_vertical"
             android:iconifiedByDefault="true"
             android:imeOptions="flagNoExtractUi|actionSearch"
             android:paddingTop="8dp"
@@ -41,12 +41,25 @@
             app:queryHint="@string/search"
             app:showAsAction="ifRoom|collapseActionView" />
 
+        <TextView
+            android:id="@+id/clearFiltersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/clear_filters"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/recyclerRestaurantList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchView" />
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/filterBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:background="@android:color/transparent"
             android:minHeight="50dp"
@@ -54,27 +67,27 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_filter" />
 
-       <!-- <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/gridLayoutBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:minHeight="50dp"
-            app:layout_constraintEnd_toStartOf="@id/listLayoutBtn"
-            app:layout_constraintTop_toBottomOf="@id/appNameText"
-            app:srcCompat="@drawable/grid" />
+        <!-- <androidx.appcompat.widget.AppCompatImageButton
+             android:id="@+id/gridLayoutBtn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="16dp"
+             android:background="@color/white"
+             android:minHeight="50dp"
+             app:layout_constraintEnd_toStartOf="@id/listLayoutBtn"
+             app:layout_constraintTop_toBottomOf="@id/appNameText"
+             app:srcCompat="@drawable/grid" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/listLayoutBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:minHeight="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appNameText"
-            app:srcCompat="@drawable/ic_list" />-->
+         <androidx.appcompat.widget.AppCompatImageButton
+             android:id="@+id/listLayoutBtn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="16dp"
+             android:background="@color/white"
+             android:minHeight="50dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/appNameText"
+             app:srcCompat="@drawable/ic_list" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerRestaurantList"
@@ -88,7 +101,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchView"
+            app:layout_constraintTop_toBottomOf="@id/clearFiltersText"
             tools:listitem="@layout/list_item" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

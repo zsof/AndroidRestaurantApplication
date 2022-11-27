@@ -25,7 +25,7 @@ import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.NewPlaceDialogfragmentBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.enums.Type
-import hu.zsof.restaurantapp.network.model.Filter
+import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.util.Constants.LATLNG
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
@@ -55,7 +55,6 @@ class NewPlaceDialogFragment : DialogFragment() {
 
         arguments?.let {
             latLng = it.get(LATLNG) as LatLng?
-            // closeListener = it.get(LISTENER) as OnDialogCloseListener
         }
 
         startForPhotoResult =
@@ -161,14 +160,6 @@ class NewPlaceDialogFragment : DialogFragment() {
         return dialog
     }
 
-    /*override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        val activity: Activity? = activity
-        if (activity is DialogInterface.OnDismissListener) {
-            (activity as DialogInterface.OnDismissListener).onDismiss(dialog)
-        }
-    }*/
-
     private fun checkAllRequiredFieldDone() {
         binding.apply {
             val name = placeNameEditText.text.toString()
@@ -255,7 +246,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
                     price = priceValue,
                     image = photoUrl,
-                    filter = Filter(
+                    customFilter = CustomFilter(
                         freeParking = parkingAdd.isChecked,
                         glutenFree = glutenFreeAdd.isChecked,
                         lactoseFree = lactoseFreeAdd.isChecked,
@@ -305,7 +296,6 @@ class NewPlaceDialogFragment : DialogFragment() {
         }
     }
 
-    // todo nem rakja bele a címet, null-t kap latlng-ként
     private fun getAddress(latLng: LatLng): String {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)

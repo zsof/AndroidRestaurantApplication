@@ -7,11 +7,14 @@ import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.FilterPlacesDialogfragmentBinding
 import hu.zsof.restaurantapp.network.enums.Price
-import java.util.*
+import hu.zsof.restaurantapp.network.model.CustomFilter
+import hu.zsof.restaurantapp.util.Constants
 
 @AndroidEntryPoint
 class FilterPlaceDialogFragment : DialogFragment() {
@@ -54,5 +57,25 @@ class FilterPlaceDialogFragment : DialogFragment() {
     }
 
     private fun filterPlaces() {
+        var customFilter: CustomFilter
+        binding.apply {
+            customFilter = CustomFilter(
+                freeParking = parkingAdd.isChecked,
+                glutenFree = glutenFreeAdd.isChecked,
+                lactoseFree = lactoseFreeAdd.isChecked,
+                vegetarian = vegetarianAdd.isChecked,
+                vegan = veganAdd.isChecked,
+                fastFood = fastFoodAdd.isChecked,
+                parkingAvailable = parkingAdd.isChecked,
+                dogFriendly = dogAdd.isChecked,
+                familyPlace = familyPlaceAdd.isChecked,
+                delivery = deliveryAdd.isChecked,
+                creditCard = creditCardAdd.isChecked
+            )
+        }
+
+        val filteredItems = Gson().toJson(customFilter)
+        val navController = findNavController()
+        navController.previousBackStackEntry?.savedStateHandle?.set(Constants.FILTERED_ITEMS, filteredItems)
     }
 }

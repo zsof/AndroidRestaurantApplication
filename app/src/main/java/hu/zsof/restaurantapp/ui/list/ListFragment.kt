@@ -9,21 +9,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.adapter.ListAdapter
 import hu.zsof.restaurantapp.databinding.ListFragmentBinding
+import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.model.User
+import hu.zsof.restaurantapp.util.Constants
 import hu.zsof.restaurantapp.util.Constants.USER_DATA
 import hu.zsof.restaurantapp.util.extensions.safeNavigate
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
-import hu.zsof.restaurantapp.util.listeners.OnDialogCloseListener
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ListFragment : Fragment(), OnDialogCloseListener {
+class ListFragment : Fragment() {
 
     private lateinit var binding: ListFragmentBinding
     private lateinit var listAdapter: ListAdapter
@@ -42,14 +44,15 @@ class ListFragment : Fragment(), OnDialogCloseListener {
         // Get user's favIdsList to compare the full list -> if both contains the place, fill the fav icon
         val userJson = viewModel.getAppPreference<String>(USER_DATA)
         val user = Gson().fromJson(userJson, User::class.java)
-
         val userFavIdsList = user.favPlaceIds
+
         listAdapter = ListAdapter(
             object : FavBtnClickListener {
                 override fun onFavBtnClicked(placeId: Long) {
                     lifecycleScope.launch {
                         val user = viewModel.addOrRemoveFavPlace(placeId)
 
+                        // Refresh user's favIdList after add or remove
                         val userJson = Gson().toJson(user)
                         viewModel.setAppPreference(USER_DATA, userJson)
                     }
@@ -88,6 +91,21 @@ class ListFragment : Fragment(), OnDialogCloseListener {
             addNewPlaceBtn.setOnClickListener {
                 safeNavigate(ListFragmentDirections.actionListFrToMapFr())
             }
+
+            findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+                Constants.FILTERED_ITEMS
+            )?.observe(viewLifecycleOwner) {
+                val filteredItemsJson = Gson().fromJson(it, CustomFilter::class.java)
+
+                listAdapter.setCustomFilters(filteredItemsJson)
+                binding.clearFiltersText.visibility = View.VISIBLE
+            }
+
+            binding.clearFiltersText.setOnClickListener {
+                // todo nem törlődik a filterezés / nem adja vissza az egész listát
+                listAdapter.resetFilters()
+                binding.clearFiltersText.visibility = View.GONE
+            }
         }
     }
 
@@ -99,7 +117,7 @@ class ListFragment : Fragment(), OnDialogCloseListener {
         }
     }
 
-    override fun onDialogClosed() {
+    /*override fun onDialogClosed() {
         viewModel.requestPlaceData()
-    }
+    }*/
 }

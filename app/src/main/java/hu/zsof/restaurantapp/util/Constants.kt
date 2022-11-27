@@ -12,11 +12,12 @@ object Constants {
 
     const val PLACE = "place"
     const val LATLNG = "latLng"
-    const val LISTENER = "listener"
 
     /**
      * Shared preferences
      */
     const val SHARED_PREFERENCES = "restaurant_app_shared_prefs"
     const val USER_DATA = "user_data"
+
+    const val FILTERED_ITEMS = "filtered_items"
 }

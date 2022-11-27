@@ -66,7 +66,6 @@ class LoginFragment : Fragment() {
 
                         val userJson = Gson().toJson(response.user)
                         viewModel.setAppPreference(USER_DATA, userJson)
-                        println("sharef login ${viewModel.getAppPreference<String>(USER_DATA)}")
                     }
                 }
             } else showToast(getString(R.string.no_internet_connection))

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
 import hu.zsof.restaurantapp.network.enums.Price
+import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.ui.list.ListFragmentDirections
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
@@ -21,6 +22,7 @@ import javax.inject.Inject
 class ListAdapter @Inject constructor(
     private val favBtnListener: FavBtnClickListener,
     private val favList: List<Long>
+    /* private val filterItems: CustomFilter*/
 ) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>(), Filterable {
 
@@ -116,6 +118,19 @@ class ListAdapter @Inject constructor(
                 itemView.findNavController().navigate(action)
             }
         }
+    }
+
+    fun setCustomFilters(filterItems: CustomFilter) {
+        println("as $filterItems")
+        val filteredList = restaurantList.filter { restaurantList ->
+            println("ad ${restaurantList.filter}")
+            filterItems.convertToList().compare(restaurantList.filter.convertToList())
+        }
+        differ.submitList(filteredList)
+    }
+
+    fun resetFilters() {
+        differ.submitList(restaurantList)
     }
 
     override fun getFilter(): Filter {
