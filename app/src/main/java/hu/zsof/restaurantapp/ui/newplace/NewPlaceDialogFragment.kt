@@ -29,6 +29,7 @@ import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.util.Constants.LATLNG
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
+import hu.zsof.restaurantapp.util.extensions.safeNavigate
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -39,8 +40,6 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     private lateinit var binding: NewPlaceDialogfragmentBinding
     private val viewModel: NewPlaceDialogViewModel by viewModels()
-
-    // private lateinit var closeListener: OnDialogCloseListener
 
     private lateinit var startForPhotoResult: ActivityResultLauncher<Intent>
     private lateinit var writeExternalPermission: ActivityResultLauncher<String>
@@ -218,13 +217,13 @@ class NewPlaceDialogFragment : DialogFragment() {
                     onPositiveButton = {
                         savePlace()
                         dismiss()
-                        // closeListener.onDialogClosed()
+                        safeNavigate(NewPlaceDialogFragmentDirections.actionNewPlaceDialogFrToListFr())
                     }
                 )
             } else {
                 savePlace()
                 dismiss()
-                // closeListener.onDialogClosed()
+                safeNavigate(NewPlaceDialogFragmentDirections.actionNewPlaceDialogFrToListFr())
             }
         }
     }
@@ -236,33 +235,35 @@ class NewPlaceDialogFragment : DialogFragment() {
         }
 
         binding.apply {
-            viewModel.addNewPlace(
-                PlaceDataRequest(
-                    name = placeNameEditText.text.toString(),
-                    address = addressEditText.text.toString(),
-                    web = websiteEditText.text.toString(),
-                    email = emailEditText.text.toString(),
-                    phoneNumber = phoneEditText.text.toString(),
-                    type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
-                    price = priceValue,
-                    image = photoUrl,
-                    customFilter = CustomFilter(
-                        freeParking = parkingAdd.isChecked,
-                        glutenFree = glutenFreeAdd.isChecked,
-                        lactoseFree = lactoseFreeAdd.isChecked,
-                        vegetarian = vegetarianAdd.isChecked,
-                        vegan = veganAdd.isChecked,
-                        fastFood = fastFoodAdd.isChecked,
-                        parkingAvailable = parkingAdd.isChecked,
-                        dogFriendly = dogAdd.isChecked,
-                        familyPlace = familyPlaceAdd.isChecked,
-                        delivery = deliveryAdd.isChecked,
-                        creditCard = creditCardAdd.isChecked
-                    ),
-                    latitude = latLng?.latitude ?: 0.0,
-                    longitude = latLng?.longitude ?: 0.0
+            if (latLng != null) {
+                viewModel.addNewPlace(
+                    PlaceDataRequest(
+                        name = placeNameEditText.text.toString(),
+                        address = addressEditText.text.toString(),
+                        web = websiteEditText.text.toString(),
+                        email = emailEditText.text.toString(),
+                        phoneNumber = phoneEditText.text.toString(),
+                        type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
+                        price = priceValue,
+                        image = photoUrl,
+                        customFilter = CustomFilter(
+                            freeParking = parkingAdd.isChecked,
+                            glutenFree = glutenFreeAdd.isChecked,
+                            lactoseFree = lactoseFreeAdd.isChecked,
+                            vegetarian = vegetarianAdd.isChecked,
+                            vegan = veganAdd.isChecked,
+                            fastFood = fastFoodAdd.isChecked,
+                            parkingAvailable = parkingAdd.isChecked,
+                            dogFriendly = dogAdd.isChecked,
+                            familyPlace = familyPlaceAdd.isChecked,
+                            delivery = deliveryAdd.isChecked,
+                            creditCard = creditCardAdd.isChecked
+                        ),
+                        latitude = latLng!!.latitude,
+                        longitude = latLng!!.longitude
+                    )
                 )
-            )
+            }
         }
     }
 

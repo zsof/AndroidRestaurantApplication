@@ -85,13 +85,14 @@ class ListFragment : Fragment() {
                 }
             )
 
-            filterBtn.setOnClickListener {
-                safeNavigate(ListFragmentDirections.actionListFrToFilterDialogFr())
-            }
             addNewPlaceBtn.setOnClickListener {
                 safeNavigate(ListFragmentDirections.actionListFrToMapFr())
             }
 
+            filterBtn.setOnClickListener {
+                safeNavigate(ListFragmentDirections.actionListFrToFilterDialogFr())
+            }
+            // Get items from FilterDialogFr and set the filter method
             findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
                 Constants.FILTERED_ITEMS
             )?.observe(viewLifecycleOwner) {

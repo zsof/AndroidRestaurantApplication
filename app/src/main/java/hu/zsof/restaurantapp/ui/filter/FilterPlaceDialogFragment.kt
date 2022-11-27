@@ -76,6 +76,10 @@ class FilterPlaceDialogFragment : DialogFragment() {
 
         val filteredItems = Gson().toJson(customFilter)
         val navController = findNavController()
-        navController.previousBackStackEntry?.savedStateHandle?.set(Constants.FILTERED_ITEMS, filteredItems)
+        // Returning result to the previous destination
+        navController.previousBackStackEntry?.savedStateHandle?.set(
+            Constants.FILTERED_ITEMS,
+            filteredItems
+        )
     }
 }

@@ -86,6 +86,8 @@
             android:name="latLng"
             app:argType="com.google.android.gms.maps.model.LatLng"
             app:nullable="true" />
+        <action android:id="@+id/action_newPlaceDialogFr_to_listFr"
+            app:destination="@id/listFragment"/>
     </dialog>
 
     <dialog

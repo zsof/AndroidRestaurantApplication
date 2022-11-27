@@ -30,6 +30,9 @@ interface ApiService {
     @GET("places")
     suspend fun getAllPlace(): List<Place>
 
+    @GET("places/map")
+    suspend fun getAllPlaceInMap(): List<Place>
+
     @POST("auth/register")
     suspend fun registerUser(@Body loginDataRequest: LoginDataRequest): NetworkResponse
 

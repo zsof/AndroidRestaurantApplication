@@ -17,6 +17,15 @@ class PlaceRepository @Inject constructor(private val apiService: ApiService) {
         }
     }
 
+    suspend fun getAllPlaceInMap(): List<Place> {
+        return try {
+            apiService.getAllPlaceInMap()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            mutableListOf()
+        }
+    }
+
     suspend fun addNewPlace(placeDataRequest: PlaceDataRequest): Place? {
         return try {
             apiService.addNewPlace(placeDataRequest)

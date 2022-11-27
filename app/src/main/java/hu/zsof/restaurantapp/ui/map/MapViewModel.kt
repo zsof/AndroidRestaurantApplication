@@ -16,7 +16,7 @@ class MapViewModel @Inject constructor(private val placeRepository: PlaceReposit
     var places = MutableLiveData<List<Place>>()
     fun requestPlaceData() {
         viewModelScope.launch {
-            places.postValue(placeRepository.getAllPlace())
+            places.postValue(placeRepository.getAllPlaceInMap())
         }
     }
 }

@@ -19,5 +19,9 @@ object Constants {
     const val SHARED_PREFERENCES = "restaurant_app_shared_prefs"
     const val USER_DATA = "user_data"
 
+    /**
+     * Nav controller
+     */
     const val FILTERED_ITEMS = "filtered_items"
+    const val NEW_PLACE = "new_place"
 }
