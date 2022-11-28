@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.network.response.PlaceMapResponse
 import hu.zsof.restaurantapp.repository.PlaceRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,7 +14,7 @@ import javax.inject.Inject
 class MapViewModel @Inject constructor(private val placeRepository: PlaceRepository) :
     ViewModel() {
 
-    var places = MutableLiveData<List<Place>>()
+    var places = MutableLiveData<List<PlaceMapResponse>>()
     fun requestPlaceData() {
         viewModelScope.launch {
             places.postValue(placeRepository.getAllPlaceInMap())

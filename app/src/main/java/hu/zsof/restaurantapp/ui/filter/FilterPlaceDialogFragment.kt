@@ -7,6 +7,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,7 +15,9 @@ import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.FilterPlacesDialogfragmentBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.model.CustomFilter
+import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.util.Constants
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FilterPlaceDialogFragment : DialogFragment() {
@@ -57,28 +60,35 @@ class FilterPlaceDialogFragment : DialogFragment() {
     }
 
     private fun filterPlaces() {
-        var customFilter: CustomFilter
+        //todo minden lista üres tömböt ad vissza
+        var responsePlaces: List<Place> = mutableListOf()
         binding.apply {
-            customFilter = CustomFilter(
-                glutenFree = glutenFreeAdd.isChecked,
-                lactoseFree = lactoseFreeAdd.isChecked,
-                vegetarian = vegetarianAdd.isChecked,
-                vegan = veganAdd.isChecked,
-                fastFood = fastFoodAdd.isChecked,
-                parkingAvailable = parkingAdd.isChecked,
-                dogFriendly = dogAdd.isChecked,
-                familyPlace = familyPlaceAdd.isChecked,
-                delivery = deliveryAdd.isChecked,
-                creditCard = creditCardAdd.isChecked
-            )
+            lifecycleScope.launch {
+                responsePlaces = viewModel.filterPlaces(
+                    CustomFilter(
+                        glutenFree = glutenFreeAdd.isChecked,
+                        lactoseFree = lactoseFreeAdd.isChecked,
+                        vegetarian = vegetarianAdd.isChecked,
+                        vegan = veganAdd.isChecked,
+                        fastFood = fastFoodAdd.isChecked,
+                        parkingAvailable = parkingAdd.isChecked,
+                        dogFriendly = dogAdd.isChecked,
+                        familyPlace = familyPlaceAdd.isChecked,
+                        delivery = deliveryAdd.isChecked,
+                        creditCard = creditCardAdd.isChecked
+                    )
+                )
+            }
         }
-
-        val filteredItems = Gson().toJson(customFilter)
+        println("resp filter $responsePlaces")
+        val filteredPlaces = Gson().toJson(responsePlaces)
         val navController = findNavController()
+
+        println("filtered $filteredPlaces")
         // Returning result to the previous destination
         navController.previousBackStackEntry?.savedStateHandle?.set(
-            Constants.FILTERED_ITEMS,
-            filteredItems
+            Constants.FILTERED_PLACES,
+            filteredPlaces
         )
     }
 }

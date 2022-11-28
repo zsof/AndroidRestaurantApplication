@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
@@ -12,6 +13,7 @@ import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
 import hu.zsof.restaurantapp.network.response.LoggedUserResponse
 import hu.zsof.restaurantapp.network.response.NetworkResponse
+import hu.zsof.restaurantapp.network.response.PlaceMapResponse
 import hu.zsof.restaurantapp.util.Constants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -27,31 +29,43 @@ import javax.inject.Singleton
 
 interface ApiService {
 
+    /**
+     * Place
+     */
     @GET("places")
     suspend fun getAllPlace(): List<Place>
 
     @GET("places/map")
-    suspend fun getAllPlaceInMap(): List<Place>
+    suspend fun getAllPlaceInMap(): List<PlaceMapResponse>
 
+    @POST("places/new-place")
+    suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): Place
+
+    @POST("places/filter")
+    suspend fun filterPlaces(@Body filter: CustomFilter): List<Place>
+
+    /**
+     * Auth
+     */
     @POST("auth/register")
     suspend fun registerUser(@Body loginDataRequest: LoginDataRequest): NetworkResponse
 
     @POST("auth/login")
     suspend fun loginUser(@Body loginDataRequest: LoginDataRequest): LoggedUserResponse
 
-    @POST("loggeduser/new-place")
-    suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): Place
-
-    @GET("loggeduser/get-profile")
+    /**
+     * User
+     */
+    @GET("users/profile")
     suspend fun getUserProfile(): User
 
-    @PUT("loggeduser/update-profile")
+    @PUT("users/profile")
     suspend fun updateUserProfile(@Body userUpdateProfileRequest: UserUpdateProfileRequest): User
 
-    @POST("loggeduser/add-favplace/{placeId}")
+    @POST("users/fav-places/{placeId}")
     suspend fun addPlaceToFav(@Path("placeId") placeId: Long): User
 
-    @GET("loggeduser/favplaces")
+    @GET("users/fav-places")
     suspend fun getFavPlaces(): List<Place>
 
     // todo cookie megmaradjon vmennyi ideig - ne kelljen újra bejelentkezni. De ha lejárt, akkor kérjen új bejelentkezést

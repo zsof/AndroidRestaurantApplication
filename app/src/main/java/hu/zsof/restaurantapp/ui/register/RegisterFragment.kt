@@ -62,7 +62,7 @@ class RegisterFragment : Fragment() {
                         if (response.isSuccess) {
                             showToast(
                                 response.successMessage + getString(R.string.please_sign_in_text),
-                                Toast.LENGTH_LONG
+                                Toast.LENGTH_SHORT
                             )
                             safeNavigate(RegisterFragmentDirections.actionLoginFrToRegisterFr())
                         } else showToast(response.error, Toast.LENGTH_LONG)

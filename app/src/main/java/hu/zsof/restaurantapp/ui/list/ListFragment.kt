@@ -12,11 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.adapter.ListAdapter
 import hu.zsof.restaurantapp.databinding.ListFragmentBinding
-import hu.zsof.restaurantapp.network.model.CustomFilter
+import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.util.Constants
 import hu.zsof.restaurantapp.util.Constants.USER_DATA
@@ -92,13 +93,17 @@ class ListFragment : Fragment() {
             filterBtn.setOnClickListener {
                 safeNavigate(ListFragmentDirections.actionListFrToFilterDialogFr())
             }
+
             // Get items from FilterDialogFr and set the filter method
             findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-                Constants.FILTERED_ITEMS
+                Constants.FILTERED_PLACES
             )?.observe(viewLifecycleOwner) {
-                val filteredItemsJson = Gson().fromJson(it, CustomFilter::class.java)
+                val itemType = object : TypeToken<List<Place>>() {}.type
+                val filteredPlaces: List<Place> = Gson().fromJson(it, itemType)
 
-                listAdapter.setCustomFilters(filteredItemsJson)
+                println("list filtere $filteredPlaces")
+
+                listAdapter.setCustomFilters(filteredPlaces)
                 binding.clearFiltersText.visibility = View.VISIBLE
             }
 

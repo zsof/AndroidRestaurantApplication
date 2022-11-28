@@ -1,9 +1,11 @@
 package hu.zsof.restaurantapp.repository
 
 import hu.zsof.restaurantapp.network.ApiService
+import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
+import hu.zsof.restaurantapp.network.response.PlaceMapResponse
 import javax.inject.Inject
 
 class PlaceRepository @Inject constructor(private val apiService: ApiService) {
@@ -17,7 +19,7 @@ class PlaceRepository @Inject constructor(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getAllPlaceInMap(): List<Place> {
+    suspend fun getAllPlaceInMap(): List<PlaceMapResponse> {
         return try {
             apiService.getAllPlaceInMap()
         } catch (e: Exception) {
@@ -47,6 +49,15 @@ class PlaceRepository @Inject constructor(private val apiService: ApiService) {
     suspend fun getFavPlacesByUser(): List<Place> {
         return try {
             apiService.getFavPlaces()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            mutableListOf()
+        }
+    }
+
+    suspend fun filterPlaces(filterItems: CustomFilter): List<Place> {
+        return try {
+            apiService.filterPlaces(filterItems)
         } catch (e: Exception) {
             e.printStackTrace()
             mutableListOf()

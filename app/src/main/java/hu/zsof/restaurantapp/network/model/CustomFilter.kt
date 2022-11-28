@@ -13,22 +13,5 @@ data class CustomFilter(
     var dogFriendly: Boolean = false,
     var familyPlace: Boolean = false,
     var delivery: Boolean = false,
-    var creditCard: Boolean = false,
-) : Serializable {
-    fun convertToList(): CustomFilterList {
-        return CustomFilterList(
-            mutableListOf(
-                glutenFree,
-                lactoseFree,
-                vegetarian,
-                vegan,
-                fastFood,
-                parkingAvailable,
-                dogFriendly,
-                familyPlace,
-                delivery,
-                creditCard
-            )
-        )
-    }
-}
+    var creditCard: Boolean = false
+) : Serializable

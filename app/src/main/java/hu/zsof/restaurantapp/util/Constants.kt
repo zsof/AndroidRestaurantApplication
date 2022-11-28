@@ -22,6 +22,6 @@ object Constants {
     /**
      * Nav controller
      */
-    const val FILTERED_ITEMS = "filtered_items"
+    const val FILTERED_PLACES = "filtered_items"
     const val NEW_PLACE = "new_place"
 }

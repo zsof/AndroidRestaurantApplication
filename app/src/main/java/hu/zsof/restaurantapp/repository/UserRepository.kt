@@ -1,6 +1,7 @@
 package hu.zsof.restaurantapp.repository
 
 import hu.zsof.restaurantapp.network.ApiService
+import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
 import javax.inject.Inject

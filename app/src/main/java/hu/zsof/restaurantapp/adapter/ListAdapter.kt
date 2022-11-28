@@ -120,13 +120,9 @@ class ListAdapter @Inject constructor(
         }
     }
 
-    fun setCustomFilters(filterItems: CustomFilter) {
-        println("as $filterItems")
-        val filteredList = restaurantList.filter { restaurantList ->
-            println("ad ${restaurantList.filter}")
-            filterItems.convertToList().compare(restaurantList.filter.convertToList())
-        }
-        differ.submitList(filteredList)
+    fun setCustomFilters(filteredPlaces: List<Place>) {
+        println("adapter $filteredPlaces")
+        differ.submitList(filteredPlaces)
     }
 
     fun resetFilters() {
