@@ -39,7 +39,7 @@ class FavListFragment : Fragment() {
         recyclerView = binding.recyclerRestaurantList
 
         // Get user's favIdsList to compare the full list -> if both contains the place, fill the fav icon
-        val userJson = viewModel.getAppPreference<String>(Constants.USER_DATA)
+        val userJson = viewModel.getAppPreference<String>(Constants.Prefs.USER_DATA)
         val user = Gson().fromJson(userJson, User::class.java)
 
         val userFavIdsList = user.favPlaceIds
@@ -50,7 +50,7 @@ class FavListFragment : Fragment() {
                         val user = viewModel.addOrRemoveFavPlace(placeId)
 
                         val userJson = Gson().toJson(user)
-                        viewModel.setAppPreference(Constants.USER_DATA, userJson)
+                        viewModel.setAppPreference(Constants.Prefs.USER_DATA, userJson)
                     }
                 }
             },

@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.LoginFragmentBinding
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
-import hu.zsof.restaurantapp.util.Constants.USER_DATA
+import hu.zsof.restaurantapp.util.Constants.Prefs.USER_DATA
 import hu.zsof.restaurantapp.util.extensions.*
 import kotlinx.coroutines.launch
 

@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class SharedPreference @Inject constructor(@ApplicationContext context: Context) {
 
     private val sharedPreferences =
-        context.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        context.getSharedPreferences(Constants.Prefs.SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
     @Suppress("UNCHECKED_CAST")
     fun <T> getPreference(key: String, defaultValue: T? = null): T {

@@ -5,7 +5,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -14,6 +13,8 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.databinding.ActivityMainBinding
 import hu.zsof.restaurantapp.util.Constants
+import hu.zsof.restaurantapp.util.extensions.LocaleUtil
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -57,9 +58,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupPreferences() {
-        val darkModePref = viewModel.getAppPreference<String>(Constants.DARK_MODE)
+        // Dark mode
+        val darkModePref = viewModel.getAppPreference<String>(Constants.Prefs.DARK_MODE)
         if (darkModePref == "1") {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+     /*   // Locale
+        val localeToSwitchTo = viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)
+        Locale.forLanguageTag(localeToSwitchTo)
+        LocaleUtil.updateLocale(this, Locale.forLanguageTag(localeToSwitchTo))
+        println("local main ${viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)} $localeToSwitchTo")*/
     }
 }

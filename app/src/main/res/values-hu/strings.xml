@@ -67,7 +67,7 @@
     <string name="filter_btn">Szűrés</string>
     <string name="no_internet_connection">Nincs internet kapcsolat</string>
     <string name="clear_filters">Szűrők törlése</string>
-    <string name="language_in_hu"><![CDATA[Nyelv IN <> HU]]></string>
+    <string name="language_in_hu"><![CDATA[Nyelv Alapértelmezett <> EN]]></string>
     <string name="default_filters">Alapértelmezett szűrők:</string>
 
     <string-array name="category_items">

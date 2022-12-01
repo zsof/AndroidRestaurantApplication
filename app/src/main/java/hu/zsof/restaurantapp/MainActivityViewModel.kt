@@ -6,7 +6,8 @@ import hu.zsof.restaurantapp.util.extensions.SharedPreference
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(private val sharedPref: SharedPreference): ViewModel() {
+class MainActivityViewModel @Inject constructor(private val sharedPref: SharedPreference) :
+    ViewModel() {
 
     fun <T> setAppPreference(key: String, value: T) {
         sharedPref.setPreference(key, value)

@@ -20,7 +20,6 @@ import hu.zsof.restaurantapp.databinding.ListFragmentBinding
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.util.Constants
-import hu.zsof.restaurantapp.util.Constants.USER_DATA
 import hu.zsof.restaurantapp.util.extensions.safeNavigate
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
 import kotlinx.coroutines.launch
@@ -43,7 +42,7 @@ class ListFragment : Fragment() {
         recyclerView = binding.recyclerRestaurantList
 
         // Get user's favIdsList to compare the full list -> if both contains the place, fill the fav icon
-        val userJson = viewModel.getAppPreference<String>(USER_DATA)
+        val userJson = viewModel.getAppPreference<String>(Constants.Prefs.USER_DATA)
         val user = Gson().fromJson(userJson, User::class.java)
         val userFavIdsList = user.favPlaceIds
 
@@ -55,7 +54,7 @@ class ListFragment : Fragment() {
 
                         // Refresh user's favIdList after add or remove
                         val userJson = Gson().toJson(user)
-                        viewModel.setAppPreference(USER_DATA, userJson)
+                        viewModel.setAppPreference(Constants.Prefs.USER_DATA, userJson)
                     }
                 }
             },

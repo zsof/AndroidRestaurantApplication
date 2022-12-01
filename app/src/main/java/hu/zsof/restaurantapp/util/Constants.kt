@@ -19,9 +19,12 @@ object Constants {
     /**
      * Shared preferences
      */
-    const val SHARED_PREFERENCES = "restaurant_app_shared_prefs"
-    const val USER_DATA = "user_data"
-    const val DARK_MODE = "dark_mode"
+    object Prefs {
+        const val SHARED_PREFERENCES = "restaurant_app_shared_prefs"
+        const val USER_DATA = "user_data"
+        const val DARK_MODE = "dark_mode"
+        const val LOCALE = "locale"
+    }
 
     /**
      * Nav controller

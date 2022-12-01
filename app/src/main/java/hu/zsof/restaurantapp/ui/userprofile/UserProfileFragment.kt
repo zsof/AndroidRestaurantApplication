@@ -1,5 +1,7 @@
 package hu.zsof.restaurantapp.ui.userprofile
 
+import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -9,15 +11,19 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.ConfigurationCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import hu.zsof.restaurantapp.MainActivity
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.UserProfileFragmentBinding
 import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
 import hu.zsof.restaurantapp.util.Constants
+import hu.zsof.restaurantapp.util.extensions.LocaleUtil
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
+import java.util.Locale
 
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
@@ -82,21 +88,43 @@ class UserProfileFragment : Fragment() {
                 )
             }
 
-            val darkModePref = viewModel.getAppPreference<String>(Constants.DARK_MODE)
+            val darkModePref = viewModel.getAppPreference<String>(Constants.Prefs.DARK_MODE)
             darkThemeToggle.isChecked = darkModePref == "1"
 
             darkThemeToggle.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    viewModel.setAppPreference(Constants.DARK_MODE, Constants.Room.TRUE)
+                    viewModel.setAppPreference(Constants.Prefs.DARK_MODE, Constants.Room.TRUE)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
-                    println("dark $isChecked  ${viewModel.getAppPreference<String>(Constants.DARK_MODE)}")
                 } else {
-                    viewModel.setAppPreference(Constants.DARK_MODE, Constants.Room.FALSE)
+                    viewModel.setAppPreference(Constants.Prefs.DARK_MODE, Constants.Room.FALSE)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    println("light $isChecked  ${viewModel.getAppPreference<String>(Constants.DARK_MODE)}")
                 }
             }
+
+          /*  val localePref = viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)
+            languageToggle.isChecked = localePref == "en"
+
+            languageToggle.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    viewModel.setAppPreference(Constants.Prefs.LOCALE, "en")
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    println("local en ${viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)}  ${Locale.ENGLISH}")
+                } else {
+                    viewModel.setAppPreference(
+                        Constants.Prefs.LOCALE,
+                        ConfigurationCompat.getLocales(
+                            Resources.getSystem().configuration
+                        ).get(0)?.language ?: "en"
+                    )
+                    LocaleUtil.updateLocale(requireContext(), Locale.forLanguageTag("hu"))
+
+                    println(
+                        "local hu ${
+                        LocaleUtil.updateLocale(requireContext(), Locale.forLanguageTag("hu"))
+                        }"
+                    )
+                }
+            }*/
             // todo password - jelenlegi megadása, új jelszó, új jelszó még egyszer
         }
     }

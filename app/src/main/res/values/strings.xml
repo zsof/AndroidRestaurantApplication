@@ -67,7 +67,7 @@
     <string name="filter_btn">Filter</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="clear_filters">Clear filters</string>
-    <string name="language_in_hu"><![CDATA[Language IN <> HU]]></string>
+    <string name="language_in_hu"><![CDATA[Language Default <> EN]]></string>
     <string name="default_filters">Default filters:</string>
 
     <string-array name="category_items">
