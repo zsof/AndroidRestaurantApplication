@@ -20,7 +20,7 @@ class SharedPreference @Inject constructor(@ApplicationContext context: Context)
             is Float -> sharedPreferences.getFloat(key, defaultValue) as T
             is Boolean -> sharedPreferences.getBoolean(key, defaultValue) as T
             is Long -> sharedPreferences.getLong(key, defaultValue) as T
-            else -> sharedPreferences.getString(key, null)!! as T
+            else -> sharedPreferences.getString(key, "")!! as T
         }
     }
 

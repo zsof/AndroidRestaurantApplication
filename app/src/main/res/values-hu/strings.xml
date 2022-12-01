@@ -37,7 +37,7 @@
     <string name="credit_card">Kártyás fizetés</string>
     <string name="add_new_place_title">Új helyszín információi</string>
     <string name="save_btn">Mentés</string>
-    <string name="cancel_btn">Törlés</string>
+    <string name="cancel_btn">Mégse</string>
     <string name="require_error">Kötelező</string>
     <string name="password_not_strong_error">A jelszó nem elég erős. Muszáj tartalmaznia legalább 6 karaktert, 1 nagybetűt és 1 számot! </string>
     <string name="email_not_valid_error">Az email cím formátuma nem megfelelő.</string>

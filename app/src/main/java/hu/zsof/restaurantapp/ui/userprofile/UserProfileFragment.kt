@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,13 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.UserProfileFragmentBinding
 import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
+import hu.zsof.restaurantapp.util.Constants
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
 
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
     private lateinit var binding: UserProfileFragmentBinding
 
-    val viewModel: UserProfileViewModel by viewModels()
+    private val viewModel: UserProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,6 +80,22 @@ class UserProfileFragment : Fragment() {
                     inputTextHint = "Type your email address",
                     inputTextType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                 )
+            }
+
+            val darkModePref = viewModel.getAppPreference<String>(Constants.DARK_MODE)
+            darkThemeToggle.isChecked = darkModePref == "1"
+
+            darkThemeToggle.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    viewModel.setAppPreference(Constants.DARK_MODE, Constants.Room.TRUE)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+                    println("dark $isChecked  ${viewModel.getAppPreference<String>(Constants.DARK_MODE)}")
+                } else {
+                    viewModel.setAppPreference(Constants.DARK_MODE, Constants.Room.FALSE)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    println("light $isChecked  ${viewModel.getAppPreference<String>(Constants.DARK_MODE)}")
+                }
             }
             // todo password - jelenlegi megadása, új jelszó, új jelszó még egyszer
         }

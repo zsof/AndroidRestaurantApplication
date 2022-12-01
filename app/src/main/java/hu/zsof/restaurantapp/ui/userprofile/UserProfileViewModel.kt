@@ -7,11 +7,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
 import hu.zsof.restaurantapp.repository.UserRepository
+import hu.zsof.restaurantapp.util.extensions.SharedPreference
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UserProfileViewModel @Inject constructor(private val userRepository: UserRepository) :
+class UserProfileViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val sharedPref: SharedPreference
+) :
     ViewModel() {
 
     val userProfile = MutableLiveData<User>()
@@ -26,5 +30,13 @@ class UserProfileViewModel @Inject constructor(private val userRepository: UserR
             userRepository.updateUserProfile(userUpdateProfileRequest)
             // todo check if userProfile refreshes after update
         }
+    }
+
+    fun <T> setAppPreference(key: String, value: T) {
+        sharedPref.setPreference(key, value)
+    }
+
+    fun <T> getAppPreference(key: String): T {
+        return sharedPref.getPreference(key)
     }
 }
