@@ -50,10 +50,10 @@ class ListFragment : Fragment() {
             object : FavBtnClickListener {
                 override fun onFavBtnClicked(placeId: Long) {
                     lifecycleScope.launch {
-                        val user = viewModel.addOrRemoveFavPlace(placeId)
+                        val userData = viewModel.addOrRemoveFavPlace(placeId)
 
                         // Refresh user's favIdList after add or remove
-                        val userJson = Gson().toJson(user)
+                        val userJson = Gson().toJson(userData)
                         viewModel.setAppPreference(Constants.Prefs.USER_DATA, userJson)
                     }
                 }
