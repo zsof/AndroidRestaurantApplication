@@ -139,8 +139,8 @@ class ListAdapter @Inject constructor(
                     fixList = restaurantList.toMutableList()
                 }
 
-                if (searchString.isEmpty()) {
-                    filterList = fixList!!
+                filterList = if (searchString.isEmpty()) {
+                    fixList!!
                 } else {
                     val tempList: MutableList<Place> = mutableListOf()
 
@@ -150,7 +150,7 @@ class ListAdapter @Inject constructor(
                         }
                         .forEach { tempList.add(it) }
 
-                    filterList = tempList
+                    tempList
                 }
 
                 return FilterResults().apply { values = filterList }

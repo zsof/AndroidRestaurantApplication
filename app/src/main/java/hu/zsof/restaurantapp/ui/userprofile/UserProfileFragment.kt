@@ -46,7 +46,9 @@ class UserProfileFragment : Fragment() {
             binding.apply {
                 userProfileNameText.text = user.name
                 userProfileEmailText.text = user.email
-                userProfileNickNameText.text = user.nickName
+                userProfileNickNameText.text = if (user.nickName != "") {
+                    user.nickName
+                } else getString(R.string.nickname)
             }
         }
     }

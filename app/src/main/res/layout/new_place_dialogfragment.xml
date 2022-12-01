@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/email_address_text"
+                android:text="@string/email_address"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             <com.google.android.material.textfield.TextInputLayout

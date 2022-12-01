@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">RestaurantAppAndroid</string>
     <string name="welcome_text">Welcome in RestaurApp</string>
-    <string name="email_address_or_username">Email address or Username</string>
+    <string name="email_address">Email address</string>
     <string name="password_text">Password</string>
     <string name="log_in">Log In</string>
     <string name="or_use">Or use</string>
     <string name="sign_in_with_facebook">Sign in with Facebook</string>
     <string name="no_account">Don\'t have an account? <u>Register</u></string>
-    <string name="email_address_register">Email address</string>
     <string name="user_name">User name</string>
     <string name="register">Register</string>
     <string name="home">Home</string>
@@ -20,7 +19,6 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="profile_settings_text">Profile Settings</string>
     <string name="dark_theme_text">Dark Theme</string>
-    <string name="save_btn_settings">Save</string>
     <string name="app_name_fragment">RestaurantApp</string>
     <string name="place_name_text">Name</string>
     <string name="address_text">Address</string>
@@ -32,7 +30,6 @@
     <string name="vegetarian">Vegetarian</string>
     <string name="vegan">Vegan</string>
     <string name="fast_food">Fast Food</string>
-    <string name="place_text">Place</string>
     <string name="parking_available">Parking Available</string>
     <string name="family_place">Family Place</string>
     <string name="dog_fancier">Dog-fancier</string>
@@ -47,16 +44,14 @@
     <string name="nickname">Nickname</string>
     <string name="have_account">You have already an account? <u>Login</u></string>
     <string name="details_tab_text">Details</string>
-    <string name="not_set_text">Not set</string>
     <string name="password">********</string>
     <string name="permission_granted">Permission granted.</string>
     <string name="permission_denied">Permission denied.</string>
-    <string name="permission_explanation_location">The device needs permission to display your location data</string>
+    <string name="permission_explanation_location">The device needs permission to display your location data!</string>
     <string name="permission_request">Permission request</string>
     <string name="ok_btn">OK</string>
     <string name="website_text">Website</string>
     <string name="optional_text">Optional</string>
-    <string name="email_address_text">Email address</string>
     <string name="phone_number_text">Phone number</string>
     <string name="filters">Filters</string>
     <string name="please_sign_in_text">! Please sign in.</string>
@@ -72,6 +67,8 @@
     <string name="filter_btn">Filter</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="clear_filters">Clear filters</string>
+    <string name="language_in_hu"><![CDATA[Language IN <> HU]]></string>
+    <string name="default_filters">Default filters:</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>

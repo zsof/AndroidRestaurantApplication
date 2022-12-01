@@ -42,21 +42,21 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/userProfileNickNameText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:textStyle="italic"
-                        android:textAppearance="?attr/textAppearanceHeadline5"
-                        android:text="@string/not_set_text" />
-
-                    <TextView
                         android:id="@+id/userProfileNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
                         tools:text="Kis Béla" />
+
+                    <TextView
+                        android:id="@+id/userProfileNickNameText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/nickname"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/userProfileEmailText"
@@ -71,8 +71,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textSize="20sp"
-                        android:text="@string/password" />
+                        android:text="@string/password"
+                        android:textSize="20sp" />
 
 
                 </LinearLayout>
@@ -138,6 +138,33 @@
                         android:layout_marginEnd="8dp"
                         android:checked="false" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/language_in_hu"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/languageToggle"
+                        style="@style/SwitchCompatStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:checked="false" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -158,6 +185,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/default_filters"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
+
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/baseFilterGroup"
                     android:layout_width="match_parent"
@@ -171,8 +206,8 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:checked="true"
-                        app:chipBackgroundColor="@drawable/chip_background_color"
-                        tools:text="Dog-friendly" />
+                        android:text="@string/dog_fancier"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/filterSettingsParking"
@@ -180,8 +215,8 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:checked="false"
-                        app:chipBackgroundColor="@drawable/chip_background_color"
-                        tools:text="Free parking" />
+                        android:text="@string/parking_available"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/filterSettingsFamily"
@@ -189,8 +224,8 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:checked="false"
-                        app:chipBackgroundColor="@drawable/chip_background_color"
-                        tools:text="Family place" />
+                        android:text="@string/family_place"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/filterSettingsGluten"
@@ -198,8 +233,17 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:checked="false"
-                        app:chipBackgroundColor="@drawable/chip_background_color"
-                        tools:text="Gluten free" />
+                        android:text="@string/gluten_free"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/filterSettingsLactose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checkable="true"
+                        android:checked="false"
+                        android:text="@string/lactose_free"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/filterSettingsVegan"
@@ -207,8 +251,8 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:checked="false"
-                        app:chipBackgroundColor="@drawable/chip_background_color"
-                        tools:text="Vegan" />
+                        android:text="@string/vegan"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/filterSettingsVegetarian"
@@ -216,8 +260,8 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:checked="false"
-                        app:chipBackgroundColor="@drawable/chip_background_color"
-                        tools:text="Vegetarian" />
+                        android:text="@string/vegetarian"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/filterSettingFastFood"
@@ -225,8 +269,26 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:checked="false"
-                        app:chipBackgroundColor="@drawable/chip_background_color"
-                        tools:text="Fast food" />
+                        android:text="@string/fast_food"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/filterSettingDelivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checkable="true"
+                        android:checked="false"
+                        android:text="@string/delivery"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/filterSettingCreditCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checkable="true"
+                        android:checked="false"
+                        android:text="@string/credit_card"
+                        app:chipBackgroundColor="@drawable/chip_background_color" />
 
                 </com.google.android.material.chip.ChipGroup>
             </LinearLayout>
@@ -237,7 +299,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:backgroundTint="@color/color_secondary"
-            android:text="@string/save_btn_settings"
+            android:text="@string/save_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
