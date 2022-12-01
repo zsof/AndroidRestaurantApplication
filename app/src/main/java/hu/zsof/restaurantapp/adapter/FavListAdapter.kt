@@ -15,7 +15,6 @@ import hu.zsof.restaurantapp.databinding.ListItemBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.ui.favs.FavListFragmentDirections
-import hu.zsof.restaurantapp.ui.list.ListFragmentDirections
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
 import javax.inject.Inject
 

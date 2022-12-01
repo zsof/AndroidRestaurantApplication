@@ -8,13 +8,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.*
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.databinding.ActivityMainBinding
 import hu.zsof.restaurantapp.util.Constants
-import hu.zsof.restaurantapp.util.extensions.LocaleUtil
-import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -22,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
+
     private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +36,9 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
 
         navController = navHostFragment.navController
-        setupWithNavController(binding.bottomNavigationView, navController)
+        binding.bottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
-            // the IDs of fragments as defined in the `navigation_graph`
             if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment
             ) {
                 binding.bottomNavigationView.visibility = View.GONE
@@ -51,10 +48,39 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            NavigationUI.onNavDestinationSelected(item, navController)
+            when (item.itemId) {
+                R.id.listFragment -> {
+                    findNavControllerCustom()?.navigate(R.id.listFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.mapFragment -> {
+                    findNavControllerCustom()?.navigate(R.id.mapFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.favListFragment -> {
+                    findNavControllerCustom()?.navigate(R.id.favListFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.userProfileFragment -> {
+                    findNavControllerCustom()?.navigate(R.id.userProfileFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.loginFragment -> {
+                    findNavControllerCustom()?.navigate(R.id.loginFragment)
+                    return@setOnItemSelectedListener true
+                }
+            }
 
-            return@setOnItemSelectedListener true
+            return@setOnItemSelectedListener false
         }
+    }
+
+    private fun findNavControllerCustom(): NavController? {
+        val navHostFragment =
+            (this as? MainActivity)?.supportFragmentManager?.findFragmentById(
+                R.id.nav_host_fragment_container
+            ) as? NavHostFragment
+        return navHostFragment?.navController
     }
 
     private fun setupPreferences() {
@@ -64,10 +90,10 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-     /*   // Locale
-        val localeToSwitchTo = viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)
-        Locale.forLanguageTag(localeToSwitchTo)
-        LocaleUtil.updateLocale(this, Locale.forLanguageTag(localeToSwitchTo))
-        println("local main ${viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)} $localeToSwitchTo")*/
+        /*   // Locale
+           val localeToSwitchTo = viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)
+           Locale.forLanguageTag(localeToSwitchTo)
+           LocaleUtil.updateLocale(this, Locale.forLanguageTag(localeToSwitchTo))
+           println("local main ${viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)} $localeToSwitchTo")*/
     }
 }

@@ -100,15 +100,12 @@ class ListFragment : Fragment() {
                 val itemType = object : TypeToken<List<Place>>() {}.type
                 val filteredPlaces: List<Place> = Gson().fromJson(it, itemType)
 
-                println("list filtere $filteredPlaces")
-
                 listAdapter.setCustomFilters(filteredPlaces)
                 binding.clearFiltersText.visibility = View.VISIBLE
             }
 
             binding.clearFiltersText.setOnClickListener {
-                // todo nem törlődik a filterezés / nem adja vissza az egész listát
-                listAdapter.resetFilters()
+                viewModel.requestPlaceData()
                 binding.clearFiltersText.visibility = View.GONE
             }
         }

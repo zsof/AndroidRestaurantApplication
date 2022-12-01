@@ -33,6 +33,7 @@ class MapFragment : Fragment() {
     private lateinit var binding: MapFragmentBinding
     private lateinit var map: GoogleMap
     private val viewModel: MapViewModel by viewModels()
+
     private lateinit var locationPermRequest: ActivityResultLauncher<String>
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -47,6 +48,7 @@ class MapFragment : Fragment() {
          */
         map = googleMap
         handleFineLocationPermission()
+        getPlacesToMarker()
 
         val budapest = LatLng(47.497913, 19.040236)
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(budapest))
@@ -76,21 +78,19 @@ class MapFragment : Fragment() {
         binding = MapFragmentBinding.bind(view)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-
-        getPlacesToMarker()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         locationPermRequest =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
                 if (granted) {
                     showToast(getString(R.string.permission_granted))
-                    // Log.d(TAG, "Permission granted for location data")
                     enableMyLocation()
                 } else {
                     showToast(getString(R.string.permission_denied))
-                    // Log.d(TAG, "Permission denied for location data")
+                    // todo
                 }
             }
     }

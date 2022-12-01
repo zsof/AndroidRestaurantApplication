@@ -1,7 +1,5 @@
 package hu.zsof.restaurantapp.ui.userprofile
 
-import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -11,19 +9,15 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.ConfigurationCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import hu.zsof.restaurantapp.MainActivity
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.UserProfileFragmentBinding
 import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
 import hu.zsof.restaurantapp.util.Constants
-import hu.zsof.restaurantapp.util.extensions.LocaleUtil
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
-import java.util.Locale
 
 @AndroidEntryPoint
 class UserProfileFragment : Fragment() {
@@ -101,30 +95,30 @@ class UserProfileFragment : Fragment() {
                 }
             }
 
-          /*  val localePref = viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)
-            languageToggle.isChecked = localePref == "en"
+            /*  val localePref = viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)
+              languageToggle.isChecked = localePref == "en"
 
-            languageToggle.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    viewModel.setAppPreference(Constants.Prefs.LOCALE, "en")
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                    println("local en ${viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)}  ${Locale.ENGLISH}")
-                } else {
-                    viewModel.setAppPreference(
-                        Constants.Prefs.LOCALE,
-                        ConfigurationCompat.getLocales(
-                            Resources.getSystem().configuration
-                        ).get(0)?.language ?: "en"
-                    )
-                    LocaleUtil.updateLocale(requireContext(), Locale.forLanguageTag("hu"))
+              languageToggle.setOnCheckedChangeListener { _, isChecked ->
+                  if (isChecked) {
+                      viewModel.setAppPreference(Constants.Prefs.LOCALE, "en")
+                      startActivity(Intent(requireContext(), MainActivity::class.java))
+                      println("local en ${viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)}  ${Locale.ENGLISH}")
+                  } else {
+                      viewModel.setAppPreference(
+                          Constants.Prefs.LOCALE,
+                          ConfigurationCompat.getLocales(
+                              Resources.getSystem().configuration
+                          ).get(0)?.language ?: "en"
+                      )
+                      LocaleUtil.updateLocale(requireContext(), Locale.forLanguageTag("hu"))
 
-                    println(
-                        "local hu ${
-                        LocaleUtil.updateLocale(requireContext(), Locale.forLanguageTag("hu"))
-                        }"
-                    )
-                }
-            }*/
+                      println(
+                          "local hu ${
+                          LocaleUtil.updateLocale(requireContext(), Locale.forLanguageTag("hu"))
+                          }"
+                      )
+                  }
+              }*/
             // todo password - jelenlegi megadása, új jelszó, új jelszó még egyszer
         }
     }
@@ -171,9 +165,5 @@ class UserProfileFragment : Fragment() {
             .create()
         alertDialog.show()
     }
-
-    // todo toggle-hez külön mentés gomb
-    // todo bekötni a toggle-ket -> backend is
     // todo image
-    // todo dark theme
 }
