@@ -8,6 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.model.User
+import hu.zsof.restaurantapp.network.request.FilterRequest
 import hu.zsof.restaurantapp.network.request.LoginDataRequest
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
@@ -42,7 +43,7 @@ interface ApiService {
     suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): Place
 
     @POST("places/filter")
-    suspend fun filterPlaces(@Body filter: CustomFilter): List<Place>
+    suspend fun filterPlaces(@Body filter: FilterRequest): List<Place>
 
     /**
      * Auth
