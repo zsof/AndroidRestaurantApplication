@@ -19,6 +19,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
@@ -289,8 +291,20 @@ class NewPlaceDialogFragment : DialogFragment() {
     }
 
     private fun setupBindings() {
-        binding.addPhotoBtn.setOnClickListener {
-            writeExternalPermission.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        binding.apply {
+            addPhotoBtn.setOnClickListener {
+                writeExternalPermission.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+
+            expandIcon.setOnClickListener {
+                if (cardGroup.visibility == View.VISIBLE) {
+                    expandIcon.setImageResource(R.drawable.ic_expand)
+                    cardGroup.visibility = View.GONE
+                } else {
+                    expandIcon.setImageResource(R.drawable.ic_collapse)
+                    cardGroup.visibility = View.VISIBLE
+                }
+            }
         }
     }
 

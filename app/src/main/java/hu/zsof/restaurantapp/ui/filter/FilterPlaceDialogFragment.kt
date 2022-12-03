@@ -3,6 +3,8 @@ package hu.zsof.restaurantapp.ui.filter
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -13,7 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.FilterPlacesDialogfragmentBinding
 import hu.zsof.restaurantapp.network.enums.Price
+import hu.zsof.restaurantapp.network.enums.Type
 import hu.zsof.restaurantapp.network.model.CustomFilter
+import hu.zsof.restaurantapp.network.request.FilterRequest
 import hu.zsof.restaurantapp.util.Constants
 
 @AndroidEntryPoint
@@ -56,20 +60,31 @@ class FilterPlaceDialogFragment : DialogFragment() {
         return dialog
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     private fun filterPlaces() {
         binding.apply {
             val responseFilter = viewModel.filterPlaces(
-                CustomFilter(
-                    glutenFree = glutenFreeAdd.isChecked,
-                    lactoseFree = lactoseFreeAdd.isChecked,
-                    vegetarian = vegetarianAdd.isChecked,
-                    vegan = veganAdd.isChecked,
-                    fastFood = fastFoodAdd.isChecked,
-                    parkingAvailable = parkingAdd.isChecked,
-                    dogFriendly = dogAdd.isChecked,
-                    familyPlace = familyPlaceAdd.isChecked,
-                    delivery = deliveryAdd.isChecked,
-                    creditCard = creditCardAdd.isChecked
+                FilterRequest(
+                    filter = CustomFilter(
+                        glutenFree = glutenFreeAdd.isChecked,
+                        lactoseFree = lactoseFreeAdd.isChecked,
+                        vegetarian = vegetarianAdd.isChecked,
+                        vegan = veganAdd.isChecked,
+                        fastFood = fastFoodAdd.isChecked,
+                        parkingAvailable = parkingAdd.isChecked,
+                        dogFriendly = dogAdd.isChecked,
+                        familyPlace = familyPlaceAdd.isChecked,
+                        delivery = deliveryAdd.isChecked,
+                        creditCard = creditCardAdd.isChecked
+                    ),
+                    type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition)
                 )
             )
 
