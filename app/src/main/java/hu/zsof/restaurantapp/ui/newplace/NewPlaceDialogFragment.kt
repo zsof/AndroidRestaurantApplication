@@ -1,5 +1,6 @@
 package hu.zsof.restaurantapp.ui.newplace
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
@@ -12,6 +13,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,8 +21,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.transition.AutoTransition
-import androidx.transition.TransitionManager
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
@@ -305,6 +305,103 @@ class NewPlaceDialogFragment : DialogFragment() {
                     cardGroup.visibility = View.VISIBLE
                 }
             }
+
+            mondayCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                dayOpenOrClosed(isChecked, mondayOpen, mondayClose)
+            }
+
+            tuesdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                dayOpenOrClosed(isChecked, tuesdayOpen, tuesdayClose)
+            }
+            wednesdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                dayOpenOrClosed(isChecked, wednesdayOpen, wednesdayClose)
+            }
+            thursdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                dayOpenOrClosed(isChecked, thursdayOpen, thursdayClose)
+            }
+            fridayCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                dayOpenOrClosed(isChecked, fridayOpen, fridayClose)
+            }
+            saturdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                dayOpenOrClosed(isChecked, saturdayOpen, saturdayClose)
+            }
+            sundayCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                dayOpenOrClosed(isChecked, sundayOpen, sundayClose)
+            }
+
+            sameOpeningCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    basicOpeningGroup.visibility = View.VISIBLE
+                    disableText(mondayOpen)
+                    disableText(mondayClose)
+                    disableText(tuesdayOpen)
+                    disableText(tuesdayClose)
+                    disableText(wednesdayOpen)
+                    disableText(wednesdayClose)
+                    disableText(thursdayOpen)
+                    disableText(thursdayClose)
+                    disableText(fridayOpen)
+                    disableText(fridayClose)
+                    disableText(saturdayOpen)
+                    disableText(saturdayClose)
+                    disableText(sundayOpen)
+                    disableText(sundayClose)
+                } else {
+                    basicOpeningGroup.visibility = View.GONE
+                    enableText(mondayOpen)
+                    enableText(mondayClose)
+                    enableText(tuesdayOpen)
+                    enableText(tuesdayClose)
+                    enableText(wednesdayOpen)
+                    enableText(wednesdayClose)
+                    enableText(thursdayOpen)
+                    enableText(thursdayClose)
+                    enableText(fridayOpen)
+                    enableText(fridayClose)
+                    enableText(saturdayOpen)
+                    enableText(saturdayClose)
+                    enableText(sundayOpen)
+                    enableText(sundayClose)
+                }
+            }
+        }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun disableText(textView: TextView) {
+        textView.isEnabled = false
+        textView.isClickable = false
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun enableText(textView: TextView) {
+        textView.isEnabled = true
+        textView.isClickable = true
+    }
+
+    private fun dayOpenOrClosed(
+        isChecked: Boolean,
+        textViewOpen: TextView,
+        textViewClose: TextView
+    ) {
+        if (isChecked) {
+            textViewOpen.text = getString(R.string.set_time)
+            textViewClose.text = getString(R.string.set_time)
+            textViewOpen.isEnabled = true
+            textViewClose.isEnabled = true
+            textViewOpen.isClickable = true
+            textViewClose.isClickable = true
+            enableText(textViewOpen)
+            enableText(textViewClose)
+        } else {
+            textViewOpen.text = getString(R.string.closed)
+            textViewClose.text = getString(R.string.closed)
+            textViewOpen.isEnabled = false
+            textViewClose.isEnabled = false
+            textViewOpen.isClickable = false
+            textViewClose.isClickable = false
+            disableText(textViewOpen)
+            disableText(textViewClose)
         }
     }
 

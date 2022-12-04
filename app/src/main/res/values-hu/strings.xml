@@ -69,6 +69,19 @@
     <string name="clear_filters">Szűrők törlése</string>
     <string name="language_in_hu"><![CDATA[Nyelv Alapértelmezett <> EN]]></string>
     <string name="default_filters">Alapértelmezett szűrők:</string>
+    <string name="monday">Hétfő:</string>
+    <string name="tuesday">Kedd:</string>
+    <string name="set_time">Időpont</string>
+    <string name="wednesday">Szerda:</string>
+    <string name="friday">Péntek:</string>
+    <string name="saturday">Szombat:</string>
+    <string name="sunday">Vasárnap:</string>
+    <string name="same_opening_hours_everyday">Ugyanaz a nyitvatartási idő mindennap?</string>
+    <string name="opening_hours">Nyitvatartás:</string>
+    <string name="basic_open_hour">Alap nyitási időpont:</string>
+    <string name="basic_close_hour">Alap zárási időpont:</string>
+    <string name="thursday">Csütörtök:</string>
+    <string name="closed">Zárva</string>
 
     <string-array name="category_items">
         <item>Étterem</item>

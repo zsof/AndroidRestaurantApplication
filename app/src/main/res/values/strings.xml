@@ -69,6 +69,19 @@
     <string name="clear_filters">Clear filters</string>
     <string name="language_in_hu"><![CDATA[Language Default <> EN]]></string>
     <string name="default_filters">Default filters:</string>
+    <string name="monday">Monday:</string>
+    <string name="tuesday">Tuesday:</string>
+    <string name="set_time">Set time</string>
+    <string name="wednesday">Wednesday:</string>
+    <string name="friday">Friday:</string>
+    <string name="saturday">Saturday:</string>
+    <string name="sunday">Sunday:</string>
+    <string name="same_opening_hours_everyday">Same opening hours everyday?</string>
+    <string name="opening_hours">Opening hours:</string>
+    <string name="basic_open_hour">Basic open hour:</string>
+    <string name="basic_close_hour">Basic close hour:</string>
+    <string name="thursday">Thursday:</string>
+    <string name="closed">Closed</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>
