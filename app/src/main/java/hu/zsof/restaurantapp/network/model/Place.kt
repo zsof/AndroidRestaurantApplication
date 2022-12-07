@@ -18,5 +18,6 @@ data class Place(
     var filter: CustomFilter = CustomFilter(),
     var latitude: Double = 0.0,
     var longitude: Double = 0.0,
-    var usersNumber: Int = 0
+    var usersNumber: Int = 0,
+    var openDetails: OpenDetails = OpenDetails()
 ) : Serializable

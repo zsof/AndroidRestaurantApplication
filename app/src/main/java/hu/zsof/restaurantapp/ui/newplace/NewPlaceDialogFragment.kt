@@ -26,6 +26,7 @@ import hu.zsof.restaurantapp.databinding.NewPlaceDialogfragmentBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.enums.Type
 import hu.zsof.restaurantapp.network.model.CustomFilter
+import hu.zsof.restaurantapp.network.model.OpenDetails
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.util.Constants.LATLNG
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
@@ -261,7 +262,9 @@ class NewPlaceDialogFragment : DialogFragment() {
                         creditCard = creditCardAdd.isChecked
                     ),
                     latitude = latLng?.latitude ?: 0.0,
-                    longitude = latLng?.longitude ?: 0.0
+                    longitude = latLng?.longitude ?: 0.0,
+                    //todo
+                   // openDetails = OpenDetails(basicOpen.toString(), basicClose.toString())
                 )
             )
         }
