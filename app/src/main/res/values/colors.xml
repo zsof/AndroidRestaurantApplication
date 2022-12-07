@@ -10,5 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#DDDCDC</color>
     <color name="dark_grey">#8D353535</color>
+    <color name="ultra_black">#000000</color>
 
 </resources>

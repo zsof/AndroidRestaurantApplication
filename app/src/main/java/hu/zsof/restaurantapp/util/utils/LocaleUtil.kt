@@ -1,4 +1,4 @@
-package hu.zsof.restaurantapp.util.extensions
+package hu.zsof.restaurantapp.util.utils
 
 import android.content.Context
 import android.content.res.Configuration
@@ -10,7 +10,7 @@ object LocaleUtil {
     fun updateLocale(context: Context, localeToSwitchTo: Locale) {
         val resources = context.resources
         val configuration: Configuration = resources.configuration
-       // val locale: Locale = Locale.forLanguageTag(localeToSwitchTo)
+        // val locale: Locale = Locale.forLanguageTag(localeToSwitchTo)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val localeList = LocaleList(localeToSwitchTo)
             LocaleList.setDefault(localeList)

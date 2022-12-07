@@ -1,6 +1,5 @@
 package hu.zsof.restaurantapp.ui.newplace
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
@@ -13,7 +12,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,6 +30,7 @@ import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.util.Constants.LATLNG
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
 import hu.zsof.restaurantapp.util.extensions.safeNavigate
+import hu.zsof.restaurantapp.util.utils.OpenHoursUtil
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -48,6 +47,8 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     private var currentPhotoPath: String? = ""
     private var priceValue = Price.LOW
+
+    private var sameOpenHoursChecked = false
 
     private var latLng: LatLng? = null
 
@@ -307,101 +308,197 @@ class NewPlaceDialogFragment : DialogFragment() {
             }
 
             mondayCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                dayOpenOrClosed(isChecked, mondayOpen, mondayClose)
+                OpenHoursUtil.dayOpenOrClosed(
+                    requireContext(),
+                    isChecked,
+                    mondayOpen,
+                    mondayClose,
+                    sameOpenHoursChecked
+                )
             }
-
             tuesdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                dayOpenOrClosed(isChecked, tuesdayOpen, tuesdayClose)
+                OpenHoursUtil.dayOpenOrClosed(
+                    requireContext(),
+                    isChecked,
+                    tuesdayOpen,
+                    tuesdayClose,
+                    sameOpenHoursChecked
+                )
             }
             wednesdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                dayOpenOrClosed(isChecked, wednesdayOpen, wednesdayClose)
+                OpenHoursUtil.dayOpenOrClosed(
+                    requireContext(),
+                    isChecked,
+                    wednesdayOpen,
+                    wednesdayClose,
+                    sameOpenHoursChecked
+                )
             }
             thursdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                dayOpenOrClosed(isChecked, thursdayOpen, thursdayClose)
+                OpenHoursUtil.dayOpenOrClosed(
+                    requireContext(),
+                    isChecked,
+                    thursdayOpen,
+                    thursdayClose,
+                    sameOpenHoursChecked
+                )
             }
             fridayCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                dayOpenOrClosed(isChecked, fridayOpen, fridayClose)
+                OpenHoursUtil.dayOpenOrClosed(
+                    requireContext(),
+                    isChecked,
+                    fridayOpen,
+                    fridayClose,
+                    sameOpenHoursChecked
+                )
             }
             saturdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                dayOpenOrClosed(isChecked, saturdayOpen, saturdayClose)
+                OpenHoursUtil.dayOpenOrClosed(
+                    requireContext(),
+                    isChecked,
+                    saturdayOpen,
+                    saturdayClose,
+                    sameOpenHoursChecked
+                )
             }
             sundayCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                dayOpenOrClosed(isChecked, sundayOpen, sundayClose)
+                OpenHoursUtil.dayOpenOrClosed(
+                    requireContext(),
+                    isChecked,
+                    sundayOpen,
+                    sundayClose,
+                    sameOpenHoursChecked
+                )
             }
 
             sameOpeningCheckbox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
+                    sameOpenHoursChecked = true
                     basicOpeningGroup.visibility = View.VISIBLE
-                    disableText(mondayOpen)
-                    disableText(mondayClose)
-                    disableText(tuesdayOpen)
-                    disableText(tuesdayClose)
-                    disableText(wednesdayOpen)
-                    disableText(wednesdayClose)
-                    disableText(thursdayOpen)
-                    disableText(thursdayClose)
-                    disableText(fridayOpen)
-                    disableText(fridayClose)
-                    disableText(saturdayOpen)
-                    disableText(saturdayClose)
-                    disableText(sundayOpen)
-                    disableText(sundayClose)
+                    OpenHoursUtil.disableText(
+                        mondayOpen,
+                        mondayClose,
+                        requireContext(),
+                        mondayCheckbox
+                    )
+                    OpenHoursUtil.disableText(
+                        tuesdayOpen,
+                        tuesdayClose,
+                        requireContext(),
+                        tuesdayCheckbox
+                    )
+                    OpenHoursUtil.disableText(
+                        wednesdayOpen,
+                        wednesdayClose,
+                        requireContext(),
+                        wednesdayCheckbox
+                    )
+                    OpenHoursUtil.disableText(
+                        thursdayOpen,
+                        thursdayClose,
+                        requireContext(),
+                        thursdayCheckbox
+                    )
+                    OpenHoursUtil.disableText(
+                        fridayOpen,
+                        fridayClose,
+                        requireContext(),
+                        fridayCheckbox
+                    )
+                    OpenHoursUtil.disableText(
+                        saturdayOpen,
+                        saturdayClose,
+                        requireContext(),
+                        saturdayCheckbox
+                    )
+                    OpenHoursUtil.disableText(
+                        sundayOpen,
+                        sundayClose,
+                        requireContext(),
+                        sundayCheckbox
+                    )
                 } else {
+                    sameOpenHoursChecked = false
                     basicOpeningGroup.visibility = View.GONE
-                    enableText(mondayOpen)
-                    enableText(mondayClose)
-                    enableText(tuesdayOpen)
-                    enableText(tuesdayClose)
-                    enableText(wednesdayOpen)
-                    enableText(wednesdayClose)
-                    enableText(thursdayOpen)
-                    enableText(thursdayClose)
-                    enableText(fridayOpen)
-                    enableText(fridayClose)
-                    enableText(saturdayOpen)
-                    enableText(saturdayClose)
-                    enableText(sundayOpen)
-                    enableText(sundayClose)
+                    OpenHoursUtil.enableText(mondayOpen, mondayClose)
+                    OpenHoursUtil.enableText(tuesdayOpen, tuesdayClose)
+                    OpenHoursUtil.enableText(wednesdayOpen, wednesdayClose)
+                    OpenHoursUtil.enableText(thursdayOpen, thursdayClose)
+                    OpenHoursUtil.enableText(fridayOpen, fridayClose)
+                    OpenHoursUtil.enableText(saturdayOpen, saturdayClose)
+                    OpenHoursUtil.enableText(sundayOpen, sundayClose)
                 }
             }
-        }
-    }
+            basicOpen.setOnClickListener {
+                OpenHoursUtil.timePickerBasic(
+                    childFragmentManager,
+                    basicOpen,
+                    mondayOpen,
+                    tuesdayOpen,
+                    wednesdayOpen,
+                    thursdayOpen,
+                    fridayOpen,
+                    saturdayOpen,
+                    sundayOpen
+                )
+            }
 
-    @SuppressLint("ResourceAsColor")
-    private fun disableText(textView: TextView) {
-        textView.isEnabled = false
-        textView.isClickable = false
-    }
+            basicClose.setOnClickListener {
+                OpenHoursUtil.timePickerBasic(
+                    childFragmentManager,
+                    basicClose,
+                    mondayClose,
+                    tuesdayClose,
+                    wednesdayClose,
+                    thursdayClose,
+                    fridayClose,
+                    saturdayClose,
+                    sundayClose
+                )
+            }
 
-    @SuppressLint("ResourceAsColor")
-    private fun enableText(textView: TextView) {
-        textView.isEnabled = true
-        textView.isClickable = true
-    }
-
-    private fun dayOpenOrClosed(
-        isChecked: Boolean,
-        textViewOpen: TextView,
-        textViewClose: TextView
-    ) {
-        if (isChecked) {
-            textViewOpen.text = getString(R.string.set_time)
-            textViewClose.text = getString(R.string.set_time)
-            textViewOpen.isEnabled = true
-            textViewClose.isEnabled = true
-            textViewOpen.isClickable = true
-            textViewClose.isClickable = true
-            enableText(textViewOpen)
-            enableText(textViewClose)
-        } else {
-            textViewOpen.text = getString(R.string.closed)
-            textViewClose.text = getString(R.string.closed)
-            textViewOpen.isEnabled = false
-            textViewClose.isEnabled = false
-            textViewOpen.isClickable = false
-            textViewClose.isClickable = false
-            disableText(textViewOpen)
-            disableText(textViewClose)
+            mondayOpen.setOnClickListener {
+                OpenHoursUtil.timePicker(mondayOpen, childFragmentManager)
+            }
+            mondayClose.setOnClickListener {
+                OpenHoursUtil.timePicker(mondayClose, childFragmentManager)
+            }
+            tuesdayOpen.setOnClickListener {
+                OpenHoursUtil.timePicker(tuesdayOpen, childFragmentManager)
+            }
+            tuesdayClose.setOnClickListener {
+                OpenHoursUtil.timePicker(tuesdayClose, childFragmentManager)
+            }
+            wednesdayOpen.setOnClickListener {
+                OpenHoursUtil.timePicker(wednesdayOpen, childFragmentManager)
+            }
+            wednesdayClose.setOnClickListener {
+                OpenHoursUtil.timePicker(wednesdayClose, childFragmentManager)
+            }
+            thursdayOpen.setOnClickListener {
+                OpenHoursUtil.timePicker(thursdayOpen, childFragmentManager)
+            }
+            thursdayClose.setOnClickListener {
+                OpenHoursUtil.timePicker(thursdayClose, childFragmentManager)
+            }
+            fridayOpen.setOnClickListener {
+                OpenHoursUtil.timePicker(fridayOpen, childFragmentManager)
+            }
+            fridayClose.setOnClickListener {
+                OpenHoursUtil.timePicker(fridayClose, childFragmentManager)
+            }
+            saturdayOpen.setOnClickListener {
+                OpenHoursUtil.timePicker(saturdayOpen, childFragmentManager)
+            }
+            saturdayClose.setOnClickListener {
+                OpenHoursUtil.timePicker(saturdayClose, childFragmentManager)
+            }
+            sundayOpen.setOnClickListener {
+                OpenHoursUtil.timePicker(sundayOpen, childFragmentManager)
+            }
+            sundayClose.setOnClickListener {
+                OpenHoursUtil.timePicker(sundayClose, childFragmentManager)
+            }
         }
     }
 
