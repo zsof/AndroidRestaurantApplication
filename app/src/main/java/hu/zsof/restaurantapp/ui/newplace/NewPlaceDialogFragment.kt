@@ -32,6 +32,7 @@ import hu.zsof.restaurantapp.util.Constants.LATLNG
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
 import hu.zsof.restaurantapp.util.extensions.safeNavigate
 import hu.zsof.restaurantapp.util.utils.OpenHoursUtil
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -235,8 +236,10 @@ class NewPlaceDialogFragment : DialogFragment() {
     private fun savePlace() {
         var photoUrl = ""
         if (currentPhotoPath != null && currentPhotoPath != "") {
-            photoUrl = currentPhotoPath ?: ""
+            photoUrl = currentPhotoPath as String
         }
+
+        println("fr image $photoUrl")
 
         binding.apply {
             viewModel.addNewPlace(
@@ -287,7 +290,8 @@ class NewPlaceDialogFragment : DialogFragment() {
                         saturdayCheckbox.isChecked,
                         sundayCheckbox.isChecked
                     )
-                )
+                ),
+                image = photoUrl
             )
         }
     }

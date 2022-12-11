@@ -6,11 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.network.model.Resource
 import hu.zsof.restaurantapp.network.model.User
-import hu.zsof.restaurantapp.network.request.FilterRequest
-import hu.zsof.restaurantapp.network.request.LoginDataRequest
-import hu.zsof.restaurantapp.network.request.PlaceDataRequest
-import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
+import hu.zsof.restaurantapp.network.request.*
 import hu.zsof.restaurantapp.network.response.LoggedUserResponse
 import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.network.response.PlaceMapResponse
@@ -39,6 +37,13 @@ interface ApiService {
     suspend fun addNewPlace(
         @Body placeDataRequest: PlaceDataRequest
     ): Place
+
+    @Multipart
+    @POST("images")
+    suspend fun addNewImage(
+        @Part file: MultipartBody.Part,
+        @PartMap mapString: Map<String, String>
+    )
 
     /*  @Multipart
       @JvmSuppressWildcards

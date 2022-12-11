@@ -5,7 +5,7 @@ import hu.zsof.restaurantapp.network.enums.Type
 import java.io.Serializable
 
 data class Place(
-    val id: Long,
+    val id: Long = 0,
     var name: String = "",
     var address: String = "",
     var phoneNumber: String? = "",
@@ -16,8 +16,8 @@ data class Place(
     var price: Price = Price.LOW,
     var image: String? = "",
     var filter: CustomFilter = CustomFilter(),
-    var latitude: Double = 0.0,
-    var longitude: Double = 0.0,
+    var latitude: Double? = 0.0,
+    var longitude: Double? = 0.0,
     var usersNumber: Int = 0,
     var openDetails: OpenDetails = OpenDetails()
 ) : Serializable

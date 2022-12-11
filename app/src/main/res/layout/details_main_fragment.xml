@@ -166,19 +166,22 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_margin="16dp"
             android:isScrollContainer="true"
             android:nestedScrollingEnabled="true"
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detailsPlacePhoneLayout"
             app:strokeColor="@color/black">
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -460,7 +463,7 @@
                         android:id="@+id/cardGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         app:constraint_referenced_ids="mondayText, mondayOpen, mondayClose, tuesdayText, tuesdayOpen, tuesdayClose, wednesdayText, wednesdayOpen, wednesdayClose, thursdayText, thursdayOpen, thursdayClose, fridayText, fridayOpen, fridayClose, saturdayText, saturdayOpen, saturdayClose, sundayText, sundayOpen, sundayClose" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
