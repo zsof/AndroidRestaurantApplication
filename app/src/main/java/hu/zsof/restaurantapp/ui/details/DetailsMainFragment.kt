@@ -44,7 +44,6 @@ class DetailsMainFragment : Fragment() {
 
     private fun setupBindings() {
         binding.apply {
-            println("place details $place")
             nameDetailsText.text = place?.name
             addressDetailsText.text = place?.address
             webDetailsText.text = place?.web
@@ -56,6 +55,99 @@ class DetailsMainFragment : Fragment() {
                 .into(
                     imageDetails
                 )
+
+            println("monday")
+            mondayOpen.text = if (place?.openDetails?.mondayOpen != getString(R.string.set_time)) {
+                place?.openDetails?.mondayOpen
+            } else getString(
+                R.string.not_set
+            )
+            mondayClose.text =
+                if (place?.openDetails?.mondayClose != getString(R.string.set_time)) {
+                    place?.openDetails?.mondayClose
+                } else getString(
+                    R.string.not_set
+                )
+            tuesdayOpen.text =
+                if (place?.openDetails?.tuesdayOpen != getString(R.string.set_time)) {
+                    place?.openDetails?.tuesdayOpen
+                } else getString(
+                    R.string.not_set
+                )
+            tuesdayClose.text =
+                if (place?.openDetails?.tuesdayClose != getString(R.string.set_time)) {
+                    place?.openDetails?.tuesdayClose
+                } else getString(
+                    R.string.not_set
+                )
+            wednesdayOpen.text =
+                if (place?.openDetails?.wednesdayOpen != getString(R.string.set_time)) {
+                    place?.openDetails?.wednesdayOpen
+                } else getString(
+                    R.string.not_set
+                )
+            wednesdayClose.text =
+                if (place?.openDetails?.wednesdayClose != getString(R.string.set_time)) {
+                    place?.openDetails?.wednesdayClose
+                } else getString(
+                    R.string.not_set
+                )
+            thursdayOpen.text =
+                if (place?.openDetails?.thursdayOpen != getString(R.string.set_time)) {
+                    place?.openDetails?.thursdayOpen
+                } else getString(
+                    R.string.not_set
+                )
+            thursdayClose.text =
+                if (place?.openDetails?.thursdayClose != getString(R.string.set_time)) {
+                    place?.openDetails?.thursdayClose
+                } else getString(
+                    R.string.not_set
+                )
+            fridayOpen.text = if (place?.openDetails?.fridayOpen != getString(R.string.set_time)) {
+                place?.openDetails?.fridayOpen
+            } else getString(
+                R.string.not_set
+            )
+            fridayClose.text =
+                if (place?.openDetails?.fridayClose != getString(R.string.set_time)) {
+                    place?.openDetails?.fridayClose
+                } else getString(
+                    R.string.not_set
+                )
+            saturdayOpen.text =
+                if (place?.openDetails?.saturdayOpen != getString(R.string.set_time)) {
+                    place?.openDetails?.saturdayOpen
+                } else getString(
+                    R.string.not_set
+                )
+            saturdayClose.text =
+                if (place?.openDetails?.saturdayClose != getString(R.string.set_time)) {
+                    place?.openDetails?.saturdayClose
+                } else getString(
+                    R.string.not_set
+                )
+            sundayOpen.text = if (place?.openDetails?.sundayOpen != getString(R.string.set_time)) {
+                place?.openDetails?.sundayOpen
+            } else getString(
+                R.string.not_set
+            )
+            sundayClose.text =
+                if (place?.openDetails?.sundayClose != getString(R.string.set_time)) {
+                    place?.openDetails?.sundayClose
+                } else getString(
+                    R.string.not_set
+                )
+
+            expandIcon.setOnClickListener {
+                if (cardGroup.visibility == View.VISIBLE) {
+                    expandIcon.setImageResource(R.drawable.ic_expand)
+                    cardGroup.visibility = View.GONE
+                } else {
+                    expandIcon.setImageResource(R.drawable.ic_collapse)
+                    cardGroup.visibility = View.VISIBLE
+                }
+            }
         }
     }
 }

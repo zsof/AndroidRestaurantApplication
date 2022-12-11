@@ -25,12 +25,14 @@
             android:id="@+id/nameDetailsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
+            android:textColor="@color/black"
             android:textSize="24sp"
-            android:textStyle="bold"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageDetails"
+            tools:ignore="NotSibling"
             tools:text="Stefánia Étterem" />
 
         <LinearLayout
@@ -39,8 +41,8 @@
             android:layout_height="wrap_content"
             android:maxHeight="30dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nameDetailsText">
 
             <TextView
@@ -49,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_weight="10"
+                android:layout_weight="8"
                 android:textSize="18sp"
                 tools:text="1146 Budapest Stefánia út 50 nahyon hosszú cíím, hogy lássam kifér-e" />
 
@@ -61,8 +63,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="28dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_map" />
@@ -161,14 +163,318 @@
                 android:src="@drawable/ic_email" />
         </LinearLayout>
 
-        <RatingBar
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="16dp"
+            android:isScrollContainer="true"
+            android:nestedScrollingEnabled="true"
+            app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailsPlaceEmailLayout"
-            />
+            app:layout_constraintTop_toBottomOf="@id/detailsPlacePhoneLayout"
+            app:strokeColor="@color/black">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/openingHoursText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/opening_hours"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/expandIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_expand"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Monday -->
+                    <TextView
+                        android:id="@+id/mondayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/monday"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/openingHoursText" />
+
+                    <TextView
+                        android:id="@+id/mondayOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/openingHoursText" />
+
+                    <TextView
+                        android:id="@+id/mondayClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mondayOpen" />
+
+                    <!-- Tuesday -->
+                    <TextView
+                        android:id="@+id/tuesdayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/tuesday"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mondayClose" />
+
+                    <TextView
+                        android:id="@+id/tuesdayOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mondayClose" />
+
+                    <TextView
+                        android:id="@+id/tuesdayClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tuesdayOpen" />
+
+                    <!-- Wednesday -->
+                    <TextView
+                        android:id="@+id/wednesdayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/wednesday"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tuesdayClose" />
+
+                    <TextView
+                        android:id="@+id/wednesdayOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tuesdayClose" />
+
+                    <TextView
+                        android:id="@+id/wednesdayClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/wednesdayOpen" />
+
+                    <!-- Thursday -->
+                    <TextView
+                        android:id="@+id/thursdayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/thursday"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/wednesdayClose" />
+
+                    <TextView
+                        android:id="@+id/thursdayOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/wednesdayClose" />
+
+                    <TextView
+                        android:id="@+id/thursdayClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/thursdayOpen" />
+
+                    <!-- Friday -->
+                    <TextView
+                        android:id="@+id/fridayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/friday"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/thursdayClose" />
+
+
+                    <TextView
+                        android:id="@+id/fridayOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/thursdayClose" />
+
+                    <TextView
+                        android:id="@+id/fridayClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fridayOpen" />
+
+                    <!-- Saturday -->
+                    <TextView
+                        android:id="@+id/saturdayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/saturday"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fridayClose" />
+
+                    <TextView
+                        android:id="@+id/saturdayOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fridayClose" />
+
+                    <TextView
+                        android:id="@+id/saturdayClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/saturdayOpen" />
+
+                    <!-- Sunday -->
+                    <TextView
+                        android:id="@+id/sundayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/sunday"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/saturdayClose" />
+
+                    <TextView
+                        android:id="@+id/sundayOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/saturdayClose" />
+
+                    <TextView
+                        android:id="@+id/sundayClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/set_time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/sundayOpen" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/cardGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:constraint_referenced_ids="mondayText, mondayOpen, mondayClose, tuesdayText, tuesdayOpen, tuesdayClose, wednesdayText, wednesdayOpen, wednesdayClose, thursdayText, thursdayOpen, thursdayClose, fridayText, fridayOpen, fridayClose, saturdayText, saturdayOpen, saturdayClose, sundayText, sundayOpen, sundayClose" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!--   <RatingBar
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/detailsPlaceEmailLayout"
+               />-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

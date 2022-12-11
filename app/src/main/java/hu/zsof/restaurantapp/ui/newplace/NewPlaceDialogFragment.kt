@@ -248,7 +248,6 @@ class NewPlaceDialogFragment : DialogFragment() {
                     phoneNumber = phoneEditText.text.toString(),
                     type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
                     price = priceValue,
-                    image = photoUrl,
                     filter = CustomFilter(
                         glutenFree = glutenFreeAdd.isChecked,
                         lactoseFree = lactoseFreeAdd.isChecked,
@@ -263,8 +262,31 @@ class NewPlaceDialogFragment : DialogFragment() {
                     ),
                     latitude = latLng?.latitude ?: 0.0,
                     longitude = latLng?.longitude ?: 0.0,
-                    //todo
-                   // openDetails = OpenDetails(basicOpen.toString(), basicClose.toString())
+                    openDetails = OpenDetails(
+                        basicOpen.text.toString(),
+                        basicClose.text.toString(),
+                        mondayOpen.text.toString(),
+                        mondayClose.text.toString(),
+                        tuesdayOpen.text.toString(),
+                        tuesdayClose.text.toString(),
+                        wednesdayOpen.text.toString(),
+                        wednesdayClose.text.toString(),
+                        thursdayOpen.text.toString(),
+                        thursdayClose.text.toString(),
+                        fridayOpen.text.toString(),
+                        fridayClose.text.toString(),
+                        saturdayOpen.text.toString(),
+                        saturdayClose.text.toString(),
+                        sundayOpen.text.toString(),
+                        sundayClose.text.toString(),
+                        mondayCheckbox.isChecked,
+                        tuesdayCheckbox.isChecked,
+                        wednesdayCheckbox.isChecked,
+                        thursdayCheckbox.isChecked,
+                        fridayCheckbox.isChecked,
+                        saturdayCheckbox.isChecked,
+                        sundayCheckbox.isChecked
+                    )
                 )
             )
         }

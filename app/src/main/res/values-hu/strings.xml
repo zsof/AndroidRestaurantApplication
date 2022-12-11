@@ -82,6 +82,7 @@
     <string name="basic_close_hour">Alap zárási időpont:</string>
     <string name="thursday">Csütörtök:</string>
     <string name="closed">Zárva</string>
+    <string name="not_set">Nincs megadva</string>
 
     <string-array name="category_items">
         <item>Étterem</item>

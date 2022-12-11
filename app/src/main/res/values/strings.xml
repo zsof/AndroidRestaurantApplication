@@ -82,6 +82,7 @@
     <string name="basic_close_hour">Basic close hour:</string>
     <string name="thursday">Thursday:</string>
     <string name="closed">Closed</string>
+    <string name="not_set">Not set</string>
 
     <string-array name="category_items">
         <item>Restaurant</item>

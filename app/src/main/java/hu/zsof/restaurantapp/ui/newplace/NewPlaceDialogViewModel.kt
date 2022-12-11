@@ -12,9 +12,49 @@ import javax.inject.Inject
 class NewPlaceDialogViewModel @Inject constructor(private val placeRepository: PlaceRepository) :
     ViewModel() {
 
-    fun addNewPlace(placeDataRequest: PlaceDataRequest) {
+    fun addNewPlace(
+        placeDataRequest: PlaceDataRequest
+    ) {
         viewModelScope.launch {
-            placeRepository.addNewPlace(placeDataRequest)
+            placeRepository.addNewPlace(
+                placeDataRequest
+            )
         }
     }
+
+/*    fun addNewPlace(
+        filePath: String,
+        placeDataRequest: PlaceDataRequest
+        *//* name: String,
+         address: String,
+         web: String,
+         email: String,
+         phoneNumber: String,
+         type: Type,
+         price: Price,
+         filter: CustomFilter,
+         rate: Float = 0f,
+         latitude: Double,
+         longitude: Double,
+         openDetails: OpenDetails*//*
+    ) {
+        viewModelScope.launch {
+            placeRepository.addNewPlace(
+                filePath,
+                placeDataRequest
+                *//* name,
+                 address,
+                 web,
+                 email,
+                 phoneNumber,
+                 type,
+                 price,
+                 filter,
+                 rate,
+                 latitude,
+                 longitude,
+                 openDetails*//*
+            )
+        }
+    }*/
 }

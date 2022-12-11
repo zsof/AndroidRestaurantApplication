@@ -5,7 +5,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.FilterRequest
@@ -16,10 +15,7 @@ import hu.zsof.restaurantapp.network.response.LoggedUserResponse
 import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.network.response.PlaceMapResponse
 import hu.zsof.restaurantapp.util.Constants
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -40,7 +36,25 @@ interface ApiService {
     suspend fun getAllPlaceInMap(): List<PlaceMapResponse>
 
     @POST("places/new-place")
-    suspend fun addNewPlace(@Body placeDataRequest: PlaceDataRequest): Place
+    suspend fun addNewPlace(
+        @Body placeDataRequest: PlaceDataRequest
+    ): Place
+
+    /*  @Multipart
+      @JvmSuppressWildcards
+      @POST("places/new-place")
+      suspend fun addNewPlace(
+          @Part file: MultipartBody.Part?,
+          @Part("place") newPlaceRequest: RequestBody
+        *//*  @Part file: MultipartBody.Part?,
+        @PartMap mapString: Map<String, RequestBody>,
+        @PartMap mapDouble: Map<String, Double>,
+        @Part("rate") rate: Float,
+        @Part("type") type: Type,
+        @Part("price") price: Price,
+        @Part("filter") filter: CustomFilter,
+        @Part("openDetails") openDetails: OpenDetails*//*
+    ): Place*/
 
     @POST("places/filter")
     suspend fun filterPlaces(@Body filter: FilterRequest): List<Place>
