@@ -12,6 +12,7 @@ import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.DetailsMainFragmentBinding
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.util.Constants.PLACE
+import hu.zsof.restaurantapp.util.extensions.imageUrl
 
 class DetailsMainFragment : Fragment() {
     private lateinit var binding: DetailsMainFragmentBinding
@@ -50,13 +51,12 @@ class DetailsMainFragment : Fragment() {
             emailDetailsText.text = place?.email
             phoneDetailsText.text = place?.phoneNumber
             Glide.with(requireContext())
-                .load(place?.image)
+                .load(place?.image.imageUrl())
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(
                     imageDetails
                 )
 
-            println("monday")
             mondayOpen.text = if (place?.openDetails?.mondayOpen != getString(R.string.set_time)) {
                 place?.openDetails?.mondayOpen
             } else getString(

@@ -6,7 +6,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hu.zsof.restaurantapp.network.model.Place
-import hu.zsof.restaurantapp.network.model.Resource
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.network.request.*
 import hu.zsof.restaurantapp.network.response.LoggedUserResponse
@@ -42,24 +41,9 @@ interface ApiService {
     @POST("images")
     suspend fun addNewImage(
         @Part file: MultipartBody.Part,
-        @PartMap mapString: Map<String, String>
+        @Part("type") type: String,
+        @Part("typeId") typeId: String
     )
-
-    /*  @Multipart
-      @JvmSuppressWildcards
-      @POST("places/new-place")
-      suspend fun addNewPlace(
-          @Part file: MultipartBody.Part?,
-          @Part("place") newPlaceRequest: RequestBody
-        *//*  @Part file: MultipartBody.Part?,
-        @PartMap mapString: Map<String, RequestBody>,
-        @PartMap mapDouble: Map<String, Double>,
-        @Part("rate") rate: Float,
-        @Part("type") type: Type,
-        @Part("price") price: Price,
-        @Part("filter") filter: CustomFilter,
-        @Part("openDetails") openDetails: OpenDetails*//*
-    ): Place*/
 
     @POST("places/filter")
     suspend fun filterPlaces(@Body filter: FilterRequest): List<Place>

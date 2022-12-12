@@ -15,6 +15,7 @@ import hu.zsof.restaurantapp.databinding.ListItemBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.ui.favs.FavListFragmentDirections
+import hu.zsof.restaurantapp.util.extensions.imageUrl
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
 import javax.inject.Inject
 
@@ -102,7 +103,7 @@ class FavListAdapter @Inject constructor(
             }
 
             Glide.with(binding.imageList)
-                .load(place.image)
+                .load(place.image.imageUrl())
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(
                     binding.imageList
