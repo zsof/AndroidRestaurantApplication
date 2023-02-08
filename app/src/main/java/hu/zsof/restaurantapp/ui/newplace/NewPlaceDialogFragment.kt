@@ -28,11 +28,11 @@ import hu.zsof.restaurantapp.network.enums.Type
 import hu.zsof.restaurantapp.network.model.CustomFilter
 import hu.zsof.restaurantapp.network.model.OpenDetails
 import hu.zsof.restaurantapp.network.request.PlaceDataRequest
-import hu.zsof.restaurantapp.util.Constants.LATLNG
+import hu.zsof.restaurantapp.repository.LocalDataStateService
 import hu.zsof.restaurantapp.util.extensions.isEmailValid
 import hu.zsof.restaurantapp.util.extensions.safeNavigate
+import hu.zsof.restaurantapp.util.extensions.showToast
 import hu.zsof.restaurantapp.util.utils.OpenHoursUtil
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -52,13 +52,15 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     private var sameOpenHoursChecked = false
 
-    private var latLng: LatLng? = null
+    private lateinit var latLng: LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            latLng = it.get(LATLNG) as LatLng?
+        try {
+            latLng = LocalDataStateService.getLatLng()
+        } catch (e: Exception) {
+            showToast(e.message)
         }
 
         startForPhotoResult =
@@ -142,9 +144,7 @@ class NewPlaceDialogFragment : DialogFragment() {
             }
         }
 
-        if (latLng != null) {
-            binding.addressEditText.setText(getAddress(latLng!!))
-        } else binding.addressEditText.setText("")
+        binding.addressEditText.setText(getAddress(latLng))
 
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.add_new_place_title))
@@ -263,8 +263,8 @@ class NewPlaceDialogFragment : DialogFragment() {
                         delivery = deliveryAdd.isChecked,
                         creditCard = creditCardAdd.isChecked
                     ),
-                    latitude = latLng?.latitude ?: 0.0,
-                    longitude = latLng?.longitude ?: 0.0,
+                    latitude = latLng.latitude,
+                    longitude = latLng.longitude,
                     openDetails = OpenDetails(
                         basicOpen.text.toString(),
                         basicClose.text.toString(),

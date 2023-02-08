@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.MapFragmentBinding
+import hu.zsof.restaurantapp.repository.LocalDataStateService
 import hu.zsof.restaurantapp.util.extensions.showToast
 
 @AndroidEntryPoint
@@ -59,8 +60,9 @@ class MapFragment : Fragment() {
         googleMap.uiSettings.isZoomControlsEnabled = true
 
         googleMap.setOnMapLongClickListener {
+            LocalDataStateService.setLatLng(it)
             val action =
-                MapFragmentDirections.actionMapFrToAddPlaceDialogFr(latLng = it)
+                MapFragmentDirections.actionMapFrToAddPlaceDialogFr()
             findNavController().navigate(action)
         }
     }

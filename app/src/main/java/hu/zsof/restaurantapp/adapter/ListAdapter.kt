@@ -14,6 +14,7 @@ import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.repository.LocalDataStateService
 import hu.zsof.restaurantapp.ui.list.ListFragmentDirections
 import hu.zsof.restaurantapp.util.extensions.imageUrl
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
@@ -110,11 +111,10 @@ class ListAdapter @Inject constructor(
                     binding.imageList
                 )
 
-            // todo most nem a viewpager-re visz
             itemView.setOnClickListener {
-                println("place adapter: $place")
+                LocalDataStateService.setPlace(place)
                 val action =
-                    ListFragmentDirections.actionListFrToDetailsFr(place = place)
+                    ListFragmentDirections.actionListFrToDetailsFr()
                 itemView.findNavController().navigate(action)
             }
         }
@@ -123,10 +123,6 @@ class ListAdapter @Inject constructor(
     fun setCustomFilters(filteredPlaces: List<Place>) {
         println("adapter $filteredPlaces")
         differ.submitList(filteredPlaces)
-    }
-
-    fun resetFilters() {
-        differ.submitList(restaurantList)
     }
 
     override fun getFilter(): Filter {

@@ -42,7 +42,7 @@
             app:destination="@id/newPlaceDialogFragment" />
         <action
             android:id="@+id/action_listFr_to_detailsFr"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsViewPager" />
         <action
             android:id="@+id/action_listFr_to_mapFr"
             app:destination="@id/mapFragment" />
@@ -55,36 +55,27 @@
         android:id="@+id/detailsViewPager"
         android:name="hu.zsof.restaurantapp.ui.details.DetailsViewPagerFragment"
         android:label="DetailsViewPager"
-        tools:layout="@layout/details_viewpager_fragment">
-        <argument
-            android:name="place"
-            app:argType="hu.zsof.restaurantapp.network.model.Place" />
-    </fragment>
+        tools:layout="@layout/details_viewpager_fragment"></fragment>
 
     <fragment
-        android:id="@+id/detailsFragment"
+        android:id="@+id/detailsMainFragment"
         android:name="hu.zsof.restaurantapp.ui.details.DetailsMainFragment"
         android:label="DetailsFragment"
-        tools:layout="@layout/details_main_fragment">
-        <argument
-            android:name="place"
-            app:argType="hu.zsof.restaurantapp.network.model.Place" />
-    </fragment>
+        tools:layout="@layout/details_main_fragment"></fragment>
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="hu.zsof.restaurantapp.ui.userprofile.UserProfileFragment"
         android:label="UserProfileFragment"
-        tools:layout="@layout/user_profile_fragment">
-    </fragment>
+        tools:layout="@layout/user_profile_fragment"></fragment>
 
     <dialog
         android:id="@+id/newPlaceDialogFragment"
         android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment"
         android:label="NewPlaceDialogFragment">
-        <argument
-            android:name="latLng"
-            app:argType="com.google.android.gms.maps.model.LatLng"
-            app:nullable="true" />
+        <!-- <argument
+             android:name="latLng"
+             app:argType="com.google.android.gms.maps.model.LatLng"
+             app:nullable="true" />-->
         <action
             android:id="@+id/action_newPlaceDialogFr_to_listFr"
             app:destination="@id/listFragment" />
@@ -118,6 +109,6 @@
 
         <action
             android:id="@+id/action_favListFr_to_detailsFr"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsViewPager" />
     </fragment>
 </navigation>

@@ -4,11 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
-fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+fun Fragment.showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(requireContext(), message, duration).show()
 }
 

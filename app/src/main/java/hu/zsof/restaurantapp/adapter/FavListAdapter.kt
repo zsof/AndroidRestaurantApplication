@@ -14,6 +14,7 @@ import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.ListItemBinding
 import hu.zsof.restaurantapp.network.enums.Price
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.repository.LocalDataStateService
 import hu.zsof.restaurantapp.ui.favs.FavListFragmentDirections
 import hu.zsof.restaurantapp.util.extensions.imageUrl
 import hu.zsof.restaurantapp.util.listeners.FavBtnClickListener
@@ -109,10 +110,10 @@ class FavListAdapter @Inject constructor(
                     binding.imageList
                 )
 
-            // todo most nem a viewpager-re visz
             itemView.setOnClickListener {
+                LocalDataStateService.setPlace(place)
                 val action =
-                    FavListFragmentDirections.actionFavListFrToDetailsFr(place = place)
+                    FavListFragmentDirections.actionFavListFrToDetailsFr()
                 itemView.findNavController().navigate(action)
             }
         }

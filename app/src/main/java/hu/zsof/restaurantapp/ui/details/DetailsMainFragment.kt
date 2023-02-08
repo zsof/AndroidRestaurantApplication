@@ -11,21 +11,14 @@ import com.bumptech.glide.Glide
 import hu.zsof.restaurantapp.R
 import hu.zsof.restaurantapp.databinding.DetailsMainFragmentBinding
 import hu.zsof.restaurantapp.network.model.Place
-import hu.zsof.restaurantapp.util.Constants.PLACE
+import hu.zsof.restaurantapp.repository.LocalDataStateService
 import hu.zsof.restaurantapp.util.extensions.imageUrl
+import hu.zsof.restaurantapp.util.extensions.showToast
 
 class DetailsMainFragment : Fragment() {
     private lateinit var binding: DetailsMainFragmentBinding
     private val viewModel: DetailsViewModel by viewModels()
-    private var place: Place? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            place = it.get(PLACE) as Place
-        }
-    }
+    private lateinit var place: Place
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +27,12 @@ class DetailsMainFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.details_main_fragment, container, false)
+
+        try {
+            place = LocalDataStateService.getPlace()
+        } catch (e: Exception) {
+            showToast(e.message)
+        }
 
         return binding.root
     }
@@ -45,96 +44,96 @@ class DetailsMainFragment : Fragment() {
 
     private fun setupBindings() {
         binding.apply {
-            nameDetailsText.text = place?.name
-            addressDetailsText.text = place?.address
-            webDetailsText.text = place?.web
-            emailDetailsText.text = place?.email
-            phoneDetailsText.text = place?.phoneNumber
+            nameDetailsText.text = place.name
+            addressDetailsText.text = place.address
+            webDetailsText.text = place.web
+            emailDetailsText.text = place.email
+            phoneDetailsText.text = place.phoneNumber
             Glide.with(requireContext())
-                .load(place?.image.imageUrl())
+                .load(place.image.imageUrl())
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(
                     imageDetails
                 )
 
-            mondayOpen.text = if (place?.openDetails?.mondayOpen != getString(R.string.set_time)) {
-                place?.openDetails?.mondayOpen
+            mondayOpen.text = if (place.openDetails.mondayOpen != getString(R.string.set_time)) {
+                place.openDetails.mondayOpen
             } else getString(
                 R.string.not_set
             )
             mondayClose.text =
-                if (place?.openDetails?.mondayClose != getString(R.string.set_time)) {
-                    place?.openDetails?.mondayClose
+                if (place.openDetails.mondayClose != getString(R.string.set_time)) {
+                    place.openDetails.mondayClose
                 } else getString(
                     R.string.not_set
                 )
             tuesdayOpen.text =
-                if (place?.openDetails?.tuesdayOpen != getString(R.string.set_time)) {
-                    place?.openDetails?.tuesdayOpen
+                if (place.openDetails.tuesdayOpen != getString(R.string.set_time)) {
+                    place.openDetails.tuesdayOpen
                 } else getString(
                     R.string.not_set
                 )
             tuesdayClose.text =
-                if (place?.openDetails?.tuesdayClose != getString(R.string.set_time)) {
-                    place?.openDetails?.tuesdayClose
+                if (place.openDetails.tuesdayClose != getString(R.string.set_time)) {
+                    place.openDetails.tuesdayClose
                 } else getString(
                     R.string.not_set
                 )
             wednesdayOpen.text =
-                if (place?.openDetails?.wednesdayOpen != getString(R.string.set_time)) {
-                    place?.openDetails?.wednesdayOpen
+                if (place.openDetails.wednesdayOpen != getString(R.string.set_time)) {
+                    place.openDetails.wednesdayOpen
                 } else getString(
                     R.string.not_set
                 )
             wednesdayClose.text =
-                if (place?.openDetails?.wednesdayClose != getString(R.string.set_time)) {
-                    place?.openDetails?.wednesdayClose
+                if (place.openDetails.wednesdayClose != getString(R.string.set_time)) {
+                    place.openDetails.wednesdayClose
                 } else getString(
                     R.string.not_set
                 )
             thursdayOpen.text =
-                if (place?.openDetails?.thursdayOpen != getString(R.string.set_time)) {
-                    place?.openDetails?.thursdayOpen
+                if (place.openDetails.thursdayOpen != getString(R.string.set_time)) {
+                    place.openDetails.thursdayOpen
                 } else getString(
                     R.string.not_set
                 )
             thursdayClose.text =
-                if (place?.openDetails?.thursdayClose != getString(R.string.set_time)) {
-                    place?.openDetails?.thursdayClose
+                if (place.openDetails.thursdayClose != getString(R.string.set_time)) {
+                    place.openDetails.thursdayClose
                 } else getString(
                     R.string.not_set
                 )
-            fridayOpen.text = if (place?.openDetails?.fridayOpen != getString(R.string.set_time)) {
-                place?.openDetails?.fridayOpen
+            fridayOpen.text = if (place.openDetails.fridayOpen != getString(R.string.set_time)) {
+                place.openDetails.fridayOpen
             } else getString(
                 R.string.not_set
             )
             fridayClose.text =
-                if (place?.openDetails?.fridayClose != getString(R.string.set_time)) {
-                    place?.openDetails?.fridayClose
+                if (place.openDetails.fridayClose != getString(R.string.set_time)) {
+                    place.openDetails.fridayClose
                 } else getString(
                     R.string.not_set
                 )
             saturdayOpen.text =
-                if (place?.openDetails?.saturdayOpen != getString(R.string.set_time)) {
-                    place?.openDetails?.saturdayOpen
+                if (place.openDetails.saturdayOpen != getString(R.string.set_time)) {
+                    place.openDetails.saturdayOpen
                 } else getString(
                     R.string.not_set
                 )
             saturdayClose.text =
-                if (place?.openDetails?.saturdayClose != getString(R.string.set_time)) {
-                    place?.openDetails?.saturdayClose
+                if (place.openDetails.saturdayClose != getString(R.string.set_time)) {
+                    place.openDetails.saturdayClose
                 } else getString(
                     R.string.not_set
                 )
-            sundayOpen.text = if (place?.openDetails?.sundayOpen != getString(R.string.set_time)) {
-                place?.openDetails?.sundayOpen
+            sundayOpen.text = if (place.openDetails.sundayOpen != getString(R.string.set_time)) {
+                place.openDetails.sundayOpen
             } else getString(
                 R.string.not_set
             )
             sundayClose.text =
-                if (place?.openDetails?.sundayClose != getString(R.string.set_time)) {
-                    place?.openDetails?.sundayClose
+                if (place.openDetails.sundayClose != getString(R.string.set_time)) {
+                    place.openDetails.sundayClose
                 } else getString(
                     R.string.not_set
                 )
