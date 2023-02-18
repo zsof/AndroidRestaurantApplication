@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 class FavListAdapter @Inject constructor(
     private val favBtnListener: FavBtnClickListener,
-    private val favList: List<Long>
+    private val favList: List<Long>,
 ) :
     RecyclerView.Adapter<FavListAdapter.ListViewHolder>(), Filterable {
 
@@ -107,11 +107,11 @@ class FavListAdapter @Inject constructor(
                 .load(place.image.imageUrl())
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(
-                    binding.imageList
+                    binding.imageList,
                 )
 
             itemView.setOnClickListener {
-                LocalDataStateService.setPlace(place)
+                LocalDataStateService.place = place
                 val action =
                     FavListFragmentDirections.actionFavListFrToDetailsFr()
                 itemView.findNavController().navigate(action)
@@ -148,7 +148,7 @@ class FavListAdapter @Inject constructor(
 
             override fun publishResults(
                 charSequence: CharSequence?,
-                filterResults: FilterResults?
+                filterResults: FilterResults?,
             ) {
                 filterList = filterResults?.values as MutableList<Place>
                 differ.submitList(filterList)

@@ -27,10 +27,10 @@ class FilterPlaceDialogFragment : DialogFragment() {
     private val viewModel: FilterPlaceDialogViewModel by viewModels()
 
     private var priceValue = Price.LOW
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
-        binding = FilterPlacesDialogfragmentBinding.inflate(LayoutInflater.from(requireContext()))
+
+        binding = FilterPlacesDialogfragmentBinding.inflate(layoutInflater)
 
         binding.priceSlider.addOnChangeListener { _, value, _ ->
             priceValue = when (value) {
@@ -57,13 +57,15 @@ class FilterPlaceDialogFragment : DialogFragment() {
             .create()
 
         dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MODE_CHANGED)
+
+        dialog.window?.attributes?.windowAnimations = R.style.DialogFragmentAnimation
         return dialog
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -82,17 +84,17 @@ class FilterPlaceDialogFragment : DialogFragment() {
                         dogFriendly = dogAdd.isChecked,
                         familyPlace = familyPlaceAdd.isChecked,
                         delivery = deliveryAdd.isChecked,
-                        creditCard = creditCardAdd.isChecked
+                        creditCard = creditCardAdd.isChecked,
                     ),
-                    type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition)
-                )
+                    type = Type.getByOrdinal(placeCategorySpinner.selectedItemPosition),
+                ),
             )
 
             // Returning result to the previous destination
             val filteredPlaces = Gson().toJson(responseFilter)
             findNavController().previousBackStackEntry?.savedStateHandle?.set(
                 Constants.FILTERED_PLACES,
-                filteredPlaces
+                filteredPlaces,
             )
         }
     }

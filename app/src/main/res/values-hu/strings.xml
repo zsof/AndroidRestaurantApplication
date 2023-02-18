@@ -5,7 +5,7 @@
     <string name="password_text">Jelszó</string>
     <string name="log_in">Bejelentkezés</string>
     <string name="or_use">Vagy</string>
-    <string name="sign_in_with_facebook">Belépés Facebook-kal</string>
+    <string name="sign_in_with_facebook">Belépés Facebook fiókkal</string>
     <string name="no_account">Nincs még fiókja? <u>Regisztráció</u></string>
     <string name="user_name">Felhasználó név</string>
     <string name="register">Regisztráció</string>
@@ -16,7 +16,7 @@
     <string name="logout">Kilépés</string>
     <string name="add_button">Add button</string>
     <string name="search">Keresés</string>
-    <string name="sign_in_with_google">Belépés Google-val</string>
+    <string name="sign_in_with_google">Belépés Google fiókkal</string>
     <string name="profile_settings_text">Profil beállítások</string>
     <string name="dark_theme_text">Sötét téma</string>
     <string name="app_name_fragment">RestaurantApp</string>

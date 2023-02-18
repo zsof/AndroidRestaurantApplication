@@ -12,10 +12,18 @@
         tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_loginFr_to_registerFr"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_loginFr_to_listFr"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
 
     </fragment>
 
@@ -25,11 +33,12 @@
         android:label="RegisterFragment"
         tools:layout="@layout/register_fragment">
         <action
-            android:id="@+id/action_registerFr_to_listFr"
-            app:destination="@id/listFragment" />
-        <action
-            android:id="@+id/action_loginFr_to_registerFr"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_registerFr_to_loginFr"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
 
     <fragment
@@ -42,7 +51,11 @@
             app:destination="@id/newPlaceDialogFragment" />
         <action
             android:id="@+id/action_listFr_to_detailsFr"
-            app:destination="@id/detailsViewPager" />
+            app:destination="@id/detailsViewPager"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_listFr_to_mapFr"
             app:destination="@id/mapFragment" />
@@ -109,6 +122,10 @@
 
         <action
             android:id="@+id/action_favListFr_to_detailsFr"
-            app:destination="@id/detailsViewPager" />
+            app:destination="@id/detailsViewPager"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
 </navigation>

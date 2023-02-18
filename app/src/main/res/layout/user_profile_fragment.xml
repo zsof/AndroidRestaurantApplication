@@ -5,7 +5,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:animateLayoutChanges="true"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/settingsText"
@@ -95,210 +98,228 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/themeCard"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            app:cardElevation="4dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@id/saveButton"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/baseCard"
-            app:strokeColor="@color/black">
+            app:layout_constraintTop_toBottomOf="@id/baseCard">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:text="@string/dark_theme_text"
-                        android:textAppearance="?attr/textAppearanceHeadline6" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/darkThemeToggle"
-                        style="@style/SwitchCompatStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:checked="false" />
-                </LinearLayout>
-
-          <!--      <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:text="@string/language_in_hu"
-                        android:textAppearance="?attr/textAppearanceHeadline6" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/languageToggle"
-                        style="@style/SwitchCompatStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:checked="false" />
-                </LinearLayout>-->
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/filterCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            app:cardElevation="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/themeCard"
-            app:strokeColor="@color/black">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="@string/default_filters"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/baseFilterGroup"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/themeCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:chipSpacingHorizontal="20dp">
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/black">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingsDog"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="true"
-                        android:text="@string/dog_fancier"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                        android:orientation="vertical">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingsParking"
-                        android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:text="@string/dark_theme_text"
+                                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/darkThemeToggle"
+                                style="@style/SwitchCompatStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="8dp"
+                                android:checked="false"
+                                android:theme="@style/SwitchCompatStyle" />
+                        </LinearLayout>
+
+                        <!--<LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:text="@string/language_in_hu"
+                                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                style="@style/SwitchCompatStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="8dp"
+                                android:checked="false" />
+                        </LinearLayout>-->
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/filterCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="24dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/themeCard"
+                    app:strokeColor="@color/black">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/parking_available"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                        android:orientation="vertical">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingsFamily"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/family_place"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@string/default_filters"
+                            android:textAppearance="?attr/textAppearanceHeadline6" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingsGluten"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/gluten_free"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingsLactose"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/lactose_free"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/baseFilterGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            app:chipSpacingHorizontal="20dp">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingsVegan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/vegan"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingsDog"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="true"
+                                android:text="@string/dog_fancier"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingsVegetarian"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/vegetarian"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingsParking"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/parking_available"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingFastFood"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/fast_food"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingsFamily"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/family_place"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingDelivery"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/delivery"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingsGluten"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/gluten_free"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/filterSettingCreditCard"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="false"
-                        android:text="@string/credit_card"
-                        app:chipBackgroundColor="@drawable/chip_background_color" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingsLactose"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/lactose_free"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
 
-                </com.google.android.material.chip.ChipGroup>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingsVegan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/vegan"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
 
-        <androidx.appcompat.widget.AppCompatButton
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingsVegetarian"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/vegetarian"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingFastFood"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/fast_food"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingDelivery"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/delivery"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filterSettingCreditCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="true"
+                                android:checked="false"
+                                android:text="@string/credit_card"
+                                app:chipBackgroundColor="@drawable/chip_background_color" />
+
+                        </com.google.android.material.chip.ChipGroup>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:backgroundTint="@color/color_secondary"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/md_theme_light_primary"
             android:text="@string/save_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

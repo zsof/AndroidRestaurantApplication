@@ -112,7 +112,7 @@ class ListAdapter @Inject constructor(
                 )
 
             itemView.setOnClickListener {
-                LocalDataStateService.setPlace(place)
+                LocalDataStateService.place = place
                 val action =
                     ListFragmentDirections.actionListFrToDetailsFr()
                 itemView.findNavController().navigate(action)

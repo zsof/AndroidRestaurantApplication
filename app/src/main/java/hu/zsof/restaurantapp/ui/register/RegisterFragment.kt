@@ -25,7 +25,7 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.register_fragment, container, false)
 
@@ -42,7 +42,7 @@ class RegisterFragment : Fragment() {
     private fun setupBindings() {
         binding.apply {
             loginText.setOnClickListener {
-                safeNavigate(RegisterFragmentDirections.actionLoginFrToRegisterFr())
+                safeNavigate(RegisterFragmentDirections.actionRegisterFrToLoginFr())
             }
         }
     }
@@ -62,13 +62,17 @@ class RegisterFragment : Fragment() {
                         if (response.isSuccess) {
                             showToast(
                                 response.successMessage + getString(R.string.please_sign_in_text),
-                                Toast.LENGTH_SHORT
+                                Toast.LENGTH_SHORT,
                             )
-                            safeNavigate(RegisterFragmentDirections.actionLoginFrToRegisterFr())
-                        } else showToast(response.error, Toast.LENGTH_LONG)
+                            safeNavigate(RegisterFragmentDirections.actionRegisterFrToLoginFr())
+                        } else {
+                            showToast(response.error, Toast.LENGTH_LONG)
+                        }
                     }
                 }
-            } else showToast(getString(R.string.no_internet_connection))
+            } else {
+                showToast(getString(R.string.no_internet_connection))
+            }
         }
     }
 

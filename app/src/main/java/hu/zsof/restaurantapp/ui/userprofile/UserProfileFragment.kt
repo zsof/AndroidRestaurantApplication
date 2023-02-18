@@ -28,7 +28,7 @@ class UserProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.user_profile_fragment, container, false)
@@ -50,7 +50,9 @@ class UserProfileFragment : Fragment() {
                 userProfileEmailText.text = user.email
                 userProfileNickNameText.text = if (user.nickName != "") {
                     user.nickName
-                } else getString(R.string.nickname)
+                } else {
+                    getString(R.string.nickname)
+                }
             }
         }
     }
@@ -62,7 +64,7 @@ class UserProfileFragment : Fragment() {
                     title = "NickName",
                     changedTextView = userProfileNickNameText,
                     inputTextHint = "Type your nickname",
-                    inputTextType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+                    inputTextType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES,
                 )
             }
             userProfileNameText.setOnClickListener {
@@ -70,7 +72,7 @@ class UserProfileFragment : Fragment() {
                     title = "Name",
                     changedTextView = userProfileNameText,
                     inputTextHint = "Type your name",
-                    inputTextType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+                    inputTextType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES,
                 )
             }
             userProfileEmailText.setOnClickListener {
@@ -78,7 +80,7 @@ class UserProfileFragment : Fragment() {
                     title = "Email address",
                     changedTextView = userProfileEmailText,
                     inputTextHint = "Type your email address",
-                    inputTextType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+                    inputTextType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS,
                 )
             }
 
@@ -133,7 +135,7 @@ class UserProfileFragment : Fragment() {
         changedTextView: TextView,
         onNegativeButton: () -> Unit = this::onDestroy,
         inputTextHint: String?,
-        inputTextType: Int
+        inputTextType: Int,
     ) {
         val inputText = EditText(requireContext())
         inputText.hint = inputTextHint
@@ -147,7 +149,9 @@ class UserProfileFragment : Fragment() {
                     if (changedTextView == binding.userProfileEmailText) {
                         if (validateEmail(inputText)) {
                             changedTextView.text = inputText.text.toString()
-                        } else changedTextView.text = binding.userProfileEmailText.text
+                        } else {
+                            changedTextView.text = binding.userProfileEmailText.text
+                        }
                     } else {
                         changedTextView.text = inputText.text.toString()
                     }
@@ -155,8 +159,8 @@ class UserProfileFragment : Fragment() {
                         UserUpdateProfileRequest(
                             name = binding.userProfileNameText.text.toString(),
                             nickName = binding.userProfileNickNameText.text.toString(),
-                            email = binding.userProfileEmailText.text.toString()
-                        )
+                            email = binding.userProfileEmailText.text.toString(),
+                        ),
                     )
                 }
             }

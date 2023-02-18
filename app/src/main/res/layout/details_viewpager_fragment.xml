@@ -22,7 +22,7 @@
             app:tabPaddingEnd="40dp"
             app:tabPaddingStart="40dp"
             app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/secondary_dark" />
+            app:tabTextColor="@color/md_theme_dark_secondaryContainer" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"

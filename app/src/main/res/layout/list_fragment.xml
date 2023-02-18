@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize">
+        android:layout_marginBottom="54dp">
 
         <TextView
             android:id="@+id/appNameText"
@@ -25,13 +25,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/search_view"
             android:gravity="center_vertical"
             android:iconifiedByDefault="true"
             android:imeOptions="flagNoExtractUi|actionSearch"
             android:paddingTop="8dp"
             android:textColor="@color/black"
+
             app:iconifiedByDefault="false"
             app:layout_behavior="com.lapism.searchview.SearchBehavior"
             app:layout_constraintEnd_toEndOf="parent"

@@ -5,20 +5,8 @@ import hu.zsof.restaurantapp.network.model.Place
 
 object LocalDataStateService {
 
-    private var place: Place? = null
+    var place: Place = Place()
     private var latLng: LatLng? = null
-
-    fun getPlace(): Place {
-        if (place == null) {
-            throw Exception("Hiba történt, nincs a megadott helyszín")
-        } else {
-            return place!!
-        }
-    }
-
-    fun setPlace(place: Place) {
-        this.place = place
-    }
 
     fun getLatLng(): LatLng {
         if (latLng == null) {

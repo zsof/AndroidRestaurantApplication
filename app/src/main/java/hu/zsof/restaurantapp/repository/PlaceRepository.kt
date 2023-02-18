@@ -8,7 +8,7 @@ import hu.zsof.restaurantapp.network.request.PlaceDataRequest
 import hu.zsof.restaurantapp.network.response.PlaceMapResponse
 import javax.inject.Inject
 
-class PlaceRepository @Inject constructor(private val apiService: ApiService) {
+class   PlaceRepository @Inject constructor(private val apiService: ApiService) {
 
     suspend fun getAllPlace(): List<Place> {
         return try {

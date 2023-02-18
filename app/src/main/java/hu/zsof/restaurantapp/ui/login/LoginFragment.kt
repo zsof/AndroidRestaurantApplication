@@ -26,9 +26,12 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false)
+
+        /* val inflater = TransitionInflater.from(requireContext())
+         exitTransition = inflater.inflateTransition(R.transition.fade)*/
 
         return binding.root
     }
@@ -67,7 +70,9 @@ class LoginFragment : Fragment() {
                         viewModel.setAppPreference(USER_DATA, userJson)
                     }
                 }
-            } else showToast(getString(R.string.no_internet_connection))
+            } else {
+                showToast(getString(R.string.no_internet_connection))
+            }
         }
     }
 

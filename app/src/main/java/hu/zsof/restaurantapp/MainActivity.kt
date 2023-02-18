@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,26 +48,32 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val options = NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .setEnterAnim(R.anim.slide_up)
+            .setPopEnterAnim(R.anim.slide_down)
+            .build()
+
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.listFragment -> {
-                    findNavControllerCustom()?.navigate(R.id.listFragment)
+                    findNavControllerCustom()?.navigate(R.id.listFragment, null, options)
                     return@setOnItemSelectedListener true
                 }
                 R.id.mapFragment -> {
-                    findNavControllerCustom()?.navigate(R.id.mapFragment)
+                    findNavControllerCustom()?.navigate(R.id.mapFragment, null, options)
                     return@setOnItemSelectedListener true
                 }
                 R.id.favListFragment -> {
-                    findNavControllerCustom()?.navigate(R.id.favListFragment)
+                    findNavControllerCustom()?.navigate(R.id.favListFragment, null, options)
                     return@setOnItemSelectedListener true
                 }
                 R.id.userProfileFragment -> {
-                    findNavControllerCustom()?.navigate(R.id.userProfileFragment)
+                    findNavControllerCustom()?.navigate(R.id.userProfileFragment, null, options)
                     return@setOnItemSelectedListener true
                 }
                 R.id.loginFragment -> {
-                    findNavControllerCustom()?.navigate(R.id.loginFragment)
+                    findNavControllerCustom()?.navigate(R.id.loginFragment, null, options)
                     return@setOnItemSelectedListener true
                 }
             }
@@ -78,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     private fun findNavControllerCustom(): NavController? {
         val navHostFragment =
             (this as? MainActivity)?.supportFragmentManager?.findFragmentById(
-                R.id.nav_host_fragment_container
+                R.id.nav_host_fragment_container,
             ) as? NavHostFragment
         return navHostFragment?.navController
     }
@@ -88,7 +95,9 @@ class MainActivity : AppCompatActivity() {
         val darkModePref = viewModel.getAppPreference<String>(Constants.Prefs.DARK_MODE)
         if (darkModePref == "1") {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
         /*   // Locale
            val localeToSwitchTo = viewModel.getAppPreference<String>(Constants.Prefs.LOCALE)

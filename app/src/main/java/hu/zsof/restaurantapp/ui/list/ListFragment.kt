@@ -35,10 +35,13 @@ class ListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
 
+        /* val inflater = TransitionInflater.from(requireContext())
+         enterTransition = inflater.inflateTransition(R.transition.slide_right)
+ */
         recyclerView = binding.recyclerRestaurantList
 
         // Get user's favIdsList to compare the full list -> if both contains the place, fill the fav icon
@@ -58,7 +61,7 @@ class ListFragment : Fragment() {
                     }
                 }
             },
-            userFavIdsList
+            userFavIdsList,
         )
 
         return binding.root
@@ -82,7 +85,7 @@ class ListFragment : Fragment() {
                         listAdapter.filter.filter(newText)
                         return true
                     }
-                }
+                },
             )
 
             addNewPlaceBtn.setOnClickListener {
@@ -95,7 +98,7 @@ class ListFragment : Fragment() {
 
             // Get items from FilterDialogFr and set the filter method
             findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-                Constants.FILTERED_PLACES
+                Constants.FILTERED_PLACES,
             )?.observe(viewLifecycleOwner) {
                 val itemType = object : TypeToken<List<Place>>() {}.type
                 val filteredPlaces: List<Place> = Gson().fromJson(it, itemType)

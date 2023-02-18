@@ -81,7 +81,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                         requireContext().contentResolver,
                         currentPhotoPath,
                         "RestaurantApp_${System.currentTimeMillis()}",
-                        "RestaurantApp-images"
+                        "RestaurantApp-images",
                     )
 
                     binding.addPhotoBtn.setImageBitmap(
@@ -89,8 +89,8 @@ class NewPlaceDialogFragment : DialogFragment() {
                             bitmap,
                             binding.addPhotoBtn.width,
                             binding.addPhotoBtn.height,
-                            false
-                        )
+                            false,
+                        ),
                     )
                 }
             }
@@ -110,7 +110,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                         val photoURI: Uri = FileProvider.getUriForFile(
                             requireContext(),
                             "hu.zsof.restaurantapp.fileProvider",
-                            photoFile
+                            photoFile,
                         )
 
                         currentPhotoPath = photoURI.path
@@ -126,7 +126,7 @@ class NewPlaceDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
-        binding = NewPlaceDialogfragmentBinding.inflate(LayoutInflater.from(requireContext()))
+        binding = NewPlaceDialogfragmentBinding.inflate(layoutInflater)
 
         setupBindings()
 
@@ -161,6 +161,8 @@ class NewPlaceDialogFragment : DialogFragment() {
         }
 
         dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MODE_CHANGED)
+        dialog.window?.attributes?.windowAnimations = R.style.DialogFragmentAnimation
+
         return dialog
     }
 
@@ -175,7 +177,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     setView = view,
                     message = (getString(R.string.warning_fill_required_fields)),
                     textPositiveBtn = getString(R.string.ok_btn),
-                    onPositiveButton = {}
+                    onPositiveButton = {},
                 )
             } else {
                 checkValidFields()
@@ -195,7 +197,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                         setView = view,
                         message = getString(R.string.warning_invalid_email_or_phone),
                         textPositiveBtn = getString(R.string.ok_btn),
-                        onPositiveButton = {}
+                        onPositiveButton = {},
                     )
                 } else {
                     checkFieldsDone()
@@ -223,7 +225,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                         savePlace()
                         dismiss()
                         safeNavigate(NewPlaceDialogFragmentDirections.actionNewPlaceDialogFrToListFr())
-                    }
+                    },
                 )
             } else {
                 savePlace()
@@ -261,7 +263,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                         dogFriendly = dogAdd.isChecked,
                         familyPlace = familyPlaceAdd.isChecked,
                         delivery = deliveryAdd.isChecked,
-                        creditCard = creditCardAdd.isChecked
+                        creditCard = creditCardAdd.isChecked,
                     ),
                     latitude = latLng.latitude,
                     longitude = latLng.longitude,
@@ -288,10 +290,10 @@ class NewPlaceDialogFragment : DialogFragment() {
                         thursdayCheckbox.isChecked,
                         fridayCheckbox.isChecked,
                         saturdayCheckbox.isChecked,
-                        sundayCheckbox.isChecked
-                    )
+                        sundayCheckbox.isChecked,
+                    ),
                 ),
-                image = photoUrl
+                image = photoUrl,
             )
         }
     }
@@ -302,7 +304,7 @@ class NewPlaceDialogFragment : DialogFragment() {
         message: String,
         textPositiveBtn: String,
         textNegativeBtn: String? = null,
-        onPositiveButton: () -> Unit
+        onPositiveButton: () -> Unit,
     ) {
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(title)
@@ -342,7 +344,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     isChecked,
                     mondayOpen,
                     mondayClose,
-                    sameOpenHoursChecked
+                    sameOpenHoursChecked,
                 )
             }
             tuesdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
@@ -351,7 +353,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     isChecked,
                     tuesdayOpen,
                     tuesdayClose,
-                    sameOpenHoursChecked
+                    sameOpenHoursChecked,
                 )
             }
             wednesdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
@@ -360,7 +362,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     isChecked,
                     wednesdayOpen,
                     wednesdayClose,
-                    sameOpenHoursChecked
+                    sameOpenHoursChecked,
                 )
             }
             thursdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
@@ -369,7 +371,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     isChecked,
                     thursdayOpen,
                     thursdayClose,
-                    sameOpenHoursChecked
+                    sameOpenHoursChecked,
                 )
             }
             fridayCheckbox.setOnCheckedChangeListener { _, isChecked ->
@@ -378,7 +380,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     isChecked,
                     fridayOpen,
                     fridayClose,
-                    sameOpenHoursChecked
+                    sameOpenHoursChecked,
                 )
             }
             saturdayCheckbox.setOnCheckedChangeListener { _, isChecked ->
@@ -387,7 +389,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     isChecked,
                     saturdayOpen,
                     saturdayClose,
-                    sameOpenHoursChecked
+                    sameOpenHoursChecked,
                 )
             }
             sundayCheckbox.setOnCheckedChangeListener { _, isChecked ->
@@ -396,7 +398,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     isChecked,
                     sundayOpen,
                     sundayClose,
-                    sameOpenHoursChecked
+                    sameOpenHoursChecked,
                 )
             }
 
@@ -408,43 +410,43 @@ class NewPlaceDialogFragment : DialogFragment() {
                         mondayOpen,
                         mondayClose,
                         requireContext(),
-                        mondayCheckbox
+                        mondayCheckbox,
                     )
                     OpenHoursUtil.disableText(
                         tuesdayOpen,
                         tuesdayClose,
                         requireContext(),
-                        tuesdayCheckbox
+                        tuesdayCheckbox,
                     )
                     OpenHoursUtil.disableText(
                         wednesdayOpen,
                         wednesdayClose,
                         requireContext(),
-                        wednesdayCheckbox
+                        wednesdayCheckbox,
                     )
                     OpenHoursUtil.disableText(
                         thursdayOpen,
                         thursdayClose,
                         requireContext(),
-                        thursdayCheckbox
+                        thursdayCheckbox,
                     )
                     OpenHoursUtil.disableText(
                         fridayOpen,
                         fridayClose,
                         requireContext(),
-                        fridayCheckbox
+                        fridayCheckbox,
                     )
                     OpenHoursUtil.disableText(
                         saturdayOpen,
                         saturdayClose,
                         requireContext(),
-                        saturdayCheckbox
+                        saturdayCheckbox,
                     )
                     OpenHoursUtil.disableText(
                         sundayOpen,
                         sundayClose,
                         requireContext(),
-                        sundayCheckbox
+                        sundayCheckbox,
                     )
                 } else {
                     sameOpenHoursChecked = false
@@ -468,7 +470,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     thursdayOpen,
                     fridayOpen,
                     saturdayOpen,
-                    sundayOpen
+                    sundayOpen,
                 )
             }
 
@@ -482,7 +484,7 @@ class NewPlaceDialogFragment : DialogFragment() {
                     thursdayClose,
                     fridayClose,
                     saturdayClose,
-                    sundayClose
+                    sundayClose,
                 )
             }
 
@@ -531,11 +533,11 @@ class NewPlaceDialogFragment : DialogFragment() {
         }
     }
 
-    private fun getAddress(latLng: LatLng): String {
+    private fun getAddress(latLng: LatLng): String? {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
 
-        return addresses[0].getAddressLine(0)
+        return addresses?.get(0)?.getAddressLine(0)
     }
 
     private fun createImageFile(): File {
@@ -558,7 +560,7 @@ class NewPlaceDialogFragment : DialogFragment() {
         val image = File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */
             ".jpg", /* suffix */
-            idsDir /* directory */
+            idsDir, /* directory */
         )
         val path = image.absolutePath
         println("abs path: $path")
