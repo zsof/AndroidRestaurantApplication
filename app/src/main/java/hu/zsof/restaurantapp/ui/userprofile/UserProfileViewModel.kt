@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UserProfileViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val sharedPref: SharedPreference
+    private val sharedPref: SharedPreference,
 ) :
     ViewModel() {
 

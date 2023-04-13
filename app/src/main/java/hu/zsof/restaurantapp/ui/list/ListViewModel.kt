@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.model.User
 import hu.zsof.restaurantapp.repository.PlaceRepository
+import hu.zsof.restaurantapp.repository.UserRepository
 import hu.zsof.restaurantapp.util.extensions.SharedPreference
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,6 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ListViewModel @Inject constructor(
     private val placeRepository: PlaceRepository,
+    private val userRepository: UserRepository,
     private val sharedPref: SharedPreference
 ) :
     ViewModel() {
@@ -26,7 +28,7 @@ class ListViewModel @Inject constructor(
     }
 
     suspend fun addOrRemoveFavPlace(placeId: Long): User? {
-        return placeRepository.addOrRemoveFavPlace(placeId)
+        return userRepository.addOrRemoveFavPlace(placeId)
     }
 
     fun <T> setAppPreference(key: String, value: T) {

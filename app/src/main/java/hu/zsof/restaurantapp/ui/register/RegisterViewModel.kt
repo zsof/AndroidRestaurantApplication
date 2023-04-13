@@ -13,6 +13,6 @@ class RegisterViewModel @Inject constructor(
 ) : ViewModel() {
 
     suspend fun register(loginDataRequest: LoginDataRequest): NetworkResponse {
-        return authRepository.registerUser(loginDataRequest)
+        return authRepository.registerUser(loginDataRequest, false)
     }
 }

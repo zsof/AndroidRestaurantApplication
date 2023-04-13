@@ -25,4 +25,22 @@ class UserRepository @Inject constructor(private val apiService: ApiService) {
             null
         }
     }
+
+    suspend fun addOrRemoveFavPlace(placeId: Long): User? {
+        return try {
+            apiService.addPlaceToFav(placeId)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    suspend fun getFavPlacesByUser(): List<Place> {
+        return try {
+            apiService.getFavPlaces()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            mutableListOf()
+        }
+    }
 }

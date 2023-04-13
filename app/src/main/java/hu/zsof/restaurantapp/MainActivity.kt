@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import dagger.hilt.android.AndroidEntryPoint
 import hu.zsof.restaurantapp.databinding.ActivityMainBinding
+import hu.zsof.restaurantapp.repository.LocalDataStateService
 import hu.zsof.restaurantapp.util.Constants
 
 @AndroidEntryPoint
@@ -45,6 +46,12 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigationView.visibility = View.GONE
             } else {
                 binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+
+            LocalDataStateService.isUserAdmin.observe(this) {
+                if (it) {
+                    binding.bottomNavigationView.menu.removeItem(R.id.favListFragment)
+                }
             }
         }
 

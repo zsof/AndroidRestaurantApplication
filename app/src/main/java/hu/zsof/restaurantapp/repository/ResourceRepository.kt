@@ -8,11 +8,10 @@ import java.io.File
 import javax.inject.Inject
 
 class ResourceRepository @Inject constructor(private val apiService: ApiService) {
-
     suspend fun addNewImage(
         filePath: String,
-        typeId: Long,
-        type: String
+        itemId: Long,
+        type: String,
     ) {
         return try {
             val file = File(filePath)
@@ -21,15 +20,16 @@ class ResourceRepository @Inject constructor(private val apiService: ApiService)
                 MultipartBody.Part.createFormData(
                     "image",
                     file.name,
-                    requestFile
+                    requestFile,
                 )
 
             apiService.addNewImage(
                 multipartFile,
                 type,
-                typeId.toString()
+                itemId.toString(),
             )
         } catch (e: Exception) {
+            println("körte ${e.message}")
             e.printStackTrace()
         }
     }

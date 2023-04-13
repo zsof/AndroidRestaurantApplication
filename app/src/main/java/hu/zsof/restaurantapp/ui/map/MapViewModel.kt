@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.zsof.restaurantapp.network.model.Place
 import hu.zsof.restaurantapp.network.response.PlaceMapResponse
 import hu.zsof.restaurantapp.repository.PlaceRepository
 import kotlinx.coroutines.launch

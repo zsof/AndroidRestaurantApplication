@@ -1,30 +1,23 @@
 package hu.zsof.restaurantapp.network
 
-import androidx.databinding.library.BuildConfig
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import hu.zsof.restaurantapp.network.model.Place
+import hu.zsof.restaurantapp.network.model.PlaceInReview
 import hu.zsof.restaurantapp.network.model.User
-import hu.zsof.restaurantapp.network.request.*
+import hu.zsof.restaurantapp.network.request.FilterRequest
+import hu.zsof.restaurantapp.network.request.LoginDataRequest
+import hu.zsof.restaurantapp.network.request.PlaceDataRequest
+import hu.zsof.restaurantapp.network.request.UserUpdateProfileRequest
 import hu.zsof.restaurantapp.network.response.LoggedUserResponse
 import hu.zsof.restaurantapp.network.response.NetworkResponse
 import hu.zsof.restaurantapp.network.response.PlaceMapResponse
-import hu.zsof.restaurantapp.util.Constants
+
 import okhttp3.*
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import java.util.concurrent.TimeUnit
-import java.util.prefs.Preferences
-import javax.inject.Singleton
 
 interface ApiService {
 
     /**
-     * Place
+     * Places (role: user, owner, admin)
      */
     @GET("places")
     suspend fun getAllPlace(): List<Place>
@@ -32,30 +25,77 @@ interface ApiService {
     @GET("places/map")
     suspend fun getAllPlaceInMap(): List<PlaceMapResponse>
 
-    @POST("places/new-place")
-    suspend fun addNewPlace(
-        @Body placeDataRequest: PlaceDataRequest
-    ): Place
-
-    @Multipart
-    @POST("images")
-    suspend fun addNewImage(
-        @Part file: MultipartBody.Part,
-        @Part("type") type: String,
-        @Part("typeId") typeId: String
-    )
+    @GET("places/{placeId}")
+    suspend fun getPlaceById(@Path("placeId") placeId: Long): Place
 
     @POST("places/filter")
     suspend fun filterPlaces(@Body filter: FilterRequest): List<Place>
 
     /**
+     * Place by Owner (role: owner, admin
+     */
+
+    @POST("places-owner/new-place")
+    suspend fun addNewPlace(
+        @Body placeDataRequest: PlaceDataRequest,
+    ): PlaceInReview
+
+    @DELETE("places-owner/places/{id}")
+    suspend fun deletePlace(@Path("id") placeId: Long)
+
+    /**
+     * Place in-review (role: admin)
+     */
+
+    @GET("places-review")
+    suspend fun getAllPlaceFromInReview(): List<PlaceInReview>
+
+    @GET("places-review/{id}")
+    suspend fun getPlaceByIdFromInReview(@Path("id") placeId: Long): PlaceInReview
+
+    @POST("places-review/accept/{id}")
+    suspend fun acceptPlaceFromInReview(@Path("id") placeId: Long): Place
+
+    @POST("places-review/report/{id}")
+    suspend fun reportProblemPlaceInReview(
+        @Path("id") placeId: Long,
+        @Body problemMessage: String,
+    ): PlaceInReview
+
+    @DELETE("places-review/places/{id}")
+    suspend fun deletePlaceFromInReview(@Path("id") placeId: Long)
+
+    /**
+     * Image
+     */
+    @Multipart
+    @POST("images")
+    suspend fun addNewImage(
+        @Part file: MultipartBody.Part,
+        @Part("type") type: String,
+        @Part("itemId") typeId: String,
+    )
+
+    /**
      * Auth
      */
     @POST("auth/register")
-    suspend fun registerUser(@Body loginDataRequest: LoginDataRequest): NetworkResponse
+    suspend fun registerUser(@Body loginDataRequest: LoginDataRequest, @Header("isAdmin") isAdmin: Boolean): NetworkResponse
 
     @POST("auth/login")
-    suspend fun loginUser(@Body loginDataRequest: LoginDataRequest): LoggedUserResponse
+    suspend fun loginUser(@Header("Authorization") encodedBasic: String): LoggedUserResponse
+
+    /**
+     * Admin
+     */
+    @GET("admin/users/{id}")
+    suspend fun getUserById(@Path("id") userId: Long): User
+
+    @GET("admin/users")
+    suspend fun getAllUser(): List<User>
+
+    @DELETE("admin/users/{id}")
+    suspend fun deleteUserById(@Path("id") userId: Long)
 
     /**
      * User
@@ -71,67 +111,4 @@ interface ApiService {
 
     @GET("users/fav-places")
     suspend fun getFavPlaces(): List<Place>
-
-    // todo cookie megmaradjon vmennyi ideig - ne kelljen újra bejelentkezni. De ha lejárt, akkor kérjen új bejelentkezést
-    @Module
-    @InstallIn(SingletonComponent::class)
-    object ApiModule {
-
-        @Singleton
-        @Provides
-        operator fun invoke(): ApiService {
-            val interceptor = HttpLoggingInterceptor()
-            if (BuildConfig.DEBUG) {
-                interceptor.level = HttpLoggingInterceptor.Level.BODY
-            } else {
-                interceptor.level = HttpLoggingInterceptor.Level.BODY
-            }
-
-            val okHttpClient =
-                OkHttpClient.Builder()
-                    .connectTimeout(15, TimeUnit.SECONDS)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .addInterceptor(interceptor)
-                    .addInterceptor(ReceivedCookiesInterceptor())
-                    .addInterceptor(AddCookiesInterceptor())
-                    .build()
-
-            val retrofit = Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build()
-
-            return retrofit.create(ApiService::class.java)
-        }
-
-        class ReceivedCookiesInterceptor : Interceptor {
-
-            override fun intercept(chain: Interceptor.Chain): Response {
-                val originalResponse: Response = chain.proceed(chain.request())
-                if (originalResponse.headers("Set-Cookie").isNotEmpty()) {
-                    val cookies = originalResponse.headers("Set-Cookie")
-
-                    Preferences.userRoot().put("cookie", cookies[0])
-                    println(cookies[0])
-                }
-                return originalResponse
-            }
-        }
-
-        class AddCookiesInterceptor : Interceptor {
-
-            override fun intercept(chain: Interceptor.Chain): Response {
-                val builder: Request.Builder = chain.request().newBuilder()
-                val cookie = Preferences.userRoot().get("cookie", "")
-                if (cookie.isNotEmpty()) {
-                    println("Cookie ->$cookie")
-                    builder.addHeader("Cookie", cookie)
-                    // Timber.tag("OkHttp").d("Adding Header: %s", cookie)
-                } else println("ERROR: NO COOKIE ADDED")
-                // This is done so I know which headers are being added; this interceptor is used after the normal logging of OkHttp
-                return chain.proceed(builder.build())
-            }
-        }
-    }
 }
