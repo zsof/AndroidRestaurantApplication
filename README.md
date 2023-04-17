@@ -4,9 +4,9 @@
 This project is being prepared as thesis work of the BME master's degree in Computer Science.
 The application consists of an Android project and a Spring Boot backend written in Kotlin. The Android part is completed with XML description language and in Jetpack Compose. 
 
-This code is written in XML and here is the Jetpack Compose codebase: https://github.com/zsof/RestaurantAppJetpackNew/tree/migration
+This code is written in XML and here is the Jetpack Compose codebase: https://github.com/zsof/RestaurantAppJetpackNew
 
-The Spring Boot backend can be found here: https://github.com/zsof/restaurantApp/tree/develop
+The Spring Boot backend can be found here: https://github.com/zsof/restaurantApp
 
 ### The Application
 
