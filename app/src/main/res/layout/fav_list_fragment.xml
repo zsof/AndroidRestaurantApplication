@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize">
+
+        <TextView
+            android:id="@+id/appNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/app_name_fragment"
+            android:textSize="24sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/search_view"
+            android:iconifiedByDefault="true"
+            android:imeOptions="flagNoExtractUi|actionSearch"
+            android:paddingTop="8dp"
+            android:textColor="@color/black"
+            app:iconifiedByDefault="false"
+            app:layout_behavior="com.lapism.searchview.SearchBehavior"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filterBtn"
+            app:queryBackground="@drawable/search_view"
+            app:queryHint="@string/search"
+            app:showAsAction="ifRoom|collapseActionView" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/filterBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/white"
+            android:minHeight="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_filter" />
+
+        <!-- <androidx.appcompat.widget.AppCompatImageButton
+             android:id="@+id/gridLayoutBtn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="16dp"
+             android:background="@color/white"
+             android:minHeight="50dp"
+             app:layout_constraintEnd_toStartOf="@id/listLayoutBtn"
+             app:layout_constraintTop_toBottomOf="@id/appNameText"
+             app:srcCompat="@drawable/grid" />
+
+         <androidx.appcompat.widget.AppCompatImageButton
+             android:id="@+id/listLayoutBtn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="16dp"
+             android:background="@color/white"
+             android:minHeight="50dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/appNameText"
+             app:srcCompat="@drawable/ic_list" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerRestaurantList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchView"
+            tools:listitem="@layout/list_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

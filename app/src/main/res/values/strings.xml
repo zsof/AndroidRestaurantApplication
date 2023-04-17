@@ -1,5 +1,95 @@
 <resources>
     <string name="app_name">RestaurantAppAndroid</string>
     <string name="welcome_text">Welcome in RestaurApp</string>
-    <string name="email_address_or_username">Email address or Username</string>
+    <string name="email_address">Email address</string>
+    <string name="password_text">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="or_use">Or use</string>
+    <string name="sign_in_with_facebook">Sign in with Facebook</string>
+    <string name="no_account">Don\'t have an account? <u>Register</u></string>
+    <string name="user_name">User name</string>
+    <string name="register">Register</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
+    <string name="favs">Favs</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="add_button">Add button</string>
+    <string name="search">Search</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="profile_settings_text">Profile Settings</string>
+    <string name="dark_theme_text">Dark Theme</string>
+    <string name="app_name_fragment">RestaurantApp</string>
+    <string name="place_name_text">Name</string>
+    <string name="address_text">Address</string>
+    <string name="type_text">Type</string>
+    <string name="price_text">Price</string>
+    <string name="category_text">Category</string>
+    <string name="gluten_free">Gluten free</string>
+    <string name="lactose_free">Lactose free</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="vegan">Vegan</string>
+    <string name="fast_food">Fast Food</string>
+    <string name="parking_available">Parking Available</string>
+    <string name="family_place">Family Place</string>
+    <string name="dog_fancier">Dog-fancier</string>
+    <string name="delivery">Delivery</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="add_new_place_title">New Place information</string>
+    <string name="save_btn">Save</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="require_error">Required</string>
+    <string name="password_not_strong_error">The password is not strong enough. It must contain at least six characters, including at least 1 uppercase letter and 1 number! </string>
+    <string name="email_not_valid_error">The email is not valid</string>
+    <string name="nickname">Nickname</string>
+    <string name="have_account">You have already an account? <u>Login</u></string>
+    <string name="details_tab_text">Details</string>
+    <string name="password">********</string>
+    <string name="permission_granted">Permission granted.</string>
+    <string name="permission_denied">Permission denied.</string>
+    <string name="permission_explanation_location">The device needs permission to display your location data!</string>
+    <string name="permission_request">Permission request</string>
+    <string name="ok_btn">OK</string>
+    <string name="website_text">Website</string>
+    <string name="optional_text">Optional</string>
+    <string name="phone_number_text">Phone number</string>
+    <string name="filters">Filters</string>
+    <string name="please_sign_in_text">! Please sign in.</string>
+    <string name="required_field">Required Fields!</string>
+    <string name="warning_fill_required_fields">You have to fill Name and Address fields!</string>
+    <string name="empty_field_title">Empty fields</string>
+    <string name="contuine_btn">Continue</string>
+    <string name="warning_missing_fields">Some fields are not filled in. Save like this or continue filling?</string>
+    <string name="invalid_fields">Invalid Fields</string>
+    <string name="warning_invalid_email_or_phone">Invalid Email address or Phone number</string>
+    <string name="rating">Rating</string>
+    <string name="filter_places_dialog">Filter places</string>
+    <string name="filter_btn">Filter</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="clear_filters">Clear filters</string>
+    <string name="language_in_hu"><![CDATA[Language Default <> EN]]></string>
+    <string name="default_filters">Default filters:</string>
+    <string name="monday">Monday:</string>
+    <string name="tuesday">Tuesday:</string>
+    <string name="set_time">Set time</string>
+    <string name="wednesday">Wednesday:</string>
+    <string name="friday">Friday:</string>
+    <string name="saturday">Saturday:</string>
+    <string name="sunday">Sunday:</string>
+    <string name="same_opening_hours_everyday">Same opening hours everyday?</string>
+    <string name="opening_hours">Opening hours:</string>
+    <string name="basic_open_hour">Basic open hour:</string>
+    <string name="basic_close_hour">Basic close hour:</string>
+    <string name="thursday">Thursday:</string>
+    <string name="closed">Closed</string>
+    <string name="not_set">Not set</string>
+
+    <string-array name="category_items">
+        <item>Restaurant</item>
+        <item>Cafe\'s</item>
+        <item>Bakery</item>
+        <item>Patisserie</item>
+        <item>Bar</item>
+        <item>Fast food</item>
+    </string-array>
 </resources>

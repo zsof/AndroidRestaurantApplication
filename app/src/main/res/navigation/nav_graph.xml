@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="hu.zsof.restaurantapp.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFr_to_registerFr"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_loginFr_to_listFr"
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="hu.zsof.restaurantapp.ui.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/register_fragment">
+        <action
+            android:id="@+id/action_registerFr_to_loginFr"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="hu.zsof.restaurantapp.ui.list.ListFragment"
+        android:label="ListFragment"
+        tools:layout="@layout/list_fragment">
+        <action
+            android:id="@+id/action_listFr_to_newPlaceDialogFr"
+            app:destination="@id/newPlaceDialogFragment" />
+        <action
+            android:id="@+id/action_listFr_to_detailsFr"
+            app:destination="@id/detailsViewPager"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_listFr_to_mapFr"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_listFr_to_filterDialogFr"
+            app:destination="@id/filterPlaceDialogFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsViewPager"
+        android:name="hu.zsof.restaurantapp.ui.details.DetailsViewPagerFragment"
+        android:label="DetailsViewPager"
+        tools:layout="@layout/details_viewpager_fragment"></fragment>
+
+    <fragment
+        android:id="@+id/detailsMainFragment"
+        android:name="hu.zsof.restaurantapp.ui.details.DetailsMainFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/details_main_fragment"></fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="hu.zsof.restaurantapp.ui.userprofile.UserProfileFragment"
+        android:label="UserProfileFragment"
+        tools:layout="@layout/user_profile_fragment"></fragment>
+
+    <dialog
+        android:id="@+id/newPlaceDialogFragment"
+        android:name="hu.zsof.restaurantapp.ui.newplace.NewPlaceDialogFragment"
+        android:label="NewPlaceDialogFragment">
+        <!-- <argument
+             android:name="latLng"
+             app:argType="com.google.android.gms.maps.model.LatLng"
+             app:nullable="true" />-->
+        <action
+            android:id="@+id/action_newPlaceDialogFr_to_listFr"
+            app:destination="@id/listFragment" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/filterPlaceDialogFragment"
+        android:name="hu.zsof.restaurantapp.ui.filter.FilterPlaceDialogFragment"
+        android:label="FilterPlaceDialogFragment" />
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="hu.zsof.restaurantapp.ui.map.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/map_fragment">
+        <action
+            android:id="@+id/action_mapFr_to_addPlaceDialogFr"
+            app:destination="@id/newPlaceDialogFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/favListFragment"
+        android:name="hu.zsof.restaurantapp.ui.favs.FavListFragment"
+        android:label="FavListFragment"
+        tools:layout="@layout/fav_list_fragment">
+
+        <action
+            android:id="@+id/action_favListFr_to_filterDialogFr"
+            app:destination="@id/filterPlaceDialogFragment" />
+
+        <action
+            android:id="@+id/action_favListFr_to_detailsFr"
+            app:destination="@id/detailsViewPager"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+</navigation>

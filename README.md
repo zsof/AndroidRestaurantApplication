@@ -28,4 +28,3 @@ Other information about the places is also available in the detailed view of the
 - The app will be published on Google Play
 
 ### Screenshots about the app
-

@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">RestaurantAppAndroid</string>
+    <string name="welcome_text">Üdvözlünk a RestaurApp-ban!</string>
+    <string name="email_address">Email cím</string>
+    <string name="password_text">Jelszó</string>
+    <string name="log_in">Bejelentkezés</string>
+    <string name="or_use">Vagy</string>
+    <string name="sign_in_with_facebook">Belépés Facebook fiókkal</string>
+    <string name="no_account">Nincs még fiókja? <u>Regisztráció</u></string>
+    <string name="user_name">Felhasználó név</string>
+    <string name="register">Regisztráció</string>
+    <string name="home">Kezdőlap</string>
+    <string name="map">Térkép</string>
+    <string name="favs">Kedvencek</string>
+    <string name="profile">Profil</string>
+    <string name="logout">Kilépés</string>
+    <string name="add_button">Add button</string>
+    <string name="search">Keresés</string>
+    <string name="sign_in_with_google">Belépés Google fiókkal</string>
+    <string name="profile_settings_text">Profil beállítások</string>
+    <string name="dark_theme_text">Sötét téma</string>
+    <string name="app_name_fragment">RestaurantApp</string>
+    <string name="place_name_text">Név</string>
+    <string name="address_text">Cím</string>
+    <string name="type_text">Típus</string>
+    <string name="price_text">Ár</string>
+    <string name="category_text">Kategória</string>
+    <string name="gluten_free">Glutén mentes</string>
+    <string name="lactose_free">Laktóz mentes</string>
+    <string name="vegetarian">Vegetáriánus</string>
+    <string name="vegan">Vegán</string>
+    <string name="fast_food">Gyors étterem</string>
+    <string name="parking_available">Parkolási lehetőség</string>
+    <string name="family_place">Családbarát</string>
+    <string name="dog_fancier">Kutyabarát</string>
+    <string name="delivery">Kiszállítás</string>
+    <string name="credit_card">Kártyás fizetés</string>
+    <string name="add_new_place_title">Új helyszín információi</string>
+    <string name="save_btn">Mentés</string>
+    <string name="cancel_btn">Mégse</string>
+    <string name="require_error">Kötelező</string>
+    <string name="password_not_strong_error">A jelszó nem elég erős. Muszáj tartalmaznia legalább 6 karaktert, 1 nagybetűt és 1 számot! </string>
+    <string name="email_not_valid_error">Az email cím formátuma nem megfelelő.</string>
+    <string name="nickname">Becenév</string>
+    <string name="have_account">Már van fiókja? <u>Bejelentkezés</u></string>
+    <string name="details_tab_text">Részletek</string>
+    <string name="password">********</string>
+    <string name="permission_granted">Engedély megadva.</string>
+    <string name="permission_denied">Engedély megtagadva.</string>
+    <string name="permission_explanation_location">Az eszköznek szüksége van az Ön helyadataihoz!</string>
+    <string name="permission_request">Engedélykérés</string>
+    <string name="ok_btn">OK</string>
+    <string name="website_text">Weboldal</string>
+    <string name="optional_text">Opcionális</string>
+    <string name="phone_number_text">Telefonszám</string>
+    <string name="filters">Szűrők</string>
+    <string name="please_sign_in_text">! Kérjük jelentkezzen be!</string>
+    <string name="required_field">Kötelező mezők!</string>
+    <string name="warning_fill_required_fields">Muszáj kitöltenie a Név és Cím mezőket!</string>
+    <string name="empty_field_title">Üres mezők</string>
+    <string name="contuine_btn">Folytatás</string>
+    <string name="warning_missing_fields">Néhány mező nincs kitöltve. Szeretné elmenteni így, vagy folytatja a kitöltést?</string>
+    <string name="invalid_fields">Invalid mezők</string>
+    <string name="warning_invalid_email_or_phone">Invalid Email cím vagy Telefonszám!</string>
+    <string name="rating">Értékelés</string>
+    <string name="filter_places_dialog">Szűrés</string>
+    <string name="filter_btn">Szűrés</string>
+    <string name="no_internet_connection">Nincs internet kapcsolat</string>
+    <string name="clear_filters">Szűrők törlése</string>
+    <string name="language_in_hu"><![CDATA[Nyelv Alapértelmezett <> EN]]></string>
+    <string name="default_filters">Alapértelmezett szűrők:</string>
+    <string name="monday">Hétfő:</string>
+    <string name="tuesday">Kedd:</string>
+    <string name="set_time">Időpont</string>
+    <string name="wednesday">Szerda:</string>
+    <string name="friday">Péntek:</string>
+    <string name="saturday">Szombat:</string>
+    <string name="sunday">Vasárnap:</string>
+    <string name="same_opening_hours_everyday">Ugyanaz a nyitvatartási idő mindennap?</string>
+    <string name="opening_hours">Nyitvatartás:</string>
+    <string name="basic_open_hour">Alap nyitási időpont:</string>
+    <string name="basic_close_hour">Alap zárási időpont:</string>
+    <string name="thursday">Csütörtök:</string>
+    <string name="closed">Zárva</string>
+    <string name="not_set">Nincs megadva</string>
+
+    <string-array name="category_items">
+        <item>Étterem</item>
+        <item>Kávézó</item>
+        <item>Pékség</item>
+        <item>Cukrászda</item>
+        <item>Bár</item>
+        <item>Gyorsétterem</item>
+    </string-array>
+</resources>

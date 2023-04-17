@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@color/black">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageList"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toStartOf="@id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nameListText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/guideline3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/favIconCheckBox"
+                tools:text="Stefánia Étterem" />
+
+            <TextView
+                android:id="@+id/rateListText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/nameListText"
+                tools:text="4.0" />
+
+            <ImageView
+                android:id="@+id/rateIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:backgroundTint="#FFC107"
+                android:paddingStart="8dp"
+                android:src="@drawable/ic_star"
+                app:layout_constraintStart_toEndOf="@id/rateListText"
+                app:layout_constraintTop_toBottomOf="@id/nameListText" />
+
+            <TextView
+                android:id="@+id/priceListText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/rateListText"
+                tools:text="$$" />
+
+
+            <ImageView
+                android:id="@+id/mapIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_map"
+                app:layout_constraintStart_toEndOf="@id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/priceListText" />
+
+            <TextView
+                android:id="@+id/addressListText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingBottom="16dp"
+                app:layout_constraintEnd_toStartOf="@id/favIconCheckBox"
+                app:layout_constraintStart_toEndOf="@id/mapIcon"
+                app:layout_constraintTop_toBottomOf="@id/priceListText"
+                tools:text="1146 Budapest Stefánia út 50" />
+
+            <CheckBox
+                android:id="@+id/favIconCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:button="@drawable/ic_fav_outlined"
+                android:buttonTint="@color/black"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="101dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
