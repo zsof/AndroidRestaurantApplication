@@ -2,7 +2,8 @@ package hu.zsof.restaurantapp.util
 
 object Constants {
 
-    const val BASE_URL = "http://wildfire.ddns.net:8092"
+    const val BASE_URL = "http://restaurant.ceeeaufagderbhhg.germanywestcentral.azurecontainer.io:8080"
+    //const val BASE_URL = "http://wildfire.ddns.net:8092"
    // const val BASE_URL = "http://192.168.2.48:8080"
 
     // Length: 6-24 char, at least 1 Uppercase, 1 Number and 1 Symbol
